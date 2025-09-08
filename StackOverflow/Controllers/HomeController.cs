@@ -10,10 +10,10 @@ namespace StackOverflow.Controllers
     {
         public ActionResult Index()
         {
-            if (Session["username"] == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
+            // if (Session["username"] == null)
+            // {
+            //     return RedirectToAction("Index", "Login");
+            // }
             return View();
         }
     }
