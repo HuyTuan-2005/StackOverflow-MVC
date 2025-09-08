@@ -1,11 +1,9 @@
 .idea/
-bin/
 obj/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
 .vs/
-bin/
 obj/
 *.user
 *.suo

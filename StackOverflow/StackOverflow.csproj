@@ -123,6 +123,8 @@
             <DependentUpon>Global.asax</DependentUpon>
         </Compile>
         <Compile Include="Models\Database.cs" />
+        <Compile Include="Models\Question.cs" />
+        <Compile Include="Models\Tags.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>
