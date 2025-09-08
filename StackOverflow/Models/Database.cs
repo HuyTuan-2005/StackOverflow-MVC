@@ -5,7 +5,6 @@ namespace StackOverflow.Models
     public class Database
     {
         private static SqlConnection _conn = null;
-
         public SqlConnection Connection()
         {
             try
