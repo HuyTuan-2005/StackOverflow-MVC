@@ -1,0 +1,118 @@
+@{
+  ViewBag.Title = "Đăng nhập";
+}
+
+<style>
+  body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+  }
+
+  .auth-container {
+    max-width: 450px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .logo {
+    display: block;
+    margin: 0 auto 20px;
+    width: 200px;
+  }
+
+  .btn-social {
+    text-align: left;
+  }
+
+  .btn-social i {
+    margin-right: 10px;
+  }
+
+  .divider {
+    position: relative;
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    display: inline-block;
+    width: 40%;
+    height: 1px;
+    background-color: #d6d9dc;
+    vertical-align: middle;
+  }
+
+  .divider span {
+    padding: 0 10px;
+    color: #6a737c;
+    font-size: 14px;
+  }
+
+  .auth-footer {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .auth-footer a {
+    text-decoration: none;
+    color: #007bff;
+  }
+
+  .auth-footer a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<div class="container">
+  <div class="auth-container">
+    <!-- Logo -->
+    <img src="https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-logo.svg" alt="Stack Overflow"
+         class="logo">
+
+    <!-- Social Login Buttons -->
+    <button class="btn btn-light btn-social btn-block w-100 mb-2">
+      <i class="fab fa-google"></i> Log in with Google
+    </button>
+    <button class="btn btn-dark btn-social btn-block w-100 mb-2">
+      <i class="fab fa-github"></i> Log in with GitHub
+    </button>
+    <button class="btn btn-primary btn-social btn-block w-100 mb-3">
+      <i class="fab fa-facebook"></i> Log in with Facebook
+    </button>
+
+    <!-- Divider -->
+    <div class="divider">
+      <span>or</span>
+    </div>
+
+    <!-- Login Form -->
+    <form action="/Login/login" method="POST">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input name="username" type="text" id="username" class="form-control" placeholder="Enter your username"
+               required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input name="password" type="password" id="password" class="form-control" placeholder="Enter your password"
+               required>
+        <div class="text-end mt-1">
+          <a href="#" class="small">Forgot password?</a>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Log in</button>
+    </form>
+
+    <!-- Footer Links -->
+    <div class="auth-footer mt-3">
+      <p class="mb-1">
+        Don't have an account? <a href="/Register">Sign up <i class="fas fa-external-link-alt small"></i> </a>
+      </p>
+    </div>
+  </div>
+</div>

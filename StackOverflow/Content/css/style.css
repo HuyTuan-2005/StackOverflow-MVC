@@ -1,0 +1,281 @@
+* {
+}
+
+p{
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+}
+
+body {
+    margin: 50px 0 0 0;
+    padding: 0;
+}
+
+header {
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #e3e6e8;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #fff;
+    z-index: 99;
+}
+
+footer {
+    background-color: #0c0d0e;
+}
+
+aside {
+    width: 25%;
+}
+
+.navbar-list li {
+    padding: 0px 5px;
+}
+
+@media (min-width: 992px) {
+    .navbar-list li:hover {
+        border-radius: 18px;
+        background-color: #e3e6e8;
+    }
+}
+
+@media (max-width: 991.98px) {
+    #offcanvasNavbar .nav-link {
+        padding-left: 15px;
+    }
+
+    #offcanvasNavbar .navbar-nav .nav-item a {
+        border-radius: 5px;
+    }
+
+    #offcanvasNavbar .navbar-nav .nav-item a:hover {
+        background-color: #868f8f;
+        color: white;
+    }
+}
+
+.nav-header .nav-link{
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: hsl(0, 0%, 40%);
+    background-color: #fff;
+    transition: 0.3s ease-in;
+}
+
+.nav-header .nav-item .nav-link:hover{
+    background-color: hsl(0, 0%, 90%);
+    color: #000;
+}
+
+.nav-header .nav-item{
+    
+}
+
+.custom-input-group{
+    border: 2px solid #fff;
+    border-radius: 11px ;
+    padding: 2px 3px;
+    transition: 0.3s ease-in;
+    position: relative;
+}
+
+.custom-input-group span i{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-left: 10px;
+    pointer-events: none;
+    color: hsl(0, 0%, 50%);
+}
+
+.custom-input-group .form-control{
+    border-radius: 8px ;
+    box-shadow: none;
+    padding: 5px 10px 5px 35px;
+}
+
+.custom-input-group .form-control::placeholder{
+    font-size: 14px;
+    align-items: center;
+}
+.custom-input-group .form-control:focus{
+    border-color: #ced4da;
+}
+
+
+.custom-input-group:focus-within{
+    border-color: #0d6efd;
+}
+
+
+
+.footer-links h5 {
+    text-transform: uppercase;
+}
+
+.footer-links a {
+    color: #c8ccd0;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.footer-links a:hover {
+    color: #e3e6e8;
+}
+
+.footer-links div ul {
+    flex-wrap: wrap;
+}
+
+.footer-meta {
+    color: #c8ccd0;
+    font-size: 11px;
+}
+
+.footer-meta li a {
+    color: #c8ccd0;
+    text-decoration: none;
+    padding-right: 20px;
+    font-size: 11px;
+}
+
+.footer-meta li a:hover {
+    color: #e3e6e8;
+}
+
+#offcanvasNavbar {
+    width: 45%;
+}
+
+.left-sidebar-list {
+    font-size: 14px;
+}
+
+.left-sidebar-list ul li {
+    border-radius: 7px;
+    margin-right: 5px;
+}
+
+.left-sidebar-list ul li:hover {
+    background-color: #f9fafa;
+    font-weight: 700;
+}
+
+.left-sidebar-list ul li a {
+    color: #384045;
+    padding-left: 10px;
+}
+
+.left-sidebar-list ul li i {
+    width: 28px;
+    text-align: center;
+    padding-right: 5px;
+}
+
+.nav-link:hover {
+
+    color: #0c0d0e;
+}
+
+.nav-link {
+    display: inline;
+}
+
+.tag-list {
+    margin: 0px;
+}
+
+.tag {
+    background-color: #e1ecf4;
+    color: #39739d;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 3px;
+    margin-right: 5px;
+    transition: 0.3s ease-in;
+}
+
+.tag:hover {
+    background-color: #3677a5;
+    color: white;
+    cursor: pointer;
+}
+
+#question-list {
+    margin-bottom: 150px;
+}
+
+.question-card {
+    transition: 0.22s ease-in;
+}
+
+.question-card:hover {
+    background-color: #f9fafa;
+}
+
+.question-card .question-content a {
+    text-decoration: none;
+    font-weight: 450;
+}
+
+.question-card .question-statics {
+    font-size: 13px;
+}
+
+.question-title {
+    overflow: hidden;
+    max-height: 48px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.question-desc {
+    overflow: hidden;
+    max-height: 21px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sidebar-box {
+    background-color: #fdf7e7;
+}
+
+.sidebar-box .section-content {
+    padding-bottom: 10px;
+}
+
+.sidebar-box .section-title {
+    font-weight: 650;
+    font-size: 15px;
+}
+
+.sidebar-box .section-content i {
+    font-size: 13px;
+    padding-right: 10px;
+}
+
+.sidebar-box a {
+    color: #636b74;
+    font-size: 13px;
+}
+
+.sidebar-box a:hover {
+    color: #0c0d0e;
+}
+
+.sidebar-box ul li {
+    position: relative;
+    padding-left: 40px;
+}
+
+.sidebar-box ul li::before {
+    background-image: url(../icon/pen-solid.svg);
+}
+
+.article-info {
+    font-size: 12px;
+}

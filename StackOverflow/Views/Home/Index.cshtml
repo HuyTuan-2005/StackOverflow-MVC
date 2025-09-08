@@ -1,0 +1,76 @@
+@{
+    ViewBag.Title = "Trang chủ";
+}
+
+@section SidebarLeft {
+    @Html.Partial("Partials/_SidebarLeft")
+}
+
+@section SectionRight {
+    @Html.Partial("Partials/_SectionRight")
+}
+
+
+<main class="col-12 col-md-9 col-lg-7 px-0">
+    <div class="p-3">
+        <div class="d-flex justify-content-between mb-3">
+            <h1 class="fs-3">Newest Questions</h1>
+            <button class="btn btn-primary" id="ask-btn-form" style="font-size: 13px;">Ask Question</button>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center">
+            <div id="quantity-questions">question</div>
+            <div>
+                <button class="btn btn-outline-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+                        <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
+                    </svg>
+                    Filter
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="question-list" class="p-0">
+        <!-- Các bài viết -->
+        <article class="row question-card flex-wrap py-3 border-top m-0 px-3 px-md-0">
+            <!--Cột trái: thống kê -->
+            <div class="col-12 col-md-2 p-0 pe-md-3">
+                <div class="question-statics text-end text-muted p-0 d-flex flex-row flex-md-column gap-3 gap-md-1">
+                    <div>0 votes</div>
+                    <div>0 answers</div>
+                    <div>0 views</div>
+                </div>
+            </div>
+            <!-- Cột phải: nội dung chính -->
+            <div class="question-content col-12 col-md-10 text p-0">
+                <a href="#" class="d-block question-title mb-1" style="font-size: 16px;">
+                    Phần tiêu đề của câu hỏi hoặc vấn đề mà người dùng đang gặp phải.Phần tiêu đề của câu hỏi hoặc vấn đề mà người dùng đang gặp phải
+                    Phần tiêu đề của câu hỏi hoặc vấn đề mà người dùng đang gặp phải.Phần tiêu đề của câu hỏi hoặc vấn đề mà người dùng đang gặp phải.Phần tiêu đề của câu hỏi hoặc vấn đề mà người dùng đang gặp phải.Phần tiêu đề của câu hỏi hoặc vấn đề mà người dùng đang gặp phải.-webkit-line-clamp: 2;
+                </a>
+
+                <!-- Mô tả ngắn -->
+                <p class="question-desc text-muted mb-2" style="font-size: 14px;">
+                    Mô tả ngắn về câu hỏi hoặc vấn đề mà người dùng đang gặp phải. Đây là phần mô tả Mô tả ngắn về câu hỏi hoặc vấn đề mà người dùng đang gặp phải. Đây là phần mô tả Mô tả ngắn về câu hỏi hoặc vấn đề mà người dùng đang gặp phải. Đây là phần mô tả
+                    Mô tả ngắn về câu hỏi hoặc vấn đề mà người dùng đang gặp phải. Đây là phần mô tả
+                </p>
+
+                <!-- Thẻ tag + Tác giả  -->
+                <div class="justify-content-between align-items-center flex-wrap gap-2 mb-1  d-block d-sm-flex">
+                    <!-- tag -->
+                    <ul class="tag-list d-flex flex-nowrap gap-1 list-unstyled">
+                        <li class="tag">tag</li>
+                    </ul>
+                    <!-- Tác giả và thời gian -->
+                    <div class="article-info text-muted me-4  mt-2 mt-md-0">
+                        <a href="#">
+                            <i class="fa fa-user me-1"></i>
+                            <span class="text-primary">Tác giả</span>
+                        </a>
+                        <time class="text-muted ms-1">time</time>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</main>

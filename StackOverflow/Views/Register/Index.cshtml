@@ -1,0 +1,151 @@
+@{
+  ViewBag.Title = "Đăng ký";
+}
+
+
+<style>
+  body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+  }
+
+  .auth-container {
+    max-width: 450px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .logo {
+    display: block;
+    margin: 0 auto 20px;
+    width: 200px;
+  }
+
+  .btn-social {
+    text-align: left;
+  }
+
+  .btn-social i {
+    margin-right: 10px;
+  }
+
+  .divider {
+    position: relative;
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    display: inline-block;
+    width: 40%;
+    height: 1px;
+    background-color: #d6d9dc;
+    vertical-align: middle;
+  }
+
+  .divider span {
+    padding: 0 10px;
+    color: #6a737c;
+    font-size: 14px;
+  }
+
+  .auth-footer {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .auth-footer a {
+    text-decoration: none;
+    color: #007bff;
+  }
+
+  .auth-footer a:hover {
+    text-decoration: underline;
+  }
+
+  .form-check-label a {
+    color: #007bff;
+    text-decoration: underline;
+  }
+
+  .form-check-label a:hover {
+    color: #0056b3;
+  }
+</style>
+
+
+<div class="container">
+  <div class="auth-container">
+    <!-- Logo -->
+    <img src="https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-logo.svg" alt="Stack Overflow"
+         class="logo">
+
+    <!-- Header -->
+    <h5 class="text-center mb-3">Diễn đàn công nghệ - StackOverflow</h5>
+    <p class="text-center text-muted mb-4">Trường Đại học Công Thương - TP. HCM</p>
+
+    <!-- Social Sign Up Buttons -->
+    <!-- Social Login Buttons -->
+    <button class="btn btn-light btn-social btn-block w-100 mb-2">
+      <i class="fab fa-google"></i> Sign up with Google
+    </button>
+    <button class="btn btn-dark btn-social btn-block w-100 mb-2">
+      <i class="fab fa-github"></i> Sign up with GitHub
+    </button>
+    <button class="btn btn-primary btn-social btn-block w-100 mb-3">
+      <i class="fab fa-facebook"></i> Sign up with Facebook
+    </button>
+
+
+    <!-- Divider -->
+    <div class="divider">
+      <span>or</span>
+    </div>
+
+    <!-- Sign Up Form -->
+    <form action="/Register/register" method="POST">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input name="username" type="text" id="username" class="form-control" placeholder="Enter your Username" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input name="email" type="email" id="email" class="form-control" placeholder="" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input name="password" type="password" id="password" class="form-control" placeholder="" required>
+      </div>
+      @* <div class="mb-3"> *@
+      @*   <label for="country" class="form-label">Country</label> *@
+      @*   <select id="country" class="form-select" required> *@
+      @*     <option value="" disabled selected>Select your country</option> *@
+      @*     <option value="us">United States</option> *@
+      @*     <option value="vn">Vietnam</option> *@
+      @*     <option value="in">India</option> *@
+      @*     <option value="uk">United Kingdom</option> *@
+      @*     <option value="fr">France</option> *@
+      @*     <option value="de">Germany</option> *@
+      @*   </select> *@
+      @* </div> *@
+      @* <div class="form-check mb-3"> *@
+      @*   <input type="checkbox" class="form-check-input" id="terms" required> *@
+      @*   <label class="form-check-label" for="terms">I agree to the <a href="#" target="_blank">terms and *@
+      @*       conditions</a>.</label> *@
+      @* </div> *@
+      <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+    </form>
+
+    <!-- Footer Links -->
+    <div class="auth-footer mt-3">
+      <p class="mb-1">
+        Already have an account? <a href="/Login">Log in</a>
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<header>
+    <div class="container">
+        <nav class="navbar d-flex justify-content-between gap-2 align-items-center py-1">
+            <a class="navbar-brand" href="/">
+                <img src="https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.svg"
+                     alt="logo-stackoverflow" height="30px">
+            </a>
+
+            <div class="flex-grow-0 nav-header">
+                <ul class="navbar-nav d-flex justify-content-between gap-2 flex-row">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Blog</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="flex-grow-1">
+                <form action="/" method="get">
+                    <div class="custom-input-group">
+                        <span>
+                            <i class="fa fa-search"></i>
+                        </span>
+                        <input name="search" type="search" class="form-control" placeholder="Search question...">
+                    </div>
+                </form>
+            </div>
+            
+            @* <div> *@
+            @*     $1$ @await Html.PartialAsync("_LoginPartial") #1# *@
+            @* </div> *@
+            
+        </nav>
+    </div>
+</header>
