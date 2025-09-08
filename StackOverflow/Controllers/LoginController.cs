@@ -10,6 +10,10 @@ namespace StackOverflow.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if (Session["username"] != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
         

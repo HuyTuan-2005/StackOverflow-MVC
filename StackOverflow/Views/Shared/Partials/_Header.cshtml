@@ -1,10 +1,18 @@
 <header>
     <div class="container">
         <nav class="navbar d-flex justify-content-between gap-2 align-items-center py-1">
-            <a class="navbar-brand" href="/">
-                <img src="https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.svg"
-                     alt="logo-stackoverflow" height="30px">
-            </a>
+            <div>
+                <!-- Logo lớn mặc định -->
+                <a class="navbar-brand d-none d-md-inline" href="/">
+                    <img src="https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.svg"
+                         alt="logo-stackoverflow" height="30px">
+                </a>
+                <!-- Logo nhỏ cho màn hình nhỏ -->
+                <a class="navbar-brand d-inline d-md-none" href="/">
+                    <img src="https://www.vectorlogo.zone/logos/stackoverflow/stackoverflow-icon.svg"
+                         alt="logo-stackoverflow-small" height="30px" class="d-inline-block">
+                </a>
+            </div>
 
             <div class="flex-grow-0 nav-header">
                 <ul class="navbar-nav d-flex justify-content-between gap-2 flex-row">
@@ -19,7 +27,7 @@
                     </li>
                 </ul>
             </div>
-            
+
             <div class="flex-grow-1">
                 <form action="/" method="get">
                     <div class="custom-input-group">
@@ -30,11 +38,13 @@
                     </div>
                 </form>
             </div>
-            
-            @* <div> *@
-            @*     $1$ @await Html.PartialAsync("_LoginPartial") #1# *@
-            @* </div> *@
-            
+
+            @* login partial *@
+            @if (ViewBag.Title != "Đăng nhập" && Session["username"] == null)
+            {
+                <a href=@Url.Action("Index", "Login") class="btn btn-primary">Login</a>
+            }
+
         </nav>
     </div>
 </header>
