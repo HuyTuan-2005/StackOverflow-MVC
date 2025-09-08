@@ -14,12 +14,13 @@ namespace StackOverflow.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+
             return View();
         }
-        
+
         [HttpPost]
         public ActionResult Login()
-        { 
+        {
             var db = new Database();
             var conn = db.Connection();
 
@@ -28,14 +29,14 @@ namespace StackOverflow.Controllers
 
             var command = conn.CreateCommand();
             command.CommandText = "SELECT * FROM Users WHERE username = @username AND password = @password";
-            
+
             command.CommandText = "SELECT * FROM Users WHERE username = @username AND password = @password";
             command.Parameters.AddWithValue("@username", username);
             command.Parameters.AddWithValue("@password", password);
-            
-            
+
+
             var reader = command.ExecuteReader();
-            
+
             if (reader.HasRows)
             {
                 reader.Close();

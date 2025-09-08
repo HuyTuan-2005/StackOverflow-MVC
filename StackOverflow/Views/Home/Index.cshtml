@@ -10,6 +10,9 @@
     @Html.Partial("Partials/_SectionRight")
 }
 
+@using System.Globalization
+@using Humanizer
+@model List<StackOverflow.Models.Question>
 
 <main class="col-12 col-md-9 col-lg-7 px-0">
     <div class="p-3">
@@ -19,61 +22,65 @@
         </div>
 
         <div class="d-flex justify-content-between align-items-center">
-            <div id="quantity-questions"><span>1000000</span> question</div>
+            <div id="quantity-questions">@ViewBag.CountQuestion question</div>
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    
+
                 </div>
                 <button class="btn btn-outline-primary px-2 py-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-filter" viewBox="0 0 18 18">
-                        <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                         class="bi bi-filter" viewBox="0 0 18 18">
+                        <path
+                            d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
                     </svg>
                     <span style="font-size: 14px;">Filter</span>
                 </button>
             </div>
         </div>
     </div>
-    
+
     <div id="question-list" class="p-0">
         <!-- Các bài viết -->
-        <article class="row question-card flex-wrap py-3 border-top m-0 px-3">
-            <!--Cột trái: thống kê -->
-            <div class="col-12 col-lg-2 p-0 pe-md-3">
-                <div class="question-statics text-end text-muted p-0 d-flex flex-row flex-lg-column gap-3 gap-lg-1">
-                    <div>099 votes</div>
-                    <div>099 answers</div>
-                    <div>099 views</div>
-                </div>
-            </div>
-            <!-- Cột phải: nội dung chính -->
-            <div class="question-content col-12 col-lg-10 text p-0">
-                <a href="#" class="d-block question-title mb-1" style="font-size: 16px;">
-                    Phần tiêu đề của câu hỏi hoặc vấn đề mà người dùng đang gặp phải.Phần tiêu đề của câu hỏi hoặc vấn đề mà người dùng đang gặp phải
-                    Phần tiêu đề của câu hỏi hoặc vấn đề mà người dùng đang gặp phải.Phần tiêu đề của câu hỏi hoặc vấn đề mà người dùng đang gặp phải.Phần tiêu đề của câu hỏi hoặc vấn đề mà người dùng đang gặp phải.Phần tiêu đề của câu hỏi hoặc vấn đề mà người dùng đang gặp phải.-webkit-line-clamp: 2;
-                </a>
-
-                <!-- Mô tả ngắn -->
-                <p class="question-desc text-muted mb-2" style="font-size: 14px;">
-                    Mô tả ngắn về câu hỏi hoặc vấn đề mà người dùng đang gặp phải. Đây là phần mô tả Mô tả ngắn về câu hỏi hoặc vấn đề mà người dùng đang gặp phải. Đây là phần mô tả Mô tả ngắn về câu hỏi hoặc vấn đề mà người dùng đang gặp phải. Đây là phần mô tả
-                    Mô tả ngắn về câu hỏi hoặc vấn đề mà người dùng đang gặp phải. Đây là phần mô tả
-                </p>
-
-                <!-- Thẻ tag + Tác giả  -->
-                <div class="justify-content-between align-items-center flex-wrap gap-2 mb-1  d-block d-sm-flex">
-                    <!-- tag -->
-                    <ul class="tag-list d-flex flex-nowrap gap-1 list-unstyled">
-                        <li class="tag">tag</li>
-                    </ul>
-                    <!-- Tác giả và thời gian -->
-                    <div class="article-info text-muted me-3 mt-2 mt-md-0">
-                        <a href="#">
-                            <i class="fa fa-user me-1"></i>
-                            <span class="text-primary">Tác giả</span>
-                        </a>
-                        <time class="text-muted ms-1">time</time>
+        @foreach (var i in @Model)
+        {
+            <article class="row question-card flex-wrap py-3 border-top m-0 px-3">
+                <!--Cột trái: thống kê -->
+                <div class="col-12 col-lg-2 p-0 pe-md-3">
+                    <div class="question-statics text-end text-muted p-0 d-flex flex-row flex-lg-column gap-3 gap-lg-1">
+                        <div>0 votes</div>
+                        <div>0 answers</div>
+                        <div>0 views</div>
                     </div>
                 </div>
-            </div>
-        </article>
+                <!-- Cột phải: nội dung chính -->
+                <div class="question-content col-12 col-lg-10 text p-0">
+                    <a href="#" class="d-block question-title mb-1" style="font-size: 16px;">@i.title</a>
+
+                    <!-- Mô tả ngắn -->
+                    <p class="question-desc text-muted mb-2" style="font-size: 14px;">
+                        @i.body
+                    </p>
+
+                    <!-- Thẻ tag + Tác giả  -->
+                    <div class="justify-content-between align-items-center flex-wrap gap-2 mb-1  d-block d-sm-flex">
+                        <!-- tag -->
+                        <ul class="tag-list d-flex flex-nowrap gap-1 list-unstyled">
+                            @foreach (var j in i.tags)
+                            {
+                                <li class="tag">@j._name</li>
+                            }
+                        </ul>
+                        <!-- Tác giả và thời gian -->
+                        <div class="article-info text-muted me-3 mt-2 mt-md-0">
+                            <a href="#">
+                                <i class="fa fa-user me-1"></i>
+                                <span class="text-primary">@i.DisplayName</span>
+                            </a>
+                            <time class="text-muted ms-1">@i.gioDang</time>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        }
     </div>
 </main>
