@@ -1,6 +1,7 @@
 :root {
     --color-primary: #F48023;
 }
+
 * {
 }
 
@@ -35,7 +36,7 @@ aside {
 }
 
 .navbar-list li {
-    padding: 0px 5px;
+    padding: 0 5px;
 }
 
 @media (min-width: 992px) {
@@ -45,7 +46,7 @@ aside {
     }
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 992px) {
     #offcanvasNavbar .nav-link {
         padding-left: 15px;
     }
@@ -114,7 +115,54 @@ aside {
     border-color: #0d6efd;
 }
 
+.btn-login
+{
+    font-family: 'Roboto', sans-serif;
+    color: #1682FD;
+    background-color: #EAEAEA;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    text-decoration: none;
+    padding: 8px 20px;
+}
 
+.btn-register{
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    background-color: var(--color-primary);
+    color: white;
+    border-radius: 5px;
+    border: none;
+    text-decoration: none;
+    padding: 8px 0;
+}
+.btn-register:hover{
+    background-color: hsl(from var(--color-primary) h s calc(l - 5));
+    color: white;
+}
+.btn-ask-question{
+    font-size: 13px;
+    font-weight: bold;
+    background-color: var(--color-primary);
+    color: white;
+    border-radius: 7px;
+    border: none;
+}
+.btn-ask-question:hover{
+    background-color: hsl(from var(--color-primary) h s calc(l - 5));
+    color: white;
+}
+
+.btn-filter{
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background-color: #FCF4EC;
+    border-radius: 7px;
+    border: 1px solid var(--color-primary); 
+}
 
 .footer-links h5 {
     text-transform: uppercase;
@@ -189,7 +237,7 @@ aside {
 }
 
 .tag-list {
-    margin: 0px;
+    margin: 0;
 }
 
 .tag {
@@ -275,9 +323,6 @@ aside {
     padding-left: 40px;
 }
 
-.sidebar-box ul li::before {
-    background-image: url(../icon/pen-solid.svg);
-}
 
 .article-info {
     font-size: 12px;

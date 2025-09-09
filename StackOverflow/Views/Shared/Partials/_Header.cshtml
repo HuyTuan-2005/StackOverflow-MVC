@@ -42,7 +42,13 @@
             @* login partial *@
             @if (ViewBag.Title != "Đăng nhập" && Session["username"] == null)
             {
-                <a href=@Url.Action("Index", "Login") class="btn btn-primary" style="font-size: 14px">Login</a>
+                <a href=@Url.Action("Index", "Register") class="btn-register">
+                    <div class="px-3">
+                        <span class="pe-2" style="font-size: 11px"><i class="fa-solid fa-user-plus"></i></span>
+                        <span>Register</span>
+                    </div>
+                </a>
+                <a href=@Url.Action("Index", "Login") class="btn-login">Login</a>
             }
 
         </nav>

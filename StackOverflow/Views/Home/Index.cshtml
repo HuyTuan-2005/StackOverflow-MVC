@@ -10,15 +10,18 @@
     @Html.Partial("Partials/_SectionRight")
 }
 
-@using System.Globalization
-@using Humanizer
 @model List<StackOverflow.Models.Question>
 
 <main class="col-12 col-md-9 col-lg-7 px-0">
     <div class="p-3">
         <div class="d-flex justify-content-between mb-3">
             <h1 class="fs-3">Newest Questions</h1>
-            <button class="btn btn-primary" id="ask-btn-form" style="font-size: 13px;">Ask Question</button>
+            <button class="p-2 btn-ask-question">
+                <div class="px-2">
+                    <span class="pe-2"><i class="fa-solid fa-plus"></i></span>
+                    <span>Ask Question</span>
+                </div>
+            </button>
         </div>
 
         <div class="d-flex justify-content-between align-items-center">
@@ -27,7 +30,7 @@
                 <div>
 
                 </div>
-                <button class="btn btn-outline-primary px-2 py-1">
+                <button class="btn-filter px-2 py-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                          class="bi bi-filter" viewBox="0 0 18 18">
                         <path
@@ -65,9 +68,12 @@
                     <div class="justify-content-between align-items-center flex-wrap gap-2 mb-1  d-block d-sm-flex">
                         <!-- tag -->
                         <ul class="tag-list d-flex flex-nowrap gap-1 list-unstyled">
-                            @foreach (var j in i.tags)
+                            @if (i.tags.Count >= 2)
                             {
-                                <li class="tag">@j._name</li>
+                                foreach (var j in i.tags)
+                                {
+                                    <li class="tag">@j._name</li>
+                                }
                             }
                         </ul>
                         <!-- Tác giả và thời gian -->

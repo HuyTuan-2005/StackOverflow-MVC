@@ -19,7 +19,7 @@ namespace StackOverflow.Controllers
         {
             try
             {
-                BCP b = new BCP(@"localhost\SQLEXPRESS", "Forum");
+                BCP b = new BCP(@"localhost", "Forum");
                 string tableName = "USERS";
                 string filePath = Server.MapPath("~/export.csv");
                 string result = b.ExportTable(tableName, filePath);
