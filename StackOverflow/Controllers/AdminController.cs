@@ -6,17 +6,15 @@ namespace StackOverflow.Controllers
     public class AdminController : Controller
     {
         // GET
+        [LoginAuthenticationFilter]
         public ActionResult Index()
         {
-            if (Session["username"] == null)
-            {
-                return RedirectToAction("Login", "Admin");
-            }
             return RedirectToAction("dashboard");
         }
         
         // GET: DashBoard
         [HttpGet]
+        [LoginAuthenticationFilter]
         public ActionResult DashBoard()
         {
             return View();
@@ -41,9 +39,15 @@ namespace StackOverflow.Controllers
             }
             else
             {
-                Session["username"] = username;
+                Session["admin"] = username;
                 return RedirectToAction("dashboard");
             }
+        }
+
+        public ActionResult Logout()
+        {
+            Session["admin"] = null;
+            return RedirectToAction("Login", "Admin");
         }
     }
 }
