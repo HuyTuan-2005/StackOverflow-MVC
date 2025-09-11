@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data.SqlClient;
 
 namespace StackOverflow.Models
 {
@@ -6,6 +7,26 @@ namespace StackOverflow.Models
     {
         private static SqlConnection _conn = null;
         
+        // Admin login
+        public SqlConnection Connection(string username, string password)
+        {
+            try
+            {
+                string connString = $"Server=localhost;Database=Forum;User Id={username};Password={password};";
+                using (var conn = new SqlConnection(connString))
+                {
+                    conn.Open();
+                    return conn;
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("Kết nối thất bại: " + ex.Message);
+                return null;
+            }
+        }
+        
+        // User login
         public SqlConnection Connection()
         {
             try
@@ -18,8 +39,9 @@ namespace StackOverflow.Models
                 }
                 return _conn;
             }
-            catch (SqlException e)
+            catch (SqlException ex)
             {
+                Console.WriteLine("Kết nối thất bại: " + ex.Message);
                 return null;
             }
         }

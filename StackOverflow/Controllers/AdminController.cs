@@ -8,9 +8,21 @@ namespace StackOverflow.Controllers
         // GET
         public ActionResult Index()
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            return RedirectToAction("dashboard");
+        }
+        
+        // GET: DashBoard
+        [HttpGet]
+        public ActionResult DashBoard()
+        {
             return View();
         }
-
+        
+        // GET: Login
         [HttpGet]
         public ActionResult Login()
         {
@@ -21,7 +33,7 @@ namespace StackOverflow.Controllers
         public ActionResult Login(string username, string password)
         {
             
-            var db = new ConnectAdmin();
+            var db = new Database();
             var conn = db.Connection(username, password);
             if (conn == null)
             {
@@ -29,7 +41,8 @@ namespace StackOverflow.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                Session["username"] = username;
+                return RedirectToAction("dashboard");
             }
         }
     }

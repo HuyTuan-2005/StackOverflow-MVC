@@ -52,6 +52,10 @@ namespace StackOverflow.Controllers
             reader.Close();
             return _questions;
         }
+        public ActionResult TestError()
+        {
+            throw new Exception("Lỗi thử để kiểm tra filter");
+        }
 
         public ActionResult Index()
         {
