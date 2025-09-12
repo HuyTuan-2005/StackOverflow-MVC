@@ -1,5 +1,7 @@
 :root {
     --color-primary: #F48023;
+    --color-primary-2: #F48023;
+    --color-sub-primary: #FCF4EC;
 }
 
 * {
@@ -204,30 +206,36 @@ aside {
 }
 
 .left-sidebar-list {
+    font-family: 'Roboto', sans-serif;
     font-size: 14px;
 }
 
 .left-sidebar-list ul li {
     border-radius: 7px;
-    margin-right: 5px;
+    margin: 0 5px 5px 0;
 }
 
-.left-sidebar-list ul li:hover {
-    background-color: #f9fafa;
-    font-weight: 700;
-}
 
 .left-sidebar-list ul li a {
-    color: #384045;
+    color: #808080;
     padding-left: 10px;
+    transition: 0.1s ease-in;
 }
 
 .left-sidebar-list ul li i {
+    display: inline-block;  
     width: 28px;
     text-align: center;
     padding-right: 5px;
+    /*color: #808080;*/
 }
 
+.left-sidebar-list ul li a:hover, .left-sidebar-list .active{
+    background-color: var(--color-sub-primary);
+    color: var(--color-primary);
+    font-weight: 700;
+    border-left: 4px solid var(--color-primary-2);
+}
 .nav-link:hover {
 
     color: #0c0d0e;

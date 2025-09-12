@@ -21,7 +21,7 @@ namespace StackOverflow.Models
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("Kết nối thất bại: " + ex.Message);
+                Console.WriteLine("Connect failed: " + ex.Message);
                 return null;
             }
         }
@@ -41,7 +41,7 @@ namespace StackOverflow.Models
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("Kết nối thất bại: " + ex.Message);
+                Console.WriteLine("Connect failed: " + ex.Message);
                 return null;
             }
         }

@@ -28,18 +28,18 @@ namespace StackOverflow.Controllers
         }
         
         [HttpPost]
-        public ActionResult Login(string username, string password)
+        public ActionResult Login(User user)
         {
             
             var db = new Database();
-            var conn = db.Connection(username, password);
+            var conn = db.Connection(user.UserName, user.Password);
             if (conn == null)
             {
                 return View("Login/Index");
             }
             else
             {
-                Session["admin"] = username;
+                Session["admin"] = user.UserName;
                 return RedirectToAction("dashboard");
             }
         }

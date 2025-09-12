@@ -151,12 +151,12 @@
     <Compile Include="Models\Database.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Tag.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\style.css" />
-    <Content Include="Content\img\default-monochrome.svg" />
-    <Content Include="Content\img\default.svg" />
+    <Content Include="Content\img\icon.svg" />
     <Content Include="Content\lib\css\bootstrap-grid.css" />
     <Content Include="Content\lib\css\bootstrap-grid.css.map" />
     <Content Include="Content\lib\css\bootstrap-grid.min.css" />
