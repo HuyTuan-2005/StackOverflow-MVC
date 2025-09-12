@@ -30,7 +30,6 @@ namespace StackOverflow.Controllers
         [HttpPost]
         public ActionResult Login(User user)
         {
-            
             var db = new Database();
             var conn = db.Connection(user.UserName, user.Password);
             if (conn == null)
