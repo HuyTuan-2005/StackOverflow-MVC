@@ -1,19 +1,31 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-          integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <link rel="stylesheet" href="~/Content/lib/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="~/Content/css/style.css">
-</head>
-<body>
-<hgroup>
-    <h1>Error.</h1>
-    <h2>An error occurred while processing your request.</h2>
-</hgroup>
-</body>
-</html>
+@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Lỗi Ứng Dụng";
+}
+
+<div class="container my-5 text-center">
+    <section class="mb-4">
+        <h1 class="display-4 text-danger">Lỗi xảy ra</h1>
+        <p class="lead text-secondary">Rất tiếc, ứng dụng gặp sự cố không mong muốn.</p>
+    </section>
+
+    <section class="mb-4 p-3 bg-light rounded">
+        <h2 class="h5">Thông tin chi tiết lỗi</h2>
+        <dl class="text-start">
+            <dt>Controller:</dt>
+            <dd>@Model.ControllerName</dd>
+
+            <dt>Action:</dt>
+            <dd>@Model.ActionName</dd>
+
+            <dt>Exception Message:</dt>
+            <dd class="text-monospace bg-white p-2 rounded">@Model.Exception.Message</dd>
+        </dl>
+    </section>
+
+    <section>
+        <a href="/" class="btn btn-primary px-4">Quay lại Trang chủ</a>
+    </section>
+</div>

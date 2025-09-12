@@ -6,11 +6,21 @@ namespace StackOverflow.Controllers
     public class AdminController : Controller
     {
         // GET
+        [LoginAuthenticationFilter]
         public ActionResult Index()
+        {
+            return RedirectToAction("dashboard");
+        }
+        
+        // GET: DashBoard
+        [HttpGet]
+        [LoginAuthenticationFilter]
+        public ActionResult DashBoard()
         {
             return View();
         }
-
+        
+        // GET: Login
         [HttpGet]
         public ActionResult Login()
         {
@@ -18,19 +28,26 @@ namespace StackOverflow.Controllers
         }
         
         [HttpPost]
-        public ActionResult Login(string username, string password)
+        public ActionResult Login(User user)
         {
             
-            var db = new ConnectAdmin();
-            var conn = db.Connection(username, password);
+            var db = new Database();
+            var conn = db.Connection(user.UserName, user.Password);
             if (conn == null)
             {
                 return View("Login/Index");
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                Session["admin"] = user.UserName;
+                return RedirectToAction("dashboard");
             }
+        }
+
+        public ActionResult Logout()
+        {
+            Session["admin"] = null;
+            return RedirectToAction("Login", "Admin");
         }
     }
 }

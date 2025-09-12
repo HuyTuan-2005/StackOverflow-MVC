@@ -1,0 +1,105 @@
+﻿@{
+  ViewData["Title"] = "Admin";
+  Layout = "_AdminLayout.cshtml";
+}
+
+<!-- Content -->
+<div class="col-md-10 p-4">
+  <h4 class="mb-4">👋 Xin chào, Admin!</h4>
+
+  <style>
+
+    .card-users {
+      background: #0077cc15;
+    }
+    .card-questions {
+      background: #f4802415;
+    }
+    .card-answers {
+      background: #2ecc7115;
+    }
+    .card-tags {
+      background: #9b59b615;
+    }
+  </style>
+  <!-- Cards -->
+  <div class="row g-4 mb-4">
+    <div class="col-md-3">
+      <div class="card text-center p-3 border-0 shadow-sm card-users">
+        <div class="icon text-primary"><i class="bi bi-people"></i></div>
+        <h6 class="text-muted">Users</h6>
+        <h3 class="text-primary">120</h3>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center p-3 border-0 shadow-sm card-questions">
+        <div class="icon" style="color:#f48024"><i class="bi bi-question-circle"></i></div>
+        <h6 class="text-muted">Questions</h6>
+        <h3 style="color:#f48024">350</h3>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center p-3 border-0 shadow-sm card-answers">
+        <div class="icon text-success"><i class="bi bi-chat-dots"></i></div>
+        <h6 class="text-muted">Answers</h6>
+        <h3 class="text-success">580</h3>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center p-3 border-0 shadow-sm card-tags">
+        <div class="icon" style="color:#9b59b6"><i class="bi bi-tags"></i></div>
+        <h6 class="text-muted">Tags</h6>
+        <h3 style="color:#9b59b6">42</h3>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Bảng -->
+  <div class="card">
+    <div class="card-header bg-white fw-bold"><i class="bi bi-people"></i> Users mới</div>
+    <div class="card-body">
+      <table class="table align-middle">
+        <thead class="table-light">
+        <tr>
+          <th>#</th>
+          <th>Tên</th>
+          <th>Email</th>
+          <th>Ngày tạo</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>Nguyễn Văn A</td>
+          <td>a@example.com</td>
+          <td>2025-09-01</td>
+          <td>
+            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Trần Thị B</td>
+          <td>b@example.com</td>
+          <td>2025-09-05</td>
+          <td>
+            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Lê Văn C</td>
+          <td>c@example.com</td>
+          <td>2025-09-09</td>
+          <td>
+            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

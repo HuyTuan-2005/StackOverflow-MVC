@@ -30,10 +30,11 @@
   <div class="card login-card">
     <div class="card-body">
       <h3 class="text-center mb-4">Admin Login</h3>
-      <form action="/admin/login" method="post">
+      <form action="/admin/login" method="post" >
         <div class="mb-3">
           <label for="username" class="form-label">Tên đăng nhập</label>
-          <input name="username" type="text" class="form-control" id="username" placeholder="Nhập tên đăng nhập">
+          <input asp-for="UserName" name="username" type="text" class="form-control" id="username" placeholder="Nhập tên đăng nhập">
+          <span asp-validation-for="UserName" class="text-danger"></span>
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Mật khẩu</label>
