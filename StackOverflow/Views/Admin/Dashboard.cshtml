@@ -2,26 +2,34 @@
   ViewData["Title"] = "Admin";
   Layout = "_AdminLayout.cshtml";
 }
-
-<!-- Content -->
-<div class="col-md-10 p-4">
-  <h4 class="mb-4">👋 Xin chào, Admin!</h4>
-
-  <style>
+<style>
 
     .card-users {
-      background: #0077cc15;
+        background: #0077cc15;
     }
+
     .card-questions {
-      background: #f4802415;
+        background: #f4802415;
     }
+
     .card-answers {
-      background: #2ecc7115;
+        background: #2ecc7115;
     }
+
     .card-tags {
-      background: #9b59b615;
+        background: #9b59b615;
     }
-  </style>
+</style>
+<!-- Content -->
+<div class="col-md-10 p-4">
+    <div class="d-flex justify-content-between">
+        <h4 class="mb-4">👋 Xin chào, Admin!</h4>
+        <form method="post" action="/Admin/Export">
+            <button type="submit" class="btn btn-primary">Export CSV</button>
+        </form>
+    </div>
+
+  
   <!-- Cards -->
   <div class="row g-4 mb-4">
     <div class="col-md-3">
