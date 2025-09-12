@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,16 +20,21 @@ namespace StackOverflow.Controllers
         {
             try
             {
-                BCP b = new BCP(@"localhost", "Forum");
+                BCP b = new BCP(@"localhost\SQLEXPRESS", "Forum");
                 string tableName = "USERS";
-                string filePath = Server.MapPath("~/export.csv");
-                string result = b.ExportTable(tableName, filePath);
 
-                byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+                string tempFile = Path.GetTempFileName();
 
-                string outputFileName = $"{tableName}" + "_export.csv";
+                string result = b.ExportTable(tableName, tempFile);
+
+                byte[] fileBytes = System.IO.File.ReadAllBytes(tempFile);
+
+                if (System.IO.File.Exists(tempFile))
+                    System.IO.File.Delete(tempFile);
+
+                string outputFileName = $"{tableName}_export.csv";
                 return File(fileBytes, "text/csv", outputFileName);
-                
+
             }
             catch (Exception ex)
             {

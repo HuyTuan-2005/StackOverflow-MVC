@@ -10,7 +10,8 @@ namespace StackOverflow.Models
         {
             try
             {
-                string connString = "Server=localhost;Database=Forum;User Id=sa;Password=sa;";
+                //string connString = "Server=192.168.2.10;Database=Forum;User Id=sa;Password=sa;";
+                string connString = "Server=localhost\\SQLEXPRESS;Database=Forum;User Id=sa;Password=sa;";
                 if (_conn == null)
                 {
                     _conn = new SqlConnection(connString);

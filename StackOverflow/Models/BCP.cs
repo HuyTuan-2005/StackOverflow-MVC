@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -20,15 +21,42 @@ namespace StackOverflow.Models
         }
         public string ExportTable(string tableName, string filePath)
         {
+
             string fullTableName = $"{DatabaseName}.dbo.{tableName}";
-            string bcpCommand = $"bcp {fullTableName} out \"{filePath}\" -c -t; -S {ServerName} -T -w";
-            return RunBCP(bcpCommand);
+
+            string bcpCommand = $"bcp {fullTableName} out \"{filePath}\" -c -t, -S {ServerName} -T -w";
+
+            string output = RunBCP(bcpCommand);
+
+            string content = System.IO.File.ReadAllText(filePath, System.Text.Encoding.Unicode);
+            System.IO.File.WriteAllText(filePath, content, new System.Text.UTF8Encoding(true));
+
+            return output;
         }
         public string ImportTable(string tableName, string filePath)
         {
+            //string fullTableName = $"{DatabaseName}.dbo.{tableName}";
+            //string bcpCommand = $"bcp {fullTableName} in \"{filePath}\" -c -t, -S {ServerName} -T -w";
+            //return RunBCP(bcpCommand);
+
             string fullTableName = $"{DatabaseName}.dbo.{tableName}";
-            string bcpCommand = $"bcp {fullTableName} in \"{filePath}\" -c -t; -S {ServerName} -T -w";
-            return RunBCP(bcpCommand);
+
+            // Bước 1: Đọc file CSV (UTF-8 BOM) và chuyển sang Unicode (UTF-16 LE) để bcp in dùng -w
+            string tempFile = Path.GetTempFileName();
+            string content = System.IO.File.ReadAllText(filePath, System.Text.Encoding.UTF8);
+            System.IO.File.WriteAllText(tempFile, content, System.Text.Encoding.Unicode);
+
+            // Bước 2: Lệnh bcp import
+            string bcpCommand = $"bcp {fullTableName} in \"{tempFile}\" -c -t, -S {ServerName} -T -w";
+
+            // Bước 3: Chạy lệnh bcp
+            string output = RunBCP(bcpCommand);
+
+            // Bước 4: Xóa file tạm
+            if (System.IO.File.Exists(tempFile))
+                System.IO.File.Delete(tempFile);
+
+            return output;
         }
 
         private string RunBCP(string command)

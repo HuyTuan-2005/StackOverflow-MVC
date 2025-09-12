@@ -9,7 +9,7 @@ namespace StackOverflow.Models
         {
             try
             {
-                string connString = $"Server=localhost;Database=Forum;User Id={username};Password={password};";
+                string connString = $"Server=192.168.2.10;Database=Forum;User Id={username};Password={password};";
                 using (var conn = new SqlConnection(connString))
                 {
                     conn.Open();
