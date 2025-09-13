@@ -31,7 +31,7 @@ namespace StackOverflow.Models
         {
             try
             {
-                string connString = "Server=192.168.2.10;Database=Forum;User Id=sa;Password=sa;";
+                string connString = "Server=192.168.1.11;Database=Forum;User Id=sa;Password=sa;";
                 // string connString = "Server=localhost\\SQLEXPRESS;Database=Forum;User Id=sa;Password=sa;";
                 if (_conn == null)
                 {
