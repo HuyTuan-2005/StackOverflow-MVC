@@ -35,24 +35,17 @@ namespace StackOverflow.Models
         }
         public string ImportTable(string tableName, string filePath)
         {
-            //string fullTableName = $"{DatabaseName}.dbo.{tableName}";
-            //string bcpCommand = $"bcp {fullTableName} in \"{filePath}\" -c -t, -S {ServerName} -T -w";
-            //return RunBCP(bcpCommand);
 
             string fullTableName = $"{DatabaseName}.dbo.{tableName}";
 
-            // Bước 1: Đọc file CSV (UTF-8 BOM) và chuyển sang Unicode (UTF-16 LE) để bcp in dùng -w
             string tempFile = Path.GetTempFileName();
             string content = System.IO.File.ReadAllText(filePath, System.Text.Encoding.UTF8);
             System.IO.File.WriteAllText(tempFile, content, System.Text.Encoding.Unicode);
 
-            // Bước 2: Lệnh bcp import
             string bcpCommand = $"bcp {fullTableName} in \"{tempFile}\" -c -t, -S {ServerName} -T -w";
 
-            // Bước 3: Chạy lệnh bcp
             string output = RunBCP(bcpCommand);
 
-            // Bước 4: Xóa file tạm
             if (System.IO.File.Exists(tempFile))
                 System.IO.File.Delete(tempFile);
           

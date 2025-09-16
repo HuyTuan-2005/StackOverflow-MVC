@@ -2,6 +2,7 @@
 using System;
 using System.Web.Mvc;
 using StackOverflow.Models;
+using System.Web;
 
 namespace StackOverflow.Controllers
 {
@@ -79,10 +80,34 @@ namespace StackOverflow.Controllers
                 return View("Index");
             }
         }
-
-        public ActionResult Import()
+        [HttpPost]
+        public ActionResult Import(HttpPostedFileBase file)
         {
-            return View();
+            try
+            {
+                if (file == null || file.ContentLength == 0)
+                {
+                    return View("Dasboard");
+                }
+                string tempFile = Path.GetTempFileName();
+                file.SaveAs(tempFile);
+
+                BCP b = new BCP(@"localhost\SQLEXPRESS", "Forum");
+                string tableName = "QUESTIONS";
+
+                string result = b.ImportTable(tableName, tempFile);
+
+                if (System.IO.File.Exists(tempFile))
+                    System.IO.File.Delete(tempFile);
+
+                return View("Dashboard");
+            }
+            catch (Exception ex)
+            {
+                return View("Dashboard");
+            }
         }
+
+
     }
 }

@@ -28,9 +28,16 @@
             <form method="post" action="/Admin/Export" class="mx-2">
                 <button type="submit" class="btn btn-primary">Export CSV</button>
             </form>
-            <form method="post" action="/Admin/Import">
+            @using (Html.BeginForm("Import", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input type="file" name="file" accept=".csv,.xlsx,.xls" />
                 <button type="submit" class="btn btn-primary">Import CSV</button>
-            </form>
+            }
+
+
+
+
+
         </div>
     </div>
 
