@@ -24,9 +24,14 @@
 <div class="col-md-10 p-4">
     <div class="d-flex justify-content-between">
         <h4 class="mb-4">👋 Xin chào, Admin!</h4>
-        <form method="post" action="/Admin/Export">
-            <button type="submit" class="btn btn-primary">Export CSV</button>
-        </form>
+        <div class="d-flex">
+            <form method="post" action="/Admin/Export" class="mx-2">
+                <button type="submit" class="btn btn-primary">Export CSV</button>
+            </form>
+            <form method="post" action="/Admin/Import">
+                <button type="submit" class="btn btn-primary">Import CSV</button>
+            </form>
+        </div>
     </div>
 
   

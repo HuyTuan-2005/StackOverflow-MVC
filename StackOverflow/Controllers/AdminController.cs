@@ -52,11 +52,6 @@ namespace StackOverflow.Controllers
             return RedirectToAction("Login", "Admin");
         }
 
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
         [HttpPost]
         public ActionResult Export()
         {
@@ -83,6 +78,11 @@ namespace StackOverflow.Controllers
                 ViewBag.Error = ex.Message;
                 return View("Index");
             }
+        }
+
+        public ActionResult Import()
+        {
+            return View();
         }
     }
 }
