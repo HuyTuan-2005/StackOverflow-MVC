@@ -42,51 +42,11 @@
         </div>
     </div>
 
-    <div id="question-list" class="p-0">
+    <div id="question-list" class="p-0 align-end">
         <!-- Các bài viết -->
         @foreach (var i in @Model)
         {
-            <article class="row question-card flex-wrap py-3 border-top m-0 px-3">
-                <!--Cột trái: thống kê -->
-                <div class="col-12 col-lg-2 p-0 pe-md-3">
-                    <div class="question-statics text-end text-muted p-0 d-flex flex-row flex-lg-column gap-3 gap-lg-1">
-                        <div>0 votes</div>
-                        <div>0 answers</div>
-                        <div>0 views</div>
-                    </div>
-                </div>
-                <!-- Cột phải: nội dung chính -->
-                <div class="question-content col-12 col-lg-10 text p-0">
-                    <a href="#" class="d-block question-title mb-1" style="font-size: 16px;">@i.title</a>
-
-                    <!-- Mô tả ngắn -->
-                    <p class="question-desc text-muted mb-2" style="font-size: 14px;">
-                        @i.body
-                    </p>
-
-                    <!-- Thẻ tag + Tác giả  -->
-                    <div class="justify-content-between align-items-center flex-wrap gap-2 mb-1  d-block d-sm-flex">
-                        <!-- tag -->
-                        <ul class="tag-list d-flex flex-nowrap gap-1 list-unstyled">
-                            @if (i.tags.Count >= 2)
-                            {
-                                foreach (var j in i.tags)
-                                {
-                                    <li class="tag">@j._name</li>
-                                }
-                            }
-                        </ul>
-                        <!-- Tác giả và thời gian -->
-                        <div class="article-info text-muted me-3 mt-2 mt-md-0">
-                            <a href="#">
-                                <i class="fa fa-user me-1"></i>
-                                <span class="text-primary">@i.DisplayName</span>
-                            </a>
-                            <time class="text-muted ms-1">@i.gioDang</time>
-                        </div>
-                    </div>
-                </div>
-            </article>
+            @Html.Partial("Partials/_Question", i)
         }
     </div>
 </main>
