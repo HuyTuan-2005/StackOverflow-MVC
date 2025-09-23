@@ -14,19 +14,12 @@ namespace StackOverflow.Controllers
     {
         private List<Question> _questions { get; set; }
 
-        private int CountQuestion()
+        private int CountQuestion(List<Question> lstQuestion)
         {
-            var db = new Database();
-            var conn = db.Connection();
-
-            var command = conn.CreateCommand();
-            command.CommandText = "SELECT count(*) FROM V_Question";
-
-            var reader = command.ExecuteScalar();
-            return (int)reader;
+            return lstQuestion.Count;
         }
 
-        private List<Question> GetQuestions()
+        private List<Question> GetAllQuestions()
         {
             _questions = new List<Question>();
             var db = new Database();
@@ -34,7 +27,7 @@ namespace StackOverflow.Controllers
 
             var command = conn.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "sp_GetQuestion";
+            command.CommandText = "sp_GetAllQuestion";
 
             var reader = command.ExecuteReader();
 
@@ -54,20 +47,55 @@ namespace StackOverflow.Controllers
             reader.Close();
             return _questions;
         }
-        public ActionResult TestError()
+        
+        private List<Question> GetQuestions(string search)
         {
-            throw new Exception("Lỗi thử để kiểm tra filter");
+            if (string.IsNullOrEmpty(search))
+                return GetAllQuestions();
+            
+            List<Question> lstQuestion = new List<Question>();
+            
+            var db = new Database();
+            var conn = db.Connection();
+
+            var command = conn.CreateCommand();
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_GetQuestion";
+            command.Parameters.AddWithValue("@keyword", search);
+
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var question = new Question()
+                    {
+                        DisplayName = reader["display_name"].ToString(),
+                        title = reader["title"].ToString(),
+                        body = reader["body"].ToString(),
+                        gioDang = DateTime.Parse(reader["GioDang"].ToString())
+                    };
+                    question.AddTags(reader["tags"].ToString());
+                    lstQuestion.Add(question);
+                }
+            }
+
+            return lstQuestion;
         }
 
         public ActionResult Index()
         {
-            // if (Session["username"] == null)
-            // {
-            //     return RedirectToAction("Index", "Login");
-            // }
-            ViewBag.CountQuestion = CountQuestion();
+            List<Question> lstQuestion = GetAllQuestions();
+            ViewBag.CountQuestion = CountQuestion(lstQuestion);
             
-            return View(GetQuestions());
+            return View("Index", lstQuestion);
+        }
+        
+        [HttpGet]
+        public ActionResult Search(string search)
+        {
+            List<Question> lstQuestion = GetQuestions(search);
+            ViewBag.CountQuestion = CountQuestion(lstQuestion);
+            return View("Index", lstQuestion);
         }
     }
 }

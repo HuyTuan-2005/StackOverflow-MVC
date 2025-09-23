@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using StackOverflow.Models;
 using System.Web;
@@ -33,7 +34,6 @@ namespace StackOverflow.Controllers
         [HttpPost]
         public ActionResult Login(User user)
         {
-            
             var db = new Database();
             var conn = db.Connection(user.UserName, user.Password);
             if (conn == null)
@@ -107,7 +107,5 @@ namespace StackOverflow.Controllers
                 return View("Dashboard");
             }
         }
-
-
     }
 }

@@ -44,9 +44,18 @@
 
     <div id="question-list" class="p-0 align-end">
         <!-- Các bài viết -->
-        @foreach (var i in @Model)
+        @if (@Model.Count > 0)
         {
-            @Html.Partial("Partials/_Question", i)
+            foreach (var i in @Model)
+            {
+                @Html.Partial("Partials/_Question", i)
+            }
+        }
+        else
+        {
+        <div class="alert m-3 text-center fw-bold" style="color: var(--color-primary-2); background-color: var(--color-sub-primary) " role="alert">
+            Không tìm thấy bài viết nào
+        </div>
         }
     </div>
 </main>
