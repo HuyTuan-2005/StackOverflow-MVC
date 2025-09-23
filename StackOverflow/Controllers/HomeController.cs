@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -32,7 +33,8 @@ namespace StackOverflow.Controllers
             var conn = db.Connection();
 
             var command = conn.CreateCommand();
-            command.CommandText = "SELECT * FROM V_Question";
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_GetQuestion";
 
             var reader = command.ExecuteReader();
 
