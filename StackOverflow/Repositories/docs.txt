@@ -1,0 +1,16 @@
+﻿/Repositories hoặc /DataAccess (DAL)
+
+Data Access Layer thao tác DB rồi trả về dữ liệu dưới dạng model hoặc DTO cho Service.
+
+
+Service gọi Data Access Layer để thao tác dữ liệu.
+
+
+Service xử lý nghiệp vụ rồi trả lại dữ liệu cho Controller.
+
+
+
+Controller gọi Service (Business Layer) qua interface hoặc trực tiếp class.
+
+
+Controller truyền dữ liệu sang ViewModel cho View hiển thị.

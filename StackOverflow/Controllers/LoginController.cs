@@ -29,8 +29,6 @@ namespace StackOverflow.Controllers
 
             var command = conn.CreateCommand();
             command.CommandText = "SELECT * FROM Users WHERE username = @username AND password = @password";
-
-            command.CommandText = "SELECT * FROM Users WHERE username = @username AND password = @password";
             command.Parameters.AddWithValue("@username", username);
             command.Parameters.AddWithValue("@password", password);
 

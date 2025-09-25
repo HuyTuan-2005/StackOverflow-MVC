@@ -13,7 +13,6 @@ namespace StackOverflow.Models
             try
             {
                 string connString = $"Server=.;Database=Forum;User Id={username};Password={password};";
-                // string connString = $"Server=localhost\\SQLEXPRESS;Database=Forum;User Id={username};Password={password};";
                 using (var conn = new SqlConnection(connString))
                 {
                     conn.Open();
@@ -33,7 +32,6 @@ namespace StackOverflow.Models
             try
             {
                 string connString = "Server=.;Database=Forum;User Id=sa;Password=sa;";
-                // string connString = "Server=localhost\\SQLEXPRESS;Database=Forum;User Id=sa;Password=sa;";
                 if (_conn == null)
                 {
                     _conn = new SqlConnection(connString);
