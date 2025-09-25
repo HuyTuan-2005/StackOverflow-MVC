@@ -29,22 +29,21 @@ namespace StackOverflow.Controllers
             command.CommandType = CommandType.StoredProcedure;
             command.CommandText = "sp_GetAllQuestion";
 
-            var reader = command.ExecuteReader();
-
-            while (reader.Read())
+            using (var reader = command.ExecuteReader())
             {
-                var question = new Question()
+                while (reader.Read())
                 {
-                    DisplayName = reader["display_name"].ToString(),
-                    title = reader["title"].ToString(),
-                    body = reader["body"].ToString(),
-                    gioDang = DateTime.Parse(reader["GioDang"].ToString())
-                };
-                question.AddTags(reader["tags"].ToString());
-                _questions.Add(question);
+                    var question = new Question()
+                    {
+                        DisplayName = reader["display_name"].ToString(),
+                        title = reader["title"].ToString(),
+                        body = reader["body"].ToString(),
+                        gioDang = DateTime.Parse(reader["GioDang"].ToString())
+                    };
+                    question.AddTags(reader["tags"].ToString());
+                    _questions.Add(question);
+                }
             }
-
-            reader.Close();
             return _questions;
         }
         

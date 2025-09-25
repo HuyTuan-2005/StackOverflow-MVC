@@ -2,6 +2,9 @@
   ViewData["Title"] = "Admin";
   Layout = "_AdminLayout.cshtml";
 }
+@using StackOverflow.Models
+@model List<StackOverflow.Models.Profile>
+
 <style>
 
     .card-users {
@@ -33,11 +36,6 @@
                 <input type="file" name="file" accept=".csv,.xlsx,.xls" />
                 <button type="submit" class="btn btn-primary">Import CSV</button>
             }
-
-
-
-
-
         </div>
     </div>
 
@@ -82,41 +80,24 @@
       <table class="table align-middle">
         <thead class="table-light">
         <tr>
-          <th>#</th>
           <th>Tên</th>
-          <th>Email</th>
-          <th>Ngày tạo</th>
+          <th>Ngày sinh</th>
+          <th>Giới tinh</th>
           <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>1</td>
-          <td>Nguyễn Văn A</td>
-          <td>a@example.com</td>
-          <td>2025-09-01</td>
-          <td>
-            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Trần Thị B</td>
-          <td>b@example.com</td>
-          <td>2025-09-05</td>
-          <td>
-            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Lê Văn C</td>
-          <td>c@example.com</td>
-          <td>2025-09-09</td>
-          <td>
-            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
-          </td>
-        </tr>
+        @foreach (var i in @Model)
+        {
+          <tr>
+            <td>@i.DisplayName</td>
+            <td>@i.Birthday.ToString("dd/MM/yyyy")</td>
+            <td>@i.Gender</td>
+            <td>
+              <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
+            </td>
+          </tr>
+        }
         </tbody>
       </table>
     </div>

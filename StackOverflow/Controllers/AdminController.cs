@@ -1,14 +1,45 @@
 ﻿using System.IO;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Web.Mvc;
 using StackOverflow.Models;
 using System.Web;
+using System.Data.SqlClient;
 
 namespace StackOverflow.Controllers
 {
     public class AdminController : Controller
     {
+        private List<Profile> GetAllProfile()
+        {
+            var db = new Database();
+            SqlConnection conn = db.Connection();
+            
+            var command = new SqlCommand();
+            command.CommandType = CommandType.Text;
+            command.CommandText = "SELECT * FROM V_USERNEW";
+            command.Connection = conn;
+            
+            List<Profile> lstProfile = new List<Profile>();
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var profile = new Profile()
+                    {
+                        DisplayName = reader["display_name"].ToString(),
+                        Birthday = DateTime.Parse(reader[1].ToString()),
+                        Gender = reader[2].ToString(),
+                    };
+                    lstProfile.Add(profile);
+                }
+            }
+            return lstProfile;
+        }
+        
+        
         // GET
         [LoginAuthenticationFilter]
         public ActionResult Index()
@@ -21,7 +52,7 @@ namespace StackOverflow.Controllers
         [LoginAuthenticationFilter]
         public ActionResult DashBoard()
         {
-            return View();
+            return View("Dashboard", GetAllProfile());
         }
         
         // GET: Login

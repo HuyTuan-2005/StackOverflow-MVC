@@ -11,6 +11,8 @@ namespace StackOverflow.Models
         public string body{get; set;}
         public List<Tag> tags{get; set;}
         public DateTime gioDang{get; set;}
+        
+        public List<Answer> LstAnswer{get; set;}
 
         public List<Tag> AddTags(string ntag)
         {

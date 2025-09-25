@@ -16,11 +16,16 @@
 
 <div class="container">
     <div class="row">
-        @RenderSection("SidebarLeft", required: false)
+        
+        <aside class="col-3 col-lg-2 d-none d-md-block border-end p-0">
+            @RenderSection("SidebarLeft", required: false)
+        </aside>
 
         @RenderBody()
 
-        @RenderSection("SectionRight", required: false)
+        <section class="col-3 d-none d-lg-block my-3">
+            @RenderSection("SectionRight", required: false)
+        </section>
     </div>
 </div>
 
