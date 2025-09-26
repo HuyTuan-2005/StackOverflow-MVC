@@ -248,7 +248,7 @@ aside {
     margin: 0;
 }
 
-.tag {
+.tag a{
     background-color: #e1ecf4;
     color: #39739d;
     font-size: 12px;
@@ -258,7 +258,7 @@ aside {
     transition: 0.3s ease-in;
 }
 
-.tag:hover {
+.tag a:hover {
     background-color: #3677a5;
     color: white;
     cursor: pointer;

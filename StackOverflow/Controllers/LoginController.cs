@@ -29,14 +29,10 @@ namespace StackOverflow.Controllers
             var db = new Database();
             var conn = db.Connection();
 
-            // var username = Request.Form.Get("username");
-            // var password = Request.Form.Get("password");
-
             var command = conn.CreateCommand();
             command.CommandText = "SELECT * FROM Users WHERE username = @username AND password = @password";
             command.Parameters.AddWithValue("@username", model.Username);
             command.Parameters.AddWithValue("@password", model.Password);
-
 
             var reader = command.ExecuteReader();
 

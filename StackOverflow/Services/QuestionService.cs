@@ -1,5 +1,6 @@
 ﻿using StackOverflow.ViewModels;
 using System.Collections.Generic;
+using System.Linq;
 using StackOverflow.Repositories;
 
 namespace StackOverflow.Services
@@ -17,6 +18,10 @@ namespace StackOverflow.Services
         {
             return _questionRepository.GetAllQuestions();
         }
-        
+
+        public List<HomePageViewModel> GetQuestionsByTag(string tag)
+        {
+            return _questionRepository.GetQuestionsByTag(tag);
+        }
     }
 }

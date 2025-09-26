@@ -16,7 +16,7 @@ namespace StackOverflow.Repositories
             _connString = connString;
         }
 
-        public List<HomePageViewModel> GetAllQuestions()
+        private List<HomePageViewModel> ExecStoredProcedureAndMap(string storedProcedureName, Dictionary<string, object> parameters = null)
         {
             var lstQuestions = new List<HomePageViewModel>();
 
@@ -25,9 +25,16 @@ namespace StackOverflow.Repositories
                 using (var conn = new SqlConnection(_connString))
                 {
                     conn.Open();
-                    using (var command = new SqlCommand("sp_GetAllQuestion", conn))
+                    using (var command = new SqlCommand(storedProcedureName, conn))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
+                        if (parameters != null)
+                        {
+                            foreach (var parameter in parameters)
+                            {
+                                command.Parameters.AddWithValue(parameter.Key, parameter.Value);
+                            }
+                        }
                         using (var reader = command.ExecuteReader())
                         {
                             while (reader.Read())
@@ -49,9 +56,20 @@ namespace StackOverflow.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
                 return new List<HomePageViewModel>();
             }
+        }
+
+        public List<HomePageViewModel> GetAllQuestions()
+        {
+            return ExecStoredProcedureAndMap("sp_GetAllQuestion");
+        }
+
+        public List<HomePageViewModel> GetQuestionsByTag(string tag)
+        {
+            var parameter = new Dictionary<string, object>();
+            parameter.Add("@Tag", tag);
+            return ExecStoredProcedureAndMap("sp_GetQuestionsByTag", parameter);
         }
     }
 }

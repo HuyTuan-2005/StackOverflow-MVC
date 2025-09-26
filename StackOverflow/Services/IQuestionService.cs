@@ -6,5 +6,6 @@ namespace StackOverflow.Services
     public interface IQuestionService
     {
         List<HomePageViewModel> GetAllQuestions();
+        List<HomePageViewModel> GetQuestionsByTag(string tag);
     }
 }

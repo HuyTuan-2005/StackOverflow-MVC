@@ -6,7 +6,7 @@ namespace StackOverflow.Repositories
 {
     public interface IQuestionRepository
     {
-        //Question GetQuestionByTitle(string title);
+        List<HomePageViewModel> GetQuestionsByTag(string tag);
         List<HomePageViewModel> GetAllQuestions();
     }
 }

@@ -31,5 +31,13 @@ namespace StackOverflow.Controllers
             
             return View("Index", lstQuestion);
         }
+
+        public ActionResult Filter(string tag)
+        {
+            if(tag == null)
+                return View("Error");
+            var lstQuestion = _questionService.GetQuestionsByTag(tag);
+            return View("Index", lstQuestion);
+        }
     }
 }
