@@ -15,36 +15,43 @@ namespace StackOverflow.Repositories
         {
             _connString = connString;
         }
-        
+
         public List<HomePageViewModel> GetAllQuestions()
         {
             var lstQuestions = new List<HomePageViewModel>();
 
-            using (var conn = new SqlConnection(_connString))
+            try
             {
-                conn.Open();
-                using (var command = new SqlCommand("sp_GetAllQuestion", conn))
+                using (var conn = new SqlConnection(_connString))
                 {
-                    command.CommandType = System.Data.CommandType.StoredProcedure;
-                    using (var reader = command.ExecuteReader())
+                    conn.Open();
+                    using (var command = new SqlCommand("sp_GetAllQuestion", conn))
                     {
-                        while (reader.Read())
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                        using (var reader = command.ExecuteReader())
                         {
-                            lstQuestions.Add(new HomePageViewModel()
+                            while (reader.Read())
                             {
-                                DisplayName = reader["Display_Name"].ToString(),
-                                Title = reader["Title"].ToString(),
-                                Body = reader["Body"].ToString(),
-                                Tags = reader["Tags"].ToString().Split(',').ToList(),
-                                CreatedAt = DateTime.Parse(reader["Created_At"].ToString()),
-                                AnswerCount = int.Parse(reader["AnswerCount"].ToString()),
-                            });
+                                lstQuestions.Add(new HomePageViewModel()
+                                {
+                                    DisplayName = reader["Display_Name"].ToString(),
+                                    Title = reader["Title"].ToString(),
+                                    Body = reader["Body"].ToString(),
+                                    Tags = reader["Tags"].ToString().Split(',').ToList(),
+                                    CreatedAt = DateTime.Parse(reader["Created_At"].ToString()),
+                                    AnswerCount = int.Parse(reader["AnswerCount"].ToString()),
+                                });
+                            }
+                            return lstQuestions;
                         }
-                        return lstQuestions;
                     }
                 }
             }
-            return null;
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return new List<HomePageViewModel>();
+            }
         }
     }
 }

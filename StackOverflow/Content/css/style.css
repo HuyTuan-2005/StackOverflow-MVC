@@ -217,7 +217,7 @@ aside {
 
 
 .left-sidebar-list ul li a {
-    color: #808080;
+    color: #000000;
     padding-left: 10px;
     transition: 0.1s ease-in;
 }
@@ -237,7 +237,6 @@ aside {
     border-left: 4px solid var(--color-primary-2);
 }
 .nav-link:hover {
-
     color: #0c0d0e;
 }
 
