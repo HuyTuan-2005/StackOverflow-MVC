@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using StackOverflow.Models;
+using StackOverflow.ViewModels;
 
 namespace StackOverflow.Controllers
 {
@@ -19,18 +20,22 @@ namespace StackOverflow.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login()
+        public ActionResult Index(UserLoginViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
             var db = new Database();
             var conn = db.Connection();
 
-            var username = Request.Form.Get("username");
-            var password = Request.Form.Get("password");
+            // var username = Request.Form.Get("username");
+            // var password = Request.Form.Get("password");
 
             var command = conn.CreateCommand();
             command.CommandText = "SELECT * FROM Users WHERE username = @username AND password = @password";
-            command.Parameters.AddWithValue("@username", username);
-            command.Parameters.AddWithValue("@password", password);
+            command.Parameters.AddWithValue("@username", model.Username);
+            command.Parameters.AddWithValue("@password", model.Password);
 
 
             var reader = command.ExecuteReader();
@@ -38,7 +43,7 @@ namespace StackOverflow.Controllers
             if (reader.HasRows)
             {
                 reader.Close();
-                Session["UserName"] = username;
+                Session["UserName"] = model.Username;
                 return RedirectToAction("Index", "Home");
             }
             else

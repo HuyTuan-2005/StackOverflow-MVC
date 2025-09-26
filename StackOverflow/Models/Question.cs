@@ -6,25 +6,10 @@ namespace StackOverflow.Models
 {
     public class Question
     {
-        public string DisplayName {get; set;}
-        public string title{get; set;}
-        public string body{get; set;}
-        public List<Tag> tags{get; set;}
-        public DateTime gioDang{get; set;}
-        
-        public List<Answer> LstAnswer{get; set;}
-
-        public List<Tag> AddTags(string ntag)
-        {
-            string[] lst = ntag.Split(',').Select(t => t.Trim()).ToArray();
-            tags = new List<Tag>();
-
-            foreach (var item in lst)
-            {
-                var tag = new Tag(item);
-                tags.Add(tag);
-            }
-            return tags;
-        }
+        public int QustionId{get; set;}
+        public int UserId{get; set;}
+        public string Title{get; set;}
+        public string Body{get; set;}
+        public DateTime CreatedAt{get; set;}
     }
 }

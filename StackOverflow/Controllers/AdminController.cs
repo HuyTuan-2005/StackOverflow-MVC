@@ -61,22 +61,22 @@ namespace StackOverflow.Controllers
         {
             return View("Login/Index");
         }
-        
-        [HttpPost]
-        public ActionResult Login(User user)
-        {
-            var db = new Database();
-            var conn = db.Connection(user.UserName, user.Password);
-            if (conn == null)
-            {
-                return View("Login/Index");
-            }
-            else
-            {
-                Session["admin"] = user.UserName;
-                return RedirectToAction("dashboard");
-            }
-        }
+        //
+        // [HttpPost]
+        // public ActionResult Login(User user)
+        // {
+        //     var db = new Database();
+        //     var conn = db.Connection(user.UserName, user.Password);
+        //     if (conn == null)
+        //     {
+        //         return View("Login/Index");
+        //     }
+        //     else
+        //     {
+        //         Session["admin"] = user.UserName;
+        //         return RedirectToAction("dashboard");
+        //     }
+        // }
 
         public ActionResult Logout()
         {

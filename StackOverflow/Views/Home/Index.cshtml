@@ -10,8 +10,8 @@
     @Html.Partial("Partials/_SectionRight")
 }
 
-@model List<StackOverflow.Models.Question>
-
+@* @model List<StackOverflow.Models.Question> *@
+@model StackOverflow.Models.User
 <main class="col-12 col-md-9 col-lg-7 px-0">
     <div class="p-3">
         <div class="d-flex justify-content-between mb-3">
@@ -25,7 +25,7 @@
         </div>
 
         <div class="d-flex justify-content-between align-items-center">
-            <div id="quantity-questions">@ViewBag.CountQuestion question</div>
+            @* <div id="quantity-questions">@ViewBag.CountQuestion question</div> *@
             <div class="d-flex justify-content-between align-items-center">
                 <div>
 
@@ -43,19 +43,23 @@
     </div>
 
     <div id="question-list" class="p-0 align-end">
+        <div>@Model.UserId</div>
+        <div>@Model.Username</div>
+        <div>@Model.Email</div>
+        <div>@Model.CreatedAt.ToString("d")</div>
         <!-- Các bài viết -->
-        @if (@Model.Count > 0)
-        {
-            foreach (var i in @Model)
-            {
-                @Html.Partial("Partials/_Question", i)
-            }
-        }
-        else
-        {
+        @* @if (@Model.Count > 0) *@
+        @* { *@
+        @*     foreach (var i in @Model) *@
+        @*     { *@
+        @*         @Html.Partial("Partials/_Question", i) *@
+        @*     } *@
+        @* } *@
+        @* else *@
+        @* { *@
         <div class="alert m-3 text-center fw-bold" style="color: var(--color-primary-2); background-color: var(--color-sub-primary) " role="alert">
             Không tìm thấy bài viết nào
         </div>
-        }
+        @* } *@
     </div>
 </main>
