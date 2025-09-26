@@ -13,18 +13,11 @@ namespace StackOverflow.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IUserService _userService;
+        private readonly IQuestionService _questionService;
 
-        public HomeController(IUserService userService)
+        public HomeController(IQuestionService questionService)
         {
-            _userService = userService;
-        }
-        
-        private List<Question> _questions { get; set; }
-
-        private int CountQuestion(List<Question> lstQuestion)
-        {
-            return lstQuestion.Count;
+            _questionService = questionService;
         }
 
         // private List<Question> GetAllQuestions()
@@ -92,12 +85,15 @@ namespace StackOverflow.Controllers
         public ActionResult Index()
         {
             // List<Question> lstQuestion = GetAllQuestions();
-            // ViewBag.CountQuestion = CountQuestion(lstQuestion);
 
-            var user = _userService.GetUser(1);
-            if(user == null)
+            var lstQuestion = _questionService.GetAllQuestions();
+            
+            if(lstQuestion == null)
                 return View("Error");
-            return View("Index", user);
+            
+            ViewBag.CountQuestion = lstQuestion.Count;
+            
+            return View("Index", lstQuestion);
         }
         
         // [HttpGet]
