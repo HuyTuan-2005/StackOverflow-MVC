@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using StackOverflow.Models;
 using StackOverflow.ViewModels;
@@ -27,9 +28,9 @@ namespace StackOverflow.Controllers
             {
                 return View(model);
             }
-            var db = new Database();
-            var conn = db.Connection();
+            var conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["ForumDB"].ConnectionString);
 
+            conn.Open();
             var command = new SqlCommand("SELECT * FROM Users WHERE username = @username AND password = @password", conn);
 
             command.Parameters.AddWithValue("@username", model.Username);
