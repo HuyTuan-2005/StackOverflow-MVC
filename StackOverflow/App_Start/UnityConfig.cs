@@ -1,4 +1,5 @@
 using System.Configuration;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using StackOverflow.Repositories;
 using StackOverflow.Services;
@@ -19,7 +20,7 @@ using Unity.Mvc5;
             
             // e.g. container.RegisterType<ITestService, TestService>();
             
-            var connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            var connString = WebConfigurationManager.ConnectionStrings["ForumDB"].ConnectionString;
 
             // Đăng ký ánh xạ interface sang class
             container.RegisterType<IUserService, UserService>();

@@ -13,6 +13,7 @@ namespace StackOverflow.Repositories
 
         public QuestionRepository(string connString)
         {
+            Console.WriteLine(connString);
             _connString = connString;
         }
 
