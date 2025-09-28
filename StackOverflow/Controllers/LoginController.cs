@@ -3,12 +3,14 @@ using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.Web.Mvc;
 using StackOverflow.Models;
+using StackOverflow.Services;
 using StackOverflow.ViewModels;
 
 namespace StackOverflow.Controllers
 {
     public class LoginController : Controller
     {
+        private readonly IUserService _userService;
         // GET
         [HttpGet]
         public ActionResult Index()
@@ -28,27 +30,8 @@ namespace StackOverflow.Controllers
             {
                 return View(model);
             }
-            var conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["ForumDB"].ConnectionString);
 
-            conn.Open();
-            var command = new SqlCommand("SELECT * FROM Users WHERE username = @username AND password = @password", conn);
-
-            command.Parameters.AddWithValue("@username", model.Username);
-            command.Parameters.AddWithValue("@password", model.Password);
-
-            var reader = command.ExecuteReader();
-
-            if (reader.HasRows)
-            {
-                reader.Close();
-                Session["UserName"] = model.Username;
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                reader.Close();
-                return View("Index");
-            }
+            return View(model);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using StackOverflow.Models;
@@ -36,18 +37,23 @@ namespace StackOverflow.Repositories
                                 command.Parameters.AddWithValue(parameter.Key, parameter.Value);
                             }
                         }
-                        using (var reader = command.ExecuteReader())
+                        using (var da = new SqlDataAdapter(command))
                         {
-                            while (reader.Read())
+                            var ds = new DataSet();
+                            da.Fill(ds, "QuestionsView");
+                            
+                            var dt = ds.Tables["QuestionsView"];
+
+                            foreach (DataRow row in dt.Rows)
                             {
                                 lstQuestions.Add(new HomePageViewModel()
                                 {
-                                    DisplayName = reader["Display_Name"].ToString(),
-                                    Title = reader["Title"].ToString(),
-                                    Body = reader["Body"].ToString(),
-                                    Tags = reader["Tags"].ToString().Split(',').ToList(),
-                                    CreatedAt = DateTime.Parse(reader["Created_At"].ToString()),
-                                    AnswerCount = int.Parse(reader["AnswerCount"].ToString()),
+                                    DisplayName = row["Display_Name"].ToString(),
+                                    Title = row["Title"].ToString(),
+                                    Body = row["Body"].ToString(),
+                                    Tags = row["Tags"].ToString().Split(',').ToList(),
+                                    CreatedAt = DateTime.Parse(row["Created_At"].ToString()),
+                                    AnswerCount = int.Parse(row["AnswerCount"].ToString()),
                                 });
                             }
                             return lstQuestions;

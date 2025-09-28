@@ -1,5 +1,7 @@
 ﻿using StackOverflow.Models;
 using StackOverflow.Repositories;
+using StackOverflow.ViewModels;
+
 
 namespace StackOverflow.Services
 {
@@ -10,11 +12,6 @@ namespace StackOverflow.Services
         public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-        }
-
-        public User GetUser(int id)
-        {
-            return _userRepository.GetById(id);
         }
     }
 }
