@@ -42,7 +42,6 @@ namespace StackOverflow.Controllers
         
         
         // GET
-        [LoginAuthenticationFilter]
         public ActionResult Index()
         {
             return RedirectToAction("dashboard");
