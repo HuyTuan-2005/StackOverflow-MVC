@@ -12,7 +12,8 @@ namespace StackOverflow.Models
         {
             try
             {
-                string connString = $"Server=tcp:stackoverflowvn-sql.database.windows.net,1433;Initial Catalog=ForumDB;Persist Security Info=False;User ID={username};Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                // string connString = $"Server=tcp:stackoverflowvn-sql.database.windows.net,1433;Initial Catalog=ForumDB;Persist Security Info=False;User ID={username};Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                string connString = $"Server=.;Database=Forum;Uid={username};pwd={password}";
                 using (var conn = new SqlConnection(connString))
                 {
                     conn.Open();
