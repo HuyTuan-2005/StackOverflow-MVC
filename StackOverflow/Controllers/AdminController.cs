@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using StackOverflow.Models;
 using System.Web;
 using System.Data.SqlClient;
+using StackOverflow.ViewModels;
 
 namespace StackOverflow.Controllers
 {
@@ -61,22 +62,22 @@ namespace StackOverflow.Controllers
         {
             return View("Login/Index");
         }
-        //
-        // [HttpPost]
-        // public ActionResult Login(User user)
-        // {
-        //     var db = new Database();
-        //     var conn = db.Connection(user.UserName, user.Password);
-        //     if (conn == null)
-        //     {
-        //         return View("Login/Index");
-        //     }
-        //     else
-        //     {
-        //         Session["admin"] = user.UserName;
-        //         return RedirectToAction("dashboard");
-        //     }
-        // }
+        
+        [HttpPost]
+        public ActionResult Login(UserLoginViewModel user)
+        {
+            var db = new Database();
+            var conn = db.Connection(user.UserName, user.Password);
+            if (conn == null)
+            {
+                return View("Login/Index");
+            }
+            else
+            {
+                Session["admin"] = user.UserName;
+                return RedirectToAction("dashboard");
+            }
+        }
 
         public ActionResult Logout()
         {
