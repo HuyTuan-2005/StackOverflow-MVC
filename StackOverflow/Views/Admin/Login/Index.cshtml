@@ -2,6 +2,7 @@
   ViewBag.Title = "Đăng nhập";
   Layout = "";
 }
+@model StackOverflow.ViewModels.UserLoginViewModel
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -30,20 +31,21 @@
   <div class="card login-card">
     <div class="card-body">
       <h3 class="text-center mb-4">Admin Login</h3>
-      <form action="/admin/login" method="post" >
+      @using (Html.BeginForm("Login", "Admin", FormMethod.Post))
+      {
         <div class="mb-3">
-          <label for="username" class="form-label">Tên đăng nhập</label>
-          <input asp-for="UserName" name="username" type="text" class="form-control" id="username" placeholder="Nhập tên đăng nhập">
-          <span asp-validation-for="UserName" class="text-danger"></span>
+          @Html.LabelFor(m => m.UserName, htmlAttributes: new { @class = "form-label" })
+          @Html.TextBoxFor(m => m.UserName, htmlAttributes: new { @class = "form-control", placeholder = $"Nhập tên đăng nhập" })
+          @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger fst-italic" })
         </div>
+
         <div class="mb-3">
-          <label for="password" class="form-label">Mật khẩu</label>
-          <input name="password" type="password" class="form-control" id="password" placeholder="Nhập mật khẩu">
+          @Html.LabelFor(m => m.Password, htmlAttributes: new { @class = "form-label" })
+          @Html.PasswordFor(m => m.Password, htmlAttributes: new { @class = "form-control", placeholder = $"Nhập mật khẩu" })
+          @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger fst-italic" })
         </div>
-        <div class="d-grid">
-          <button type="submit" class="btn btn-primary">Đăng nhập</button>
-        </div>
-      </form>
+        <button type="submit" class="btn btn-primary w-100">Log in</button>
+      }
     </div>
   </div>
 </div>

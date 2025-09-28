@@ -50,7 +50,6 @@ namespace StackOverflow.Controllers
         
         // GET: DashBoard
         [HttpGet]
-        [LoginAuthenticationFilter]
         public ActionResult DashBoard()
         {
             return View("Dashboard", GetAllProfile());
@@ -60,13 +59,18 @@ namespace StackOverflow.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            return View("Login/Index");
+            return View("Login/Index", new UserLoginViewModel());
         }
         
         [HttpPost]
         public ActionResult Login(UserLoginViewModel user)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Login/Index", user);
+            }
             var db = new Database();
+            
             var conn = db.Connection(user.UserName, user.Password);
             if (conn == null)
             {
