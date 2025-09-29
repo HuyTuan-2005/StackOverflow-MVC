@@ -13,5 +13,10 @@ namespace StackOverflow.Services
         {
             _userRepository = userRepository;
         }
+
+        public int VerifyUser(UserLoginViewModel user)
+        {
+            return _userRepository.VerifyUser(user);
+        }
     }
 }
