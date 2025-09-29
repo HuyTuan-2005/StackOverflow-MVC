@@ -5,7 +5,8 @@ namespace StackOverflow.Services
 {
     public interface IQuestionService
     {
-        List<HomePageViewModel> GetAllQuestions();
-        List<HomePageViewModel> GetQuestionsByTag(string tag);
+        IReadOnlyList<HomePageViewModel> GetAllQuestions();
+        IReadOnlyList<HomePageViewModel> GetQuestionsByTagName(string tag);
+        IReadOnlyList<HomePageViewModel> GetQuestionsByTitle(string title);
     }
 }

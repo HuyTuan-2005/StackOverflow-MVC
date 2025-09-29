@@ -14,7 +14,6 @@ namespace StackOverflow.Repositories
 
         public QuestionRepository(string connString)
         {
-            Console.WriteLine(connString);
             _connString = connString;
         }
 
@@ -72,11 +71,18 @@ namespace StackOverflow.Repositories
             return ExecStoredProcedureAndMap("sp_GetAllQuestion");
         }
 
-        public List<HomePageViewModel> GetQuestionsByTag(string tag)
+        public List<HomePageViewModel> GetQuestionsByTagName(string tag)
         {
             var parameter = new Dictionary<string, object>();
             parameter.Add("@Tag", tag);
             return ExecStoredProcedureAndMap("sp_GetQuestionsByTag", parameter);
+        }
+
+        public List<HomePageViewModel> GetQuestionsByTitle(string title)
+        {
+            var parameter = new Dictionary<string, object>();
+            parameter.Add("@title", title);
+            return ExecStoredProcedureAndMap("sp_GetQuestionsByTitle", parameter);
         }
     }
 }

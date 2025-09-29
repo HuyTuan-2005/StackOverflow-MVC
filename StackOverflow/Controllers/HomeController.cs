@@ -13,31 +13,9 @@ namespace StackOverflow.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IQuestionService _questionService;
-
-        public HomeController(IQuestionService questionService)
-        {
-            _questionService = questionService;
-        }
-
         public ActionResult Index()
         {
-            var lstQuestion = _questionService.GetAllQuestions();
-            
-            if(lstQuestion == null)
-                return View("Error");
-            
-            ViewBag.CountQuestion = lstQuestion.Count;
-            
-            return View("Index", lstQuestion);
-        }
-
-        public ActionResult Filter(string tag)
-        {
-            if(tag == null)
-                return View("Error");
-            var lstQuestion = _questionService.GetQuestionsByTag(tag);
-            return View("Index", lstQuestion);
+            return RedirectToAction("Index", "Questions");
         }
     }
 }

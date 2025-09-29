@@ -15,11 +15,6 @@ namespace StackOverflow.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            if (Session["username"] != null)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
             return View();
         }
 
@@ -31,6 +26,7 @@ namespace StackOverflow.Controllers
                 return View(model);
             }
 
+            ModelState.AddModelError(string.Empty, "Sai tên đăng nhập hoặc mật khẩu");
             return View(model);
         }
     }

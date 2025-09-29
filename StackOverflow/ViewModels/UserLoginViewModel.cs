@@ -6,11 +6,11 @@ namespace StackOverflow.ViewModels
     public class UserLoginViewModel
     {
         [Display(Name = "Tên đăng nhập")]
-        [Required(ErrorMessage = "* Enter your Username")]
+        [Required(ErrorMessage = "Vui lòng nhập tên đăng nhập")]
         public string UserName {get; set;}
         
         [Display(Name = "Mật khẩu")]
-        [Required(ErrorMessage = "* Enter your Password")]
+        [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
         public string Password {get; set;}
     }
 }

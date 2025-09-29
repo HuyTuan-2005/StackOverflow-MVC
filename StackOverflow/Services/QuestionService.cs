@@ -14,14 +14,19 @@ namespace StackOverflow.Services
             _questionRepository = questionRepository;
         }
 
-        public List<HomePageViewModel> GetAllQuestions()
+        public IReadOnlyList<HomePageViewModel> GetAllQuestions()
         {
             return _questionRepository.GetAllQuestions();
         }
 
-        public List<HomePageViewModel> GetQuestionsByTag(string tag)
+        public IReadOnlyList<HomePageViewModel> GetQuestionsByTagName(string tag)
         {
-            return _questionRepository.GetQuestionsByTag(tag);
+            return _questionRepository.GetQuestionsByTagName(tag);
+        }
+
+        public IReadOnlyList<HomePageViewModel> GetQuestionsByTitle(string title)
+        {
+            return _questionRepository.GetQuestionsByTitle(title);
         }
     }
 }

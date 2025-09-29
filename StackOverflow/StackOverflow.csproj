@@ -152,6 +152,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -179,6 +180,7 @@
   <ItemGroup>
     <Content Include="Content\css\style.css" />
     <Content Include="Content\img\icon.svg" />
+    <Content Include="Content\img\smIcon.svg" />
     <Content Include="Content\lib\css\bootstrap-grid.css" />
     <Content Include="Content\lib\css\bootstrap-grid.css.map" />
     <Content Include="Content\lib\css\bootstrap-grid.min.css" />
@@ -260,7 +262,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Questions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

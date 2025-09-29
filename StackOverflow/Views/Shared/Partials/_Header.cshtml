@@ -32,14 +32,16 @@
             </div>
 
             <div class="flex-grow-1">
-                <form action=@Url.Action("Search", "Home") method="get">
+                @using (Html.BeginForm("Index", "Questions", FormMethod.Get))
+                {
                     <div class="custom-input-group">
                         <span>
                             <i class="fa fa-search"></i>
                         </span>
-                        <input name="search" type="search" class="form-control" placeholder="Search question...">
+                        @Html.TextBox("search", "", new {@class="form-control", placeholder="Search question.."})
+                        @* <input name="search" type="search" class="form-control" placeholder="Search question..."> *@
                     </div>
-                </form>
+                }
             </div>
 
             @* login partial *@
