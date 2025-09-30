@@ -23,6 +23,7 @@ namespace StackOverflow.Repositories
             {
                 conn.Open();
                 
+                // SqlCommand([cmdText], connection)
                 // cmdText = tên stored procedure
                 using (var command = new SqlCommand("sp_VerifyUser", conn))
                 {
@@ -32,10 +33,11 @@ namespace StackOverflow.Repositories
                     command.Parameters.AddWithValue("@username", user.UserName);
                     command.Parameters.AddWithValue("@password", user.Password);
                     
-                    // khai báo giá trị output trong sql server
+                    // khai báo giá trị nhận output trong sql server
+                    // SqlParameter([tenthuoctinh output], [datatype in db])
                     var result = new SqlParameter("@result", SqlDbType.Int);
                     
-                    // Direction = Output
+                    // Direction = Output để nhan gia tri tra ve tu stored procedure
                     result.Direction = ParameterDirection.Output;
                     command.Parameters.Add(result);
                     
