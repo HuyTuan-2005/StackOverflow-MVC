@@ -74,7 +74,7 @@ namespace StackOverflow.Repositories
         public List<HomePageViewModel> GetQuestionsByTagName(string tag)
         {
             var parameter = new Dictionary<string, object>();
-            parameter.Add("@Tag", tag);
+            parameter.Add("@tag_name", tag);
             return ExecStoredProcedureAndMap("sp_GetQuestionsByTag", parameter);
         }
 

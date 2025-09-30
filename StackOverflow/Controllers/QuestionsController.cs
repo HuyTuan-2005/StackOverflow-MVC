@@ -36,7 +36,7 @@ namespace StackOverflow.Controllers
 
         public ActionResult Tag(string id)
         {
-            var lstQuestion = _questionService.GetQuestionsByTagName(id);
+            var lstQuestion = _questionService.GetQuestionsByTagName(id.ToLower());
 
             if (lstQuestion == null)
                 return View("Error");

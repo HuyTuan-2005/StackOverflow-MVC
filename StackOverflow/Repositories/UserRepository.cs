@@ -22,18 +22,26 @@ namespace StackOverflow.Repositories
             using (var conn = new SqlConnection(_connString))
             {
                 conn.Open();
+                
+                // cmdText = tên stored procedure
                 using (var command = new SqlCommand("sp_VerifyUser", conn))
                 {
+                    // CommandType = StoredProcedure sử dụng stored procedure trong SQL Server
                     command.CommandType = CommandType.StoredProcedure;
+                    
                     command.Parameters.AddWithValue("@username", user.UserName);
                     command.Parameters.AddWithValue("@password", user.Password);
                     
-                    
+                    // khai báo giá trị output trong sql server
                     var result = new SqlParameter("@result", SqlDbType.Int);
+                    
+                    // Direction = Output
                     result.Direction = ParameterDirection.Output;
                     command.Parameters.Add(result);
                     
                     command.ExecuteNonQuery();
+                    
+                    // giá trị output = result.value
                     return (int)result.Value;
                 }
             }

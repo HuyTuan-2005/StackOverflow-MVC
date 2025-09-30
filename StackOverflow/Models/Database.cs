@@ -13,8 +13,12 @@ namespace StackOverflow.Models
         {
             try
             {
-                string connString = $"Server=tcp:stackoverflowvn-sql.database.windows.net,1433;Initial Catalog=ForumDB;Persist Security Info=False;User ID={username};Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-                // string connString = $"Server=.;Database=Forum;Uid={username};pwd={password}";
+                string connString = ConfigurationManager.ConnectionStrings["ForumDB"].ConnectionString;
+                var builder = new SqlConnectionStringBuilder(connString);
+                builder.UserID = username;
+                builder.Password = password;
+                connString = builder.ConnectionString;
+                
                 using (var conn = new SqlConnection(connString))
                 {
                     conn.Open();
