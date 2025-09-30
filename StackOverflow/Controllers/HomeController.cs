@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using StackOverflow.Models;
-using Humanizer;
 using System.Globalization;
 using StackOverflow.Services;
 
