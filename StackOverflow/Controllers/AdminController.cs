@@ -73,7 +73,8 @@ namespace StackOverflow.Controllers
             var conn = db.Connection(user.UserName, user.Password);
             if (conn == null)
             {
-                return View("Login/Index");
+                ModelState.AddModelError(string.Empty, "Sai tên đăng nhập hoặc mật khẩu");
+                return View("Login/Index", user);
             }
             else
             {
