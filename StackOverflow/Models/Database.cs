@@ -6,7 +6,6 @@ namespace StackOverflow.Models
 {
     public class Database
     {
-        public static string ConnString = ConfigurationManager.ConnectionStrings["ForumDB"].ConnectionString;
         private static SqlConnection _conn = null;
         
         // Admin login
@@ -14,13 +13,13 @@ namespace StackOverflow.Models
         {
             try
             {
-                string ConnString = ConfigurationManager.ConnectionStrings["ForumDB"].ConnectionString;
-                var builder = new SqlConnectionStringBuilder(ConnString);
+                string connString = ConfigurationManager.ConnectionStrings["ForumDB"].ConnectionString;
+                var builder = new SqlConnectionStringBuilder(connString);
                 builder.UserID = username;
                 builder.Password = password;
-                ConnString = builder.ConnectionString;
+                connString = builder.ConnectionString;
                 
-                using (var conn = new SqlConnection(ConnString))
+                using (var conn = new SqlConnection(connString))
                 {
                     conn.Open();
                     return conn;
@@ -38,9 +37,10 @@ namespace StackOverflow.Models
         {
             try
             {
+                string connString = ConfigurationManager.ConnectionStrings["ForumDB"].ConnectionString;
                 if (_conn == null)
                 {
-                    _conn = new SqlConnection(ConnString);
+                    _conn = new SqlConnection(connString);
                     _conn.Open();
                 }
                 return _conn;

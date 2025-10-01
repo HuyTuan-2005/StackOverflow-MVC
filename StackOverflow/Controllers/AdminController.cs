@@ -7,6 +7,7 @@ using StackOverflow.Models;
 using System.Web;
 using System.Data.SqlClient;
 using StackOverflow.ViewModels;
+using System.Numerics;
 
 namespace StackOverflow.Controllers
 {
@@ -51,9 +52,18 @@ namespace StackOverflow.Controllers
         [HttpGet]
         public ActionResult DashBoard()
         {
-            return View("Dashboard", GetAllProfile());
+            var profiles = GetAllProfile();
+
+            var parameters = ThongKeDashboard();
+            ViewBag.CountUsers = (int)parameters[0].Value;
+            ViewBag.CountQuestions = (int)parameters[1].Value;
+            ViewBag.CountAnswers = (int)parameters[2].Value;
+            ViewBag.CountTags = (int)parameters[3].Value;
+
+            return View("Dashboard", profiles);
         }
-        
+
+
         // GET: Login
         [HttpGet]
         public ActionResult Login()
@@ -141,6 +151,35 @@ namespace StackOverflow.Controllers
             catch (Exception ex)
             {
                 return View("Dashboard");
+            }
+        }
+        public SqlParameter[] ThongKeDashboard()
+        {
+            using (var conn = new SqlConnection(Database.ConnString))
+            {
+                conn.Open();
+
+                // cmdText = tên stored procedure
+                using (var command = new SqlCommand("sp_ThongKeDashboard", conn))
+                {
+                    // CommandType = StoredProcedure sử dụng stored procedure trong SQL Server
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    // khai báo giá trị output trong sql server
+                    SqlParameter[] parameters = new SqlParameter[4];
+                    parameters[0] = new SqlParameter("@COUNT_USERS", SqlDbType.Int) { Direction = ParameterDirection.Output };
+                    parameters[1] = new SqlParameter("@COUNT_QUESTIONS", SqlDbType.Int) { Direction = ParameterDirection.Output }; 
+                    parameters[2] = new SqlParameter("@COUNT_ANSWERS", SqlDbType.Int) { Direction = ParameterDirection.Output }; 
+                    parameters[3] = new SqlParameter("@COUNT_TAGS", SqlDbType.Int) { Direction = ParameterDirection.Output }; 
+                    // Direction = Output
+                    foreach (var p in parameters)
+                    {
+                        command.Parameters.Add(p);
+                    }
+                    command.ExecuteNonQuery();
+
+                    return parameters;
+                }
             }
         }
     }
