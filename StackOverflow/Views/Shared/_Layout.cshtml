@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
           integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    @Styles.Render("~/bundles/css") 
-    
+    @Styles.Render("~/bundles/css")
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/modernizr")
@@ -19,16 +19,13 @@
 
 <div class="container">
     <div class="row">
-        
-        <aside class="col-3 col-lg-2 d-none d-md-block border-end p-0">
-            @RenderSection("SidebarLeft", required: false)
-        </aside>
+
+        @RenderSection("SidebarLeft", required: false)
 
         @RenderBody()
 
-        <section class="col-3 d-none d-lg-block my-3">
-            @RenderSection("SectionRight", required: false)
-        </section>
+        @RenderSection("SectionRight", required: false)
+
     </div>
 </div>
 

@@ -12,8 +12,8 @@
     </div>
     <!-- Cột phải: nội dung chính -->
     <div class="question-content col-12 col-lg-10 text p-0">
-        <a href="#" class="d-block question-title mb-1" style="font-size: 16px;">@Model.Title</a>
-
+        <a href=@Url.Action("Index", "Questions", new {id = Model.QustionId}) class="d-block question-title mb-1">@Model.Title</a>
+        @* @Html.ActionLink(Model.Title, "Index", new { id = Model.QustionId }, new { @class = "d-block question-title mb-1" }) *@
         <!-- Mô tả ngắn -->
         <p class="question-desc text-muted mb-2" style="font-size: 14px;">
             @Model.Body
@@ -29,14 +29,14 @@
                     {
                         if (!string.IsNullOrEmpty(j))
                         {
-                            <li class="tag">@Html.ActionLink(j , "Tag", "Questions",  new {id = j.Trim().ToLower()}, null)</li>
+                            <li class="tag">@Html.ActionLink(j, "Tag", "Questions", new { id = j.Trim().ToLower() }, null)</li>
                         }
                     }
                 }
             </ul>
             <!-- Tác giả và thời gian -->
             <div class="article-info text-muted me-3 mt-2 mt-md-0">
-                <a href="#">
+                <a href=@Url.Action("Index", "Users", new { id = Model.UserId })>
                     <i class="fa fa-user me-1"></i>
                     <span class="text-primary">@Model.DisplayName</span>
                 </a>

@@ -6,8 +6,8 @@ namespace StackOverflow.ViewModels
 {
     public class HomePageViewModel
     {
-        // public static int PostCount;
-        
+        public int QustionId {get; set;}
+        public int UserId {get; set;}
         public string DisplayName {get; set;}
         public string Title {get; set;}
         public string Body {get; set;}

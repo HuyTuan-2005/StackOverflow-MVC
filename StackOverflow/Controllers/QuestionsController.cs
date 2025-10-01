@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Security.Policy;
+using System.Security.Principal;
 using System.Web.Mvc;
 using StackOverflow.Services;
 using StackOverflow.ViewModels;
@@ -13,17 +16,22 @@ namespace StackOverflow.Controllers
         {
             _questionService = questionService;
         }
-
-        public ActionResult Index(string search)
+        
+        public ActionResult Index(int? id ,HomePageViewModel model)
         {
+            if (id.HasValue)
+            {
+                ViewBag.Id = id;
+                return View("Detail");           
+            }
             IReadOnlyList<HomePageViewModel> lstQuestion;
-            if (string.IsNullOrEmpty(search))
+            if (string.IsNullOrEmpty(model.Title))
             {
                 lstQuestion = _questionService.GetAllQuestions();
             }
             else
             {
-                lstQuestion = _questionService.GetQuestionsByTitle(search);
+                lstQuestion = _questionService.GetQuestionsByTitle(model.Title);
             }
 
             if (lstQuestion == null)
@@ -31,7 +39,7 @@ namespace StackOverflow.Controllers
 
             ViewBag.CountQuestion = lstQuestion.Count;
 
-            return View("Index", lstQuestion);
+            return View(lstQuestion);
         }
 
         public ActionResult Tag(string id)

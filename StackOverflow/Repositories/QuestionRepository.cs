@@ -39,14 +39,16 @@ namespace StackOverflow.Repositories
                         using (var da = new SqlDataAdapter(command))
                         {
                             var ds = new DataSet();
-                            da.Fill(ds, "QuestionsView");
+                            da.Fill(ds, "ViewQuestions");
                             
-                            var dt = ds.Tables["QuestionsView"];
+                            var dt = ds.Tables["ViewQuestions"];
 
                             foreach (DataRow row in dt.Rows)
                             {
                                 lstQuestions.Add(new HomePageViewModel()
                                 {
+                                    UserId = int.Parse(row["User_Id"].ToString()),
+                                    QustionId = int.Parse(row["Question_Id"].ToString()),
                                     DisplayName = row["Display_Name"].ToString(),
                                     Title = row["Title"].ToString(),
                                     Body = row["Body"].ToString(),
