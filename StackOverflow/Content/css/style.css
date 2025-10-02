@@ -84,7 +84,7 @@ aside {
 .custom-input-group{
     border: 2px solid #fff;
     border-radius: 11px ;
-    padding: 2px 3px;
+    padding: 2px 2px;
     transition: 0.3s ease-in;
     position: relative;
 }
@@ -101,7 +101,6 @@ aside {
 .custom-input-group .form-control{
     border-radius: 8px ;
     box-shadow: none;
-    padding: 5px 10px 5px 35px;
 }
 
 .custom-input-group .form-control::placeholder{

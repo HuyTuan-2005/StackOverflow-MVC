@@ -15,12 +15,13 @@
     <div class="p-3">
         <div class="d-flex justify-content-between mb-3">
             <h1 class="fs-3">Newest Questions</h1>
-            <button class="p-2 btn-ask-question">
-                <div class="px-2">
+            
+            <a href=@Url.Action("Ask", "Questions") class="text-decoration-none">
+                <div class="btn-ask-question" style="padding: 10px 12px">
                     <span class="pe-2"><i class="fa-solid fa-plus"></i></span>
                     <span>Ask Question</span>
                 </div>
-            </button>
+            </a>
         </div>
 
         <div class="d-flex justify-content-between align-items-center">
@@ -52,9 +53,10 @@
         }
         else
         {
-        <div class="alert m-3 text-center fw-bold" style="color: var(--color-primary-2); background-color: var(--color-sub-primary) " role="alert">
-            Không tìm thấy bài viết nào
-        </div>
+            <div class="alert m-3 text-center fw-bold"
+                 style="color: var(--color-primary-2); background-color: var(--color-sub-primary) " role="alert">
+                Không tìm thấy bài viết nào
+            </div>
         }
     </div>
 </main>

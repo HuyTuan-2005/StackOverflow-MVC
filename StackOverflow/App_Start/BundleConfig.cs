@@ -19,8 +19,12 @@ namespace StackOverflow
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/bundles/css").Include("~/Content/lib/css/bootstrap.css", new CssRewriteUrlTransform()).Include("" +
-                "~/Content/css/style.css", "~/Content/css/QuestionDetails.css"));
+            bundles.Add(new StyleBundle("~/bundles/css")
+                .Include("~/Content/lib/css/bootstrap.css", new CssRewriteUrlTransform())
+                .Include("~/Content/css/style.css", new CssRewriteUrlTransform()));
+
+            bundles.Add(new StyleBundle("~/bundles/css/Question")
+                .Include("~/Content/css/QuestionDetails.css"));
         }
     }
 }

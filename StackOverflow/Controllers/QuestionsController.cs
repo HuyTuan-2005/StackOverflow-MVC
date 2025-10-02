@@ -18,6 +18,7 @@ namespace StackOverflow.Controllers
             _questionService = questionService;
         }
         
+        [Route("questions/{id:int?}")]
         public ActionResult Index(int? id ,HomePageViewModel model)
         {
             IReadOnlyList<HomePageViewModel> lstQuestion;
@@ -52,6 +53,11 @@ namespace StackOverflow.Controllers
 
             ViewBag.CountQuestion = lstQuestion.Count;
             return View("Index", lstQuestion);
+        }
+        
+        public ActionResult Ask()
+        {
+            return View();
         }
     }
 }

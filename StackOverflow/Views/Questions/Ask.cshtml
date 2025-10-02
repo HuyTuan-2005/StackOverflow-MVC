@@ -1,0 +1,107 @@
+﻿<!-- Answer Form Section -->
+
+@section SidebarLeft
+{
+    @Html.Partial("Partials/_SidebarLeft")
+}
+
+@section css{
+    <style>
+        .card {
+            border: none;
+        }
+
+        .sidebar-box {
+            border: 1px solid #92c2f2;
+            background-color: #EDF5FD;
+            font-size: 14px;
+        }
+
+        .sidebar-box ul li {
+            padding: 0;
+            font-size: 12px;
+        }
+    </style>
+}
+
+<div class="mainContent col-12 col-md-9 col-lg-7 px-0">
+    <section class="card m-3 ">
+        <div class="card-body">
+            <h2 class="h4 mb-3 ms-2">Thêm câu trả lời của bạn</h2>
+            <form action="/Question/PostAnswer" method="post">
+                <input type="hidden" name="QuestionId" value="123"/>
+                <div class="mb-3">
+                    <div class="mb-3">
+                        <label for="titleQuestion" class="form-label fw-semibold p-0 ms-2 mb-0">Tiêu đề</label>
+                        <div class="custom-input-group">
+                            <input class="form-control" id="titleQuestion" type="text" name="title"
+                                   placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
+                                   value=""/>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="questionBody" class="form-label fw-semibold p-0 ms-2 mb-0">Nội dung trả lời</label>
+                        <div class="custom-input-group">
+                            <textarea
+                                class="form-control"
+                                id="questionBody"
+                                name="Body"
+                                rows="8"
+                                required
+                                aria-describedby="answerHelp"
+                                placeholder="Viết câu trả lời chi tiết, có ví dụ code nếu cần..."></textarea>
+                        </div>
+                        <div id="answerHelp" class="form-text ms-2">
+                            Hỗ trợ Markdown cơ bản: **in đậm**, *in nghiêng*, `code inline`, và khối code với backtick 3
+                            lần.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="tagsQuestion" class="form-label fw-semibold p-0 ms-2 mb-0">Tags</label>
+                        <div class="custom-input-group">
+                            <input class="form-control" id="tagsQuestion" type="text" name="title" placeholder="Tags"
+                                   value=""/>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="d-flex gap-2 ms-2">
+                    <button type="submit" class="px-3 btn-register" style="font-size: 14px;">
+                        <span class="pe-2 "><i class="bi bi-send"></i></span>
+                        <span>Gửi</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
+
+@section SectionRight
+{
+    <section class=" col-3 d-none d-lg-block my-3">
+        <div class="sidebar-box rounded-2 p-3 ">
+            <div class="mb-3">
+                <h4 class="fw-light fs-4">Writing a good question</h4>
+                <p class="mb-2">You’re ready to ask a programming-related question and this form will help guide you
+                    through the
+                    process.</p>
+                <p>Looking to ask a non-programming question? See the topics here to find a relevant site.</p>
+            </div>
+            <div>
+                <h4 class="fw-bold fs-6">Steps</h4>
+                <ul>
+                    <li>Summarize your problem in a one-line title.</li>
+                    <li>Describe your problem in more detail.</li>
+                    <li>Describe what you tried and what you expected to happen.</li>
+                    <li>Add “tags” which help surface your question to members of the community.</li>
+                    <li>Review your question and post it to the site.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+}

@@ -11,6 +11,11 @@
   @Html.Partial("Partials/_SectionRight")
 }
 
+@section css
+{
+  @Styles.Render("~/bundles/css/Question")
+}
+
 @model StackOverflow.ViewModels.HomePageViewModel
 
 <div class="col-12 col-md-9 col-lg-7 px-2">
@@ -25,39 +30,41 @@
             <div class="text-muted small">
               <span>Đã hỏi <time>@Model.CreatedAt</time></span>
               <span class="mx-2">•</span>
-              <span>Bởi <a href=@Url.Action("Index", "Users", new {id = Model.UserId}) class="link-primary">@Model.DisplayName</a></span>
+              <span>Bởi <a href=@Url.Action("Index", "Users", new { id = Model.UserId })
+                           class="link-primary">@Model.DisplayName</a></span>
               <span class="mx-2">•</span>
               <span>1 Lượt xem</span>
             </div>
           </div>
         </div>
 
-      <div class="question-body mb-3">
-        <p class="mb-3">@Model.Body</p>
-        @*           <p class="mb-3">Tôi đang xây dựng một trang hỏi đáp với ASP.NET MVC, muốn có bố cục hiển thị câu hỏi chi *@
-        @*             tiết, danh sách trả lời và form nhập câu trả lời. Có cách nào tối ưu cho việc phân trang và cache *@
-        @*             không?</p> *@
-        @* *@
-        @*           <pre class="bg-light border p-3"><code>// QuestionController.cs *@
-        @* public ActionResult Details(int id) { *@
-        @*     var question = _db.Questions.Include(q => q.Answers) *@
-        @*                                 .FirstOrDefault(q => q.Id == id); *@
-        @*     return View(question); *@
-        @* }</code></pre> *@
-        @* *@
-        @*           <p>Mọi người có thể gợi ý pattern nào tốt cho việc load câu trả lời không?</p> *@
-        @*         </div> *@
+        <div class="question-body mb-3">
+          <p class="mb-3">@Model.Body</p>
+          @*           <p class="mb-3">Tôi đang xây dựng một trang hỏi đáp với ASP.NET MVC, muốn có bố cục hiển thị câu hỏi chi *@
+          @*             tiết, danh sách trả lời và form nhập câu trả lời. Có cách nào tối ưu cho việc phân trang và cache *@
+          @*             không?</p> *@
+          @* *@
+          @*           <pre class="bg-light border p-3"><code>// QuestionController.cs *@
+          @* public ActionResult Details(int id) { *@
+          @*     var question = _db.Questions.Include(q => q.Answers) *@
+          @*                                 .FirstOrDefault(q => q.Id == id); *@
+          @*     return View(question); *@
+          @* }</code></pre> *@
+          @* *@
+          @*           <p>Mọi người có thể gợi ý pattern nào tốt cho việc load câu trả lời không?</p> *@
+          @*         </div> *@
 
-        <div class="d-flex flex-wrap gap-2 mb-3">
-          @foreach (var i in Model.Tags)
-          {
-            <a href=@Url.Action("Tag", "Questions", new {id = i}) class="badge tag-badge">@i</a>
-          }
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            @foreach (var i in Model.Tags)
+            {
+              <a href=@Url.Action("Tag", "Questions", new { id = i }) class="badge tag-badge">@i</a>
+            }
+          </div>
+
         </div>
-
-      </div>
       </div>
     </article>
+
     <!-- Answer Form Section -->
     <section class="card mb-3">
       <div class="card-body">
@@ -80,15 +87,17 @@
           </div>
 
           <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-primary-custom">Gửi câu trả lời</button>
-            <button type="button" class="btn btn-outline-secondary">Xem trước</button>
+            <button type="submit" class="px-3 btn-register" style="font-size: 14px;">
+              <span class="pe-2 "><i class="bi bi-chat-left"></i></span>
+              <span>Gửi</span>
+            </button>
           </div>
         </form>
       </div>
     </section>
     <!-- Answers Section -->
     <section class="mb-4">
-      <h2 class="h4 mb-3">3 câu trả lời</h2>
+      <h2 class="h4 mb-3">@Model.AnswerCount câu trả lời khác</h2>
 
       <!-- Answer 1 - Accepted -->
       <article class="card mb-3 shadow-sm answer-accepted" style="border-left: 4px solid #48C774;: ">

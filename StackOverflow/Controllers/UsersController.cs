@@ -5,6 +5,7 @@ namespace StackOverflow.Controllers
     public class UsersController : Controller
     {
         // GET
+        [Route("users/{id:int?}")]
         public ActionResult Index(int? id)
         {
             ViewBag.Id = id;
