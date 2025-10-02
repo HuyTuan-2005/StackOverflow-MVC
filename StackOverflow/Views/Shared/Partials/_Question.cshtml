@@ -28,7 +28,7 @@
                     {
                         if (!string.IsNullOrEmpty(j))
                         {
-                            <li class="tag">@Html.ActionLink(j, "Tag", "Questions", new { id = j.Trim().ToLower() }, null)</li>
+                            <li class="tag">@Html.ActionLink(j, "Tag", "Questions", new { id = j.Trim().Replace(".", "").ToLower() }, null)</li>
                         }
                     }
                 }
