@@ -1,6 +1,6 @@
 <header>
     <div class="container">
-        <nav class="navbar d-flex justify-content-between gap-2 align-items-center py-1">
+        <nav class="navbar d-flex justify-content-between gap-2 align-items-center py-1 flex-nowrap">
             <div>
                 <!-- Logo lớn mặc định -->
                 <a class="navbar-brand d-none d-md-inline" href="/">
@@ -15,7 +15,7 @@
                 </a>
             </div>
 
-            <div class="flex-grow-0 nav-header">
+            <div class="flex-grow-0 nav-header d-none d-lg-block">
                 <ul class="navbar-nav d-flex justify-content-between flex-row">
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
@@ -47,7 +47,7 @@
             @if (ViewBag.Title != "Đăng nhập" && Session["username"] == null)
             {
                 <a href=@Url.Action("Index", "Register") class="btn-register">
-                    <div class="px-3">
+                    <div class="px-3 d-flex align-items-center flex-nowrap">
                         <span class="pe-2" style="font-size: 11px"><i class="fa-solid fa-user-plus"></i></span>
                         <span>Register</span>
                     </div>

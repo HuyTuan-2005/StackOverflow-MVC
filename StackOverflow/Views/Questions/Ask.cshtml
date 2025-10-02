@@ -24,11 +24,11 @@
     </style>
 }
 
-<div class="mainContent col-12 col-md-9 col-lg-7 px-0">
+<div class="col-12 col-md-9 col-lg-7 px-0">
     <section class="card m-3 ">
-        <div class="card-body">
-            <h2 class="h4 mb-3 ms-2">Thêm câu trả lời của bạn</h2>
-            <form action="/Question/PostAnswer" method="post">
+        <div class="card-body p-0 p-md-2">
+            <h2 class="h4 mb-3 ms-2">Thêm câu hỏi của bạn</h2>
+            <form action="/Questions/" method="post">
                 <input type="hidden" name="QuestionId" value="123"/>
                 <div class="mb-3">
                     <div class="mb-3">
@@ -36,7 +36,7 @@
                         <div class="custom-input-group">
                             <input class="form-control" id="titleQuestion" type="text" name="title"
                                    placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
-                                   value=""/>
+                                   value="" required/>
                         </div>
                     </div>
 
