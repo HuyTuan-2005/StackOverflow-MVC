@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Security.Policy;
 using System.Security.Principal;
 using System.Web.Mvc;
@@ -19,11 +20,6 @@ namespace StackOverflow.Controllers
         
         public ActionResult Index(int? id ,HomePageViewModel model)
         {
-            if (id.HasValue)
-            {
-                ViewBag.Id = id;
-                return View("Detail");           
-            }
             IReadOnlyList<HomePageViewModel> lstQuestion;
             if (string.IsNullOrEmpty(model.Title))
             {
@@ -32,6 +28,11 @@ namespace StackOverflow.Controllers
             else
             {
                 lstQuestion = _questionService.GetQuestionsByTitle(model.Title);
+            }
+            if (id.HasValue)
+            {
+                ViewBag.Id = id;
+                return View("Details", lstQuestion.Where(t => t.QustionId == id.Value).FirstOrDefault());           
             }
 
             if (lstQuestion == null)
