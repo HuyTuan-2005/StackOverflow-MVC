@@ -6,11 +6,209 @@
     @Html.Partial("Partials/_SidebarLeft")
 }
 
-@section SectionRight
+@section css
 {
-    @Html.Partial("Partials/_SectionRight")   
+    @Styles.Render("~/bundles/css/user")
 }
 
-<div class="col-7 mt-5">
-    <h1>User @ViewBag.Id</h1>
+<div class="col-10 mt-5">
+    <!-- Main Content -->
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="row">
+            <div class="col-md-3 text-center">
+                <div class="profile-avatar mx-auto">
+                    U1
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h1 class="profile-name">Huy Tuấn</h1>
+                <p class="profile-username">huyfuan</p>
+                <p class="profile-bio">
+                    Full-stack Developer với 3 năm kinh nghiệm trong phát triển ứng dụng web.
+                    Đam mê công nghệ ASP.NET MVC, SQL Server và xây dựng giải pháp hiệu quả cho doanh nghiệp.
+                    Luôn sẵn sàng học hỏi và chia sẻ kiến thức với cộng đồng.
+                </p>
+                <div class="profile-meta">
+                    <div class="meta-item">
+                        <i class="bi bi-envelope"></i>
+                        <span>huyfuan@email.com</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="bi bi-cake"></i>
+                        <span>22/05/2005</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="bi bi-calendar-check"></i>
+                        <span>Tham gia: 15/09/2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="bi bi-clock"></i>
+                        <span>Hoạt động: 2 giờ trước</span>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <button class="btn btn-primary">
+                        <i class="bi bi-pencil"></i> Chỉnh Sửa Hồ Sơ
+                    </button>
+                    <button class="btn btn-outline-primary">
+                        <i class="bi bi-share"></i> Chia Sẻ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="stats-section">
+        <h3 class="content-card-title">Thống Kê Hoạt Động</h3>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">42</span>
+                <div class="stat-label">Câu Hỏi</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">128</span>
+                <div class="stat-label">Trả Lời</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">1,547</span>
+                <div class="stat-label">Điểm Uy Tín</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">5.2K</span>
+                <div class="stat-label">Lượt Tiếp Cận</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Badges Section -->
+    <div class="content-card">
+        <h3 class="content-card-title">Huy Hiệu & Thành Tựu</h3>
+        <div>
+                        <span class="badge-custom badge-gold">
+                            <i class="bi bi-star-fill"></i> Vàng × 3
+                        </span>
+            <span class="badge-custom badge-silver">
+                            <i class="bi bi-star-fill"></i> Bạc × 12
+                        </span>
+            <span class="badge-custom badge-bronze">
+                            <i class="bi bi-star-fill"></i> Đồng × 28
+                        </span>
+        </div>
+    </div>
+
+    <!-- Skills Section -->
+    <div class="content-card">
+        <h3 class="content-card-title">Kỹ Năng & Tags</h3>
+        <div>
+            <span class="skill-tag">ASP.NET MVC</span>
+            <span class="skill-tag">C#</span>
+            <span class="skill-tag">SQL Server</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">Bootstrap</span>
+            <span class="skill-tag">HTML/CSS</span>
+            <span class="skill-tag">Entity Framework</span>
+            <span class="skill-tag">ADO.NET</span>
+            <span class="skill-tag">Stored Procedures</span>
+            <span class="skill-tag">Git</span>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="content-card">
+        <h3 class="content-card-title">Hoạt Động Gần Đây</h3>
+
+        <div class="activity-item">
+            <div class="activity-title">
+                <i class="bi bi-question-circle text-primary"></i>
+                Đã đặt câu hỏi: "Làm thế nào để tối ưu hóa stored procedure trong SQL Server?"
+            </div>
+            <div class="activity-meta">
+                <i class="bi bi-clock"></i> 2 giờ trước
+                <span class="ms-3"><i class="bi bi-hand-thumbs-up"></i> 15 upvotes</span>
+                <span class="ms-3"><i class="bi bi-chat"></i> 5 câu trả lời</span>
+            </div>
+        </div>
+
+        <div class="activity-item">
+            <div class="activity-title">
+                <i class="bi bi-chat-left-text text-success"></i>
+                Đã trả lời câu hỏi: "Repository Pattern trong ASP.NET MVC có cần thiết không?"
+            </div>
+            <div class="activity-meta">
+                <i class="bi bi-clock"></i> 5 giờ trước
+                <span class="ms-3"><i class="bi bi-check-circle text-success"></i> Được chấp nhận</span>
+                <span class="ms-3"><i class="bi bi-hand-thumbs-up"></i> 23 upvotes</span>
+            </div>
+        </div>
+
+        <div class="activity-item">
+            <div class="activity-title">
+                <i class="bi bi-pencil text-warning"></i>
+                Đã chỉnh sửa: "Cách kết nối ADO.NET với SQL Server trong ASP.NET MVC"
+            </div>
+            <div class="activity-meta">
+                <i class="bi bi-clock"></i> 1 ngày trước
+                <span class="ms-3"><i class="bi bi-hand-thumbs-up"></i> 8 upvotes</span>
+            </div>
+        </div>
+
+        <div class="activity-item">
+            <div class="activity-title">
+                <i class="bi bi-award text-danger"></i>
+                Đã nhận huy hiệu bạc: "Câu trả lời hay"
+            </div>
+            <div class="activity-meta">
+                <i class="bi bi-clock"></i> 2 ngày trước
+            </div>
+        </div>
+
+        <div class="activity-item">
+            <div class="activity-title">
+                <i class="bi bi-chat-left-text text-success"></i>
+                Đã trả lời: "Sự khác biệt giữa ViewBag và ViewData trong MVC"
+            </div>
+            <div class="activity-meta">
+                <i class="bi bi-clock"></i> 3 ngày trước
+                <span class="ms-3"><i class="bi bi-hand-thumbs-up"></i> 34 upvotes</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Posts -->
+    <div class="content-card">
+        <h3 class="content-card-title">Bài Viết Nổi Bật</h3>
+
+        <div class="activity-item">
+            <div class="activity-title">
+                Hướng dẫn chi tiết về Repository Pattern trong ASP.NET MVC
+            </div>
+            <div class="activity-meta">
+                <i class="bi bi-eye"></i> 2.3K lượt xem
+                <span class="ms-3"><i class="bi bi-hand-thumbs-up"></i> 156 upvotes</span>
+            </div>
+        </div>
+
+        <div class="activity-item">
+            <div class="activity-title">
+                10 mẹo tối ưu hóa query SQL Server cho người mới bắt đầu
+            </div>
+            <div class="activity-meta">
+                <i class="bi bi-eye"></i> 1.8K lượt xem
+                <span class="ms-3"><i class="bi bi-hand-thumbs-up"></i> 98 upvotes</span>
+            </div>
+        </div>
+
+        <div class="activity-item">
+            <div class="activity-title">
+                Cách sử dụng Stored Procedure với ADO.NET hiệu quả
+            </div>
+            <div class="activity-meta">
+                <i class="bi bi-eye"></i> 1.5K lượt xem
+                <span class="ms-3"><i class="bi bi-hand-thumbs-up"></i> 87 upvotes</span>
+            </div>
+        </div>
+    </div>
+
 </div>

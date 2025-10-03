@@ -28,8 +28,8 @@
     <section class="card m-3 ">
         <div class="card-body p-0 p-md-2">
             <h2 class="h4 mb-3 ms-2">Thêm câu hỏi của bạn</h2>
-            <form action="/Questions/" method="post">
-                <input type="hidden" name="QuestionId" value="123"/>
+            <form action="/Questions" method="post">
+                <input type="hidden" name="UserId" value="??????"/>
                 <div class="mb-3">
                     <div class="mb-3">
                         <label for="titleQuestion" class="form-label fw-semibold p-0 ms-2 mb-0">Tiêu đề</label>
@@ -46,7 +46,7 @@
                             <textarea
                                 class="form-control"
                                 id="questionBody"
-                                name="Body"
+                                name="body"
                                 rows="8"
                                 required
                                 aria-describedby="answerHelp"
@@ -61,7 +61,7 @@
                     <div class="mb-3">
                         <label for="tagsQuestion" class="form-label fw-semibold p-0 ms-2 mb-0">Tags</label>
                         <div class="custom-input-group">
-                            <input class="form-control" id="tagsQuestion" type="text" name="title" placeholder="Tags"
+                            <input class="form-control" id="tagsQuestion" type="text" name="tags" placeholder="Tags"
                                    value=""/>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
 
                 </div>
 
-                <div class="d-flex gap-2 ms-2">
+                <div class="text-end gap-2" style="margin-right: 4px;">
                     <button type="submit" class="px-3 btn-register" style="font-size: 14px;">
                         <span class="pe-2 "><i class="bi bi-send"></i></span>
                         <span>Gửi</span>

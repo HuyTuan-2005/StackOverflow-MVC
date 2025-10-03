@@ -12,7 +12,7 @@
     </div>
     <!-- Cột phải: nội dung chính -->
     <div class="question-content col-12 col-lg-10 text p-0">
-        @Html.ActionLink(Model.Title, "Index", "Questions", new { id = Model.QustionId }, new { @class = "d-block question-title mb-1" })
+        @Html.ActionLink(Model.Title, "Index", "Questions", new { id = Model.QuestionId }, new { @class = "d-block question-title mb-1" })
         <!-- Mô tả ngắn -->
         <p class="question-desc text-muted mb-2" style="font-size: 14px;">
             @Model.Body

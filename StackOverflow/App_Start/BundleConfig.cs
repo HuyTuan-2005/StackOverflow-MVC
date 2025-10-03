@@ -25,6 +25,10 @@ namespace StackOverflow
 
             bundles.Add(new StyleBundle("~/bundles/css/Question")
                 .Include("~/Content/css/QuestionDetails.css"));
+            
+            bundles.Add(new StyleBundle("~/bundles/css/User")
+                .Include("~/Content/css/user.css"));
+            
         }
     }
 }

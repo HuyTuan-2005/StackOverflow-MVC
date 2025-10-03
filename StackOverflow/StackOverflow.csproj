@@ -181,6 +181,7 @@
   <ItemGroup>
     <Content Include="Content\css\QuestionDetails.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\user.css" />
     <Content Include="Content\img\icon.svg" />
     <Content Include="Content\img\smIcon.svg" />
     <Content Include="Content\lib\css\bootstrap-grid.css" />

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace StackOverflow.Models
 {
     public class Profile
     {
+        [Key]
         public int ProfileId{get; set;}
         public int UserId{get; set;}
         public string DisplayName{get; set;}

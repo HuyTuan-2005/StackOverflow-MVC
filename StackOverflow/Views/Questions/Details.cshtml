@@ -70,13 +70,14 @@
       <div class="card-body">
         <h2 class="h4 mb-3">Thêm câu trả lời của bạn</h2>
         <form action="/Question/PostAnswer" method="post">
-          <input type="hidden" name="QuestionId" value="123"/>
+          <input type="hidden" name="QuestionId" value=@Model.QuestionId />
+          <input type="hidden" name="UserId" value=@Model.UserId />
           <div class="mb-3">
             <label for="answerBody" class="form-label fw-semibold">Nội dung trả lời</label>
             <textarea
               class="form-control"
               id="answerBody"
-              name="Body"
+              name="body"
               rows="8"
               required
               aria-describedby="answerHelp"

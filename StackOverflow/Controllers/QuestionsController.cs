@@ -17,9 +17,9 @@ namespace StackOverflow.Controllers
         {
             _questionService = questionService;
         }
-        
+
         [Route("questions/{id:int?}")]
-        public ActionResult Index(int? id ,HomePageViewModel model)
+        public ActionResult Index(int? id, HomePageViewModel model)
         {
             IReadOnlyList<HomePageViewModel> lstQuestion;
             if (string.IsNullOrEmpty(model.Title))
@@ -30,10 +30,11 @@ namespace StackOverflow.Controllers
             {
                 lstQuestion = _questionService.GetQuestionsByTitle(model.Title);
             }
+
             if (id.HasValue)
             {
                 ViewBag.Id = id;
-                return View("Details", lstQuestion.Where(t => t.QustionId == id.Value).FirstOrDefault());           
+                return View("Details", lstQuestion.Where(t => t.QuestionId == id.Value).FirstOrDefault());
             }
 
             if (lstQuestion == null)
@@ -54,10 +55,12 @@ namespace StackOverflow.Controllers
             ViewBag.CountQuestion = lstQuestion.Count;
             return View("Index", lstQuestion);
         }
-        
+
         public ActionResult Ask()
         {
-            return View();
+            if (Session["UserName"] != null)
+                return View();    
+            return RedirectToAction("Index", "Login");
         }
     }
 }

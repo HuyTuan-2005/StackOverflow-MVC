@@ -48,7 +48,7 @@ namespace StackOverflow.Repositories
                                 lstQuestions.Add(new HomePageViewModel()
                                 {
                                     UserId = int.Parse(row["User_Id"].ToString()),
-                                    QustionId = int.Parse(row["Question_Id"].ToString()),
+                                    QuestionId = int.Parse(row["Question_Id"].ToString()),
                                     DisplayName = row["Display_Name"].ToString(),
                                     Title = row["Title"].ToString(),
                                     Body = row["Body"].ToString(),

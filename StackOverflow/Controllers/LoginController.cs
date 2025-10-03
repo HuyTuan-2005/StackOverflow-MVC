@@ -35,6 +35,7 @@ namespace StackOverflow.Controllers
             var result = _userService.VerifyUser(model);
             if (result == 1)
             {
+                Session["UserName"] = model.UserName;
                 return RedirectToAction("Index", "Questions");
             }
 

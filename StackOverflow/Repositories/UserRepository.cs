@@ -35,7 +35,7 @@ namespace StackOverflow.Repositories
                     
                     // khai báo giá trị nhận output trong sql server
                     // SqlParameter([tenthuoctinh output], [datatype in db])
-                    var result = new SqlParameter("@result", SqlDbType.Int);
+                    SqlParameter result = new SqlParameter("@result", SqlDbType.Int);
                     
                     // Direction = Output để nhan gia tri tra ve tu stored procedure
                     result.Direction = ParameterDirection.Output;
