@@ -28,7 +28,7 @@
           <div class="mb-3">
             <h1 class="h3 mb-2">@Model.Title</h1>
             <div class="text-muted small">
-              <span>Đã hỏi <time>@Model.CreatedAt</time></span>
+              <span>Đã hỏi <time>@StackOverflow.Helpers.DateTimeHelper.ConvertDateToString(Model.CreatedAt)</time></span>
               <span class="mx-2">•</span>
               <span>Bởi <a href=@Url.Action("Index", "Users", new { id = Model.UserId })
                            class="link-primary">@Model.DisplayName</a></span>
@@ -70,8 +70,8 @@
       <div class="card-body">
         <h2 class="h4 mb-3">Thêm câu trả lời của bạn</h2>
         <form action="/Question/PostAnswer" method="post">
-          <input type="hidden" name="QuestionId" value=@Model.QuestionId />
-          <input type="hidden" name="UserId" value=@Model.UserId />
+          <input type="hidden" name="QuestionId" value=@Model.QuestionId/>
+          <input type="hidden" name="UserId" value=@Model.UserId/>
           <div class="mb-3">
             <label for="answerBody" class="form-label fw-semibold">Nội dung trả lời</label>
             <textarea
@@ -97,7 +97,7 @@
       </div>
     </section>
     <!-- Answers Section -->
-    <section class="mb-4">
+    <section class="mb-4 p-3">
       <h2 class="h4 mb-3">@Model.AnswerCount câu trả lời khác</h2>
 
       <!-- Answer 1 - Accepted -->

@@ -39,7 +39,7 @@
                     <i class="fa fa-user me-1"></i>
                     <span class="text-primary">@Model.DisplayName</span>
                 </a>
-                <time class="text-muted ms-1">@Model.CreatedAt</time>
+                <time class="text-muted ms-1">@StackOverflow.Helpers.DateTimeHelper.ConvertDateToString(Model.CreatedAt)</time>
             </div>
         </div>
     </div>
