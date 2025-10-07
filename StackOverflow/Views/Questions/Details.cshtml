@@ -16,7 +16,8 @@
   @Styles.Render("~/bundles/css/Question")
 }
 
-@model StackOverflow.ViewModels.HomePageViewModel
+@using StackOverflow.Helpers
+@model StackOverflow.ViewModels.DetailsQuestionViewModel
 
 <div class="col-12 col-md-9 col-lg-7 px-2">
 
@@ -26,12 +27,12 @@
       <div class="card-body">
         <div class="border-bottom mb-3">
           <div class="mb-3">
-            <h1 class="h3 mb-2">@Model.Title</h1>
+            <h1 class="h3 mb-2">@Model.Question.Title</h1>
             <div class="text-muted small">
-              <span>Đã hỏi <time>@StackOverflow.Helpers.DateTimeHelper.ConvertDateToString(Model.CreatedAt)</time></span>
+              <span>Đã hỏi <time>@StackOverflow.Helpers.DateTimeHelper.ConvertDateToString(Model.Question.CreatedAt)</time></span>
               <span class="mx-2">•</span>
-              <span>Bởi <a href=@Url.Action("Index", "Users", new { id = Model.UserId })
-                           class="link-primary">@Model.DisplayName</a></span>
+              <span>Bởi <a href=@Url.Action("Index", "Users", new { id = Model.Question.UserId })
+                           class="link-primary">@Model.Question.DisplayName</a></span>
               <span class="mx-2">•</span>
               <span>1 Lượt xem</span>
             </div>
@@ -39,7 +40,7 @@
         </div>
 
         <div class="question-body mb-3">
-          <p class="mb-3">@Model.Body</p>
+          <p class="mb-3">@Model.Question.Body</p>
           @*           <p class="mb-3">Tôi đang xây dựng một trang hỏi đáp với ASP.NET MVC, muốn có bố cục hiển thị câu hỏi chi *@
           @*             tiết, danh sách trả lời và form nhập câu trả lời. Có cách nào tối ưu cho việc phân trang và cache *@
           @*             không?</p> *@
@@ -55,7 +56,7 @@
           @*         </div> *@
 
           <div class="d-flex flex-wrap gap-2 mb-3">
-            @foreach (var i in Model.Tags)
+            @foreach (var i in Model.Question.Tags)
             {
               <a href=@Url.Action("Tag", "Questions", new { id = i }) class="badge tag-badge">@i</a>
             }
@@ -70,8 +71,8 @@
       <div class="card-body">
         <h2 class="h4 mb-3">Thêm câu trả lời của bạn</h2>
         <form action="/Question/PostAnswer" method="post">
-          <input type="hidden" name="QuestionId" value=@Model.QuestionId/>
-          <input type="hidden" name="UserId" value=@Model.UserId/>
+          <input type="hidden" name="QuestionId" value=@Model.Question.QuestionId/>
+          <input type="hidden" name="UserId" value=@Model.Question.UserId/>
           <div class="mb-3">
             <label for="answerBody" class="form-label fw-semibold">Nội dung trả lời</label>
             <textarea
@@ -98,32 +99,38 @@
     </section>
     <!-- Answers Section -->
     <section class="mb-4 p-3">
-      <h2 class="h4 mb-3">@Model.AnswerCount câu trả lời khác</h2>
+      <h2 class="h4 mb-3">@Model.Question.AnswerCount câu trả lời khác</h2>
 
-      <!-- Answer 1 - Accepted -->
-      <article class="card mb-3 shadow-sm answer-accepted" style="border-left: 4px solid #48C774;: ">
-        <div class="card-body">
-          <!-- Answer Content -->
-          <div class="answer-body mb-3">
-            <p>Dùng Repository Pattern với Unit of Work để tách logic truy vấn. Triển khai lazy loading cho câu trả
-              lời và cache với Output Cache hoặc Redis:</p>
+      <!-- Answer - Accepted -->
+      @foreach (var i in Model.Answers)
+      {
+        <article class="answer-item answer-accepted d-flex gap-3 p-3 mb-3">
+          <div class="flex-grow-1">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <div class="d-flex align-items-center gap-2" style="font-family: 'Roboto', sans-serif">
 
-            <pre class="bg-light border rounded p-3"><code>[OutputCache(Duration = 300, VaryByParam = "id")]
-public ActionResult Details(int id) {
-    var question = _questionRepo.GetById(id);
-    return View(question);
-}</code></pre>
-            <p>Phân trang câu trả lời khi số lượng lớn (>20) để giảm tải trang ban đầu.</p>
-          </div>
+                <a href=@Url.Action("Index", "Users", new { id = i.UserId })
+                   class="text-decoration-none fw-semibold d-flex align-items-center gap-2 text-dark">
+                  <img src="https://i.pravatar.cc/64?img=22" class="rounded-circle" width="32" height="32" alt="">
+                  <span>@i.DisplayName</span>
+                </a>
+                <i class="bi bi-check2-circle text-success" title="Accepted" style="font-size: 1rem"></i>
 
-          <div class="answer-meta d-flex justify-content-between align-items-center">
-            <div class="text-muted small">
-              <span>trả lời bởi <a href="#" class="link-primary">devA</a></span>
-              <span class="ms-2">1 giờ trước</span>
+                <span class="text-muted small">@DateTimeHelper.ConvertDateToString(i.CreatedAt)</span>
+              </div>
+              <span class="badge text-bg-success">Accepted</span>
+            </div>
+
+            <div class="answer-body" style="font-size: 14px">
+              <p>
+                @i.Body
+              </p>
             </div>
           </div>
-        </div>
-      </article>
+        </article>
+      }
+
+
     </section>
   </div>
 </div>

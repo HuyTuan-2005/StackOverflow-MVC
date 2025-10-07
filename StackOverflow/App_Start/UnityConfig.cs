@@ -29,6 +29,9 @@ using Unity.Mvc5;
             container.RegisterType<IQuestionService, QuestionService>();
             container.RegisterType<IQuestionRepository, QuestionRepository>(new InjectionConstructor(connString));
             
+            container.RegisterType<IAnswerService, AnswerService>();
+            container.RegisterType<IAnswerRepository, AnswerRepository>(new InjectionConstructor(connString));
+            
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

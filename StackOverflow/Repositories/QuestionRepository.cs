@@ -17,7 +17,7 @@ namespace StackOverflow.Repositories
             _connString = connString;
         }
 
-        private List<HomePageViewModel> ExecStoredProcedureAndMap(string storedProcedureName, Dictionary<string, object> parameters = null)
+        private List<HomePageViewModel> ExecStoredProcedureAndMap(string query, CommandType commandType = CommandType.Text, Dictionary<string, object> parameters = null)
         {
             var lstQuestions = new List<HomePageViewModel>();
 
@@ -26,9 +26,9 @@ namespace StackOverflow.Repositories
                 using (var conn = new SqlConnection(_connString))
                 {
                     conn.Open();
-                    using (var command = new SqlCommand(storedProcedureName, conn))
+                    using (var command = new SqlCommand(query, conn))
                     {
-                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                        command.CommandType = commandType;
                         if (parameters != null)
                         {
                             foreach (var parameter in parameters)
@@ -70,21 +70,34 @@ namespace StackOverflow.Repositories
 
         public List<HomePageViewModel> GetAllQuestions()
         {
-            return ExecStoredProcedureAndMap("sp_GetAllQuestion");
-        }
-
-        public List<HomePageViewModel> GetQuestionsByTagName(string tag)
-        {
-            var parameter = new Dictionary<string, object>();
-            parameter.Add("@tag_name", tag);
-            return ExecStoredProcedureAndMap("sp_GetQuestionsByTag", parameter);
+            return ExecStoredProcedureAndMap("sp_GetQuestions", CommandType.StoredProcedure);
         }
 
         public List<HomePageViewModel> GetQuestionsByTitle(string title)
         {
             var parameter = new Dictionary<string, object>();
-            parameter.Add("@title", title);
-            return ExecStoredProcedureAndMap("sp_GetQuestionsByTitle", parameter);
+            parameter.Add("@title", $"N'%' + {title} + N'%'");
+            return ExecStoredProcedureAndMap("select * from f_GetQuestionsByTitle(@title)", CommandType.Text, parameter);
+        }
+        public List<HomePageViewModel> GetQuestionsByTagName(string tags)
+        {
+            var parameter = new Dictionary<string, object>()
+            {
+                { "@Tags", tags }
+            };
+            // parameter.Add("@Tags", tag);
+            return ExecStoredProcedureAndMap("execute sp_GetQuestions null, null, null, @tags", CommandType.Text, parameter);
+        }
+
+        
+        public HomePageViewModel GetQuestionsById(int questionId)
+        {
+            var parameter = new Dictionary<string, object>()
+            {
+                { "@question_id", questionId }
+            };
+            // parameter.Add("@Tags", tag);
+            return ExecStoredProcedureAndMap("select * from f_GetQuestionsById(@question_id)", CommandType.Text, parameter).First();;
         }
     }
 }

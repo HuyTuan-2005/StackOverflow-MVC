@@ -3,13 +3,13 @@
         <div class="left-sidebar-list">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="text-decoration-none nav-link d-block " href="/">
+                    <a class="text-decoration-none nav-link d-block @(Request.Url.Segments.Any(t => t.ToLowerInvariant().Contains("Home"))? "active": "")" href="/">
                         <i class="fa-solid fa-house"></i>
                         Home
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="text-decoration-none nav-link d-block active" href="/">
+                    <a class="text-decoration-none nav-link d-block @(Request.Url.Segments.Any(t => t.ToLowerInvariant().Contains("questions"))? "active": "")" href="/">
                         <i class="fa-solid fa-message"></i>
                         Question
                     </a>
@@ -34,13 +34,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="text-decoration-none nav-link d-block" href="#">
+                    <a class="text-decoration-none nav-link d-block @(Request.Url.Segments.Any(t => t.ToLowerInvariant().Contains("users/"))? "active": "")" href="#">
                         <i class="fa-solid fa-address-card"></i>
                         Articles
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="text-decoration-none nav-link d-block" href="#">
+                    <a class="text-decoration-none nav-link d-block " href="#">
                         <i class="fa-solid fa-user-group"></i>
                         User
                     </a>

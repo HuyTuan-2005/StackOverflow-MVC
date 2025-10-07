@@ -16,16 +16,18 @@ namespace StackOverflow.Controllers
         {
             _userService = userService;
         }
-        
+
         // GET
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl; 
             return View();
         }
 
+
         [HttpPost]
-        public ActionResult Index(UserLoginViewModel model)
+        public ActionResult Index(UserLoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -36,11 +38,18 @@ namespace StackOverflow.Controllers
             if (result == 1)
             {
                 Session["UserName"] = model.UserName;
+        
+                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+        
                 return RedirectToAction("Index", "Questions");
             }
 
             ModelState.AddModelError(string.Empty, "Sai tên đăng nhập hoặc mật khẩu");
             return View(model);
         }
+
     }
 }

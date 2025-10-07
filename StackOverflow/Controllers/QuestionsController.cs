@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Security.Principal;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using StackOverflow.Services;
 using StackOverflow.ViewModels;
 
@@ -12,15 +13,28 @@ namespace StackOverflow.Controllers
     public class QuestionsController : Controller
     {
         private readonly IQuestionService _questionService;
+        private readonly IAnswerService _answerService;
 
-        public QuestionsController(IQuestionService questionService)
+        public QuestionsController(IQuestionService questionService,  IAnswerService answerService)
         {
             _questionService = questionService;
+            _answerService = answerService;
         }
 
         [Route("questions/{id:int?}")]
         public ActionResult Index(int? id, HomePageViewModel model)
         {
+            if (id.HasValue)
+            {
+                ViewBag.Id = id;
+                
+                // tra ve chi tiet cau hoi va danh sach cac cau tra loi cua cau hoi đó
+                return View("Details", new DetailsQuestionViewModel()
+                {
+                    Question = _questionService.GetQuestionsById(id.Value),
+                    Answers = _answerService.GetAnswerByQuestionId(id.Value)
+                });
+            }
             IReadOnlyList<HomePageViewModel> lstQuestion;
             if (string.IsNullOrEmpty(model.Title))
             {
@@ -29,12 +43,6 @@ namespace StackOverflow.Controllers
             else
             {
                 lstQuestion = _questionService.GetQuestionsByTitle(model.Title);
-            }
-
-            if (id.HasValue)
-            {
-                ViewBag.Id = id;
-                return View("Details", lstQuestion.Where(t => t.QuestionId == id.Value).FirstOrDefault());
             }
 
             if (lstQuestion == null)
@@ -60,7 +68,9 @@ namespace StackOverflow.Controllers
         {
             if (Session["UserName"] != null)
                 return View();    
-            return RedirectToAction("Index", "Login");
+            
+            string returnUrl = Request.Url.PathAndQuery;
+            return RedirectToAction("Index", "Login", new { returnUrl = returnUrl });
         }
     }
 }

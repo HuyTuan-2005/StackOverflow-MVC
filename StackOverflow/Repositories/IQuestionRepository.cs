@@ -9,5 +9,6 @@ namespace StackOverflow.Repositories
         List<HomePageViewModel> GetAllQuestions();
         List<HomePageViewModel> GetQuestionsByTagName(string tag);
         List<HomePageViewModel> GetQuestionsByTitle(string title);
+        HomePageViewModel GetQuestionsById(int questionId);
     }
 }

@@ -8,5 +8,6 @@ namespace StackOverflow.Services
         IReadOnlyList<HomePageViewModel> GetAllQuestions();
         IReadOnlyList<HomePageViewModel> GetQuestionsByTagName(string tag);
         IReadOnlyList<HomePageViewModel> GetQuestionsByTitle(string title);
+        HomePageViewModel GetQuestionsById(int questionId);
     }
 }

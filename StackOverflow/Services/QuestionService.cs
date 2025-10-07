@@ -29,5 +29,10 @@ namespace StackOverflow.Services
         {
             return _questionRepository.GetQuestionsByTitle(title);
         }
+
+        public HomePageViewModel GetQuestionsById(int questionId)
+        {
+            return _questionRepository.GetQuestionsById(questionId);
+        }
     }
 }

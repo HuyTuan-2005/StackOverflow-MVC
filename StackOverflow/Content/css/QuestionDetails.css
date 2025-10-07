@@ -103,7 +103,8 @@ pre {
     background-color: #f6f8fa;
     border: 1px solid var(--border-color);
     border-radius: 6px;
-    padding: 16px;
+    padding: 6px;
+    margin: 6px 0;
     overflow-x: auto;
     font-size: 0.875rem;
 }
@@ -162,5 +163,9 @@ pre code {
 .card {
     border: none;
 }
+/* Answer cards */
+.answer-item{background:#fff;border:1px solid var(--border-color);border-radius:.5rem;transition:box-shadow .2s}
+.answer-item:hover{box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.answer-accepted{background:linear-gradient(to right,#f0fff4 0%,#fff 3%);border-left:4px solid var(--success-color)}
 
 
