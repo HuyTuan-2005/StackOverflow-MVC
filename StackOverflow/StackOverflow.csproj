@@ -184,6 +184,8 @@
     <Compile Include="ViewModels\DetailsQuestionViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\UserLoginViewModel.cs" />
+    <Compile Include="ViewModels\UserPageViewModel.cs" />
+    <Compile Include="ViewModels\UserRegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\QuestionDetails.css" />

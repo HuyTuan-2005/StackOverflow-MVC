@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using StackOverflow.ViewModels;
 
 namespace StackOverflow.Controllers
 {
@@ -12,9 +13,18 @@ namespace StackOverflow.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register()
+        public ActionResult Index(UserRegisterViewModel model)
         {
-            return View("Index");
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            // else
+            // {
+                ModelState.AddModelError(string.Empty, "Tên đăng nhập hoặc email đã tồn tại.");
+                return View(model);
+            // }
+            return RedirectToAction("Index", "Login");
         }
     }
 }

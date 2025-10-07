@@ -12,7 +12,7 @@ namespace StackOverflow.ViewModels
         public string DisplayName {get; set;}
         public string Title {get; set;}
         public string Body {get; set;}
-        public List<string> Tags {get; set;}
+        public List<string> Tags {get; set;}    
         
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}")]
         public DateTime CreatedAt {get; set;}

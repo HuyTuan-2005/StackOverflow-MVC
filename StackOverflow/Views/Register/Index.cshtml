@@ -2,6 +2,7 @@
   ViewBag.Title = "Đăng ký";
 }
 
+@model StackOverflow.ViewModels.UserRegisterViewModel
 
 <style>
   body {
@@ -76,7 +77,13 @@
   .form-check-label a:hover {
     color: #0056b3;
   }
+  .validation-summary-errors ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 </style>
+
 
 
 <div class="container">
@@ -108,38 +115,62 @@
     </div>
 
     <!-- Sign Up Form -->
-    <form action="/Register/" method="POST">
+    @using (Html.BeginForm("Index", "Register", FormMethod.Post))
+    {
       <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input name="username" type="text" id="username" class="form-control" placeholder="Enter your Username" required>
+        @Html.LabelFor(m => m.Username)
+        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = $"Nhập tên đăng nhập" })
+        @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
       </div>
       <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input name="email" type="email" id="email" class="form-control" placeholder="Enter your Email" required>
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = $"Nhập email" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
       </div>
       <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input name="password" type="password" id="password" class="form-control" placeholder="Enter your PassWord" required>
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = $"Nhập mật khẩu" })
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
       </div>
-      @* <div class="mb-3"> *@
-      @*   <label for="country" class="form-label">Country</label> *@
-      @*   <select id="country" class="form-select" required> *@
-      @*     <option value="" disabled selected>Select your country</option> *@
-      @*     <option value="us">United States</option> *@
-      @*     <option value="vn">Vietnam</option> *@
-      @*     <option value="in">India</option> *@
-      @*     <option value="uk">United Kingdom</option> *@
-      @*     <option value="fr">France</option> *@
-      @*     <option value="de">Germany</option> *@
-      @*   </select> *@
-      @* </div> *@
-      @* <div class="form-check mb-3"> *@
-      @*   <input type="checkbox" class="form-check-input" id="terms" required> *@
-      @*   <label class="form-check-label" for="terms">I agree to the <a href="#" target="_blank">terms and *@
-      @*       conditions</a>.</label> *@
-      @* </div> *@
+      <div class="mb-3">
+        @Html.LabelFor(m => m.ConfirmPassword)
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = $"Nhập lại mật khẩu" })
+        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+      </div>
+      @Html.ValidationSummary(true, "", new { @class = "text-danger fst-italic mb-3" })
       <button type="submit" class="btn btn-primary w-100">Sign Up</button>
-    </form>
+    }
+    @* <form action="/Register/" method="POST"> *@
+    @*   <div class="mb-3"> *@
+    @*     <label for="username" class="form-label">Username</label> *@
+    @*     <input name="username" type="text" id="username" class="form-control" placeholder="Enter your Username" required> *@
+    @*   </div> *@
+    @*   <div class="mb-3"> *@
+    @*     <label for="email" class="form-label">Email</label> *@
+    @*     <input name="email" type="email" id="email" class="form-control" placeholder="Enter your Email" required> *@
+    @*   </div> *@
+    @*   <div class="mb-3"> *@
+    @*     <label for="password" class="form-label">Password</label> *@
+    @*     <input name="password" type="password" id="password" class="form-control" placeholder="Enter your PassWord" required> *@
+    @*   </div> *@
+    @* <div class="mb-3"> *@
+    @*   <label for="country" class="form-label">Country</label> *@
+    @*   <select id="country" class="form-select" required> *@
+    @*     <option value="" disabled selected>Select your country</option> *@
+    @*     <option value="us">United States</option> *@
+    @*     <option value="vn">Vietnam</option> *@
+    @*     <option value="in">India</option> *@
+    @*     <option value="uk">United Kingdom</option> *@
+    @*     <option value="fr">France</option> *@
+    @*     <option value="de">Germany</option> *@
+    @*   </select> *@
+    @* </div> *@
+    @* <div class="form-check mb-3"> *@
+    @*   <input type="checkbox" class="form-check-input" id="terms" required> *@
+    @*   <label class="form-check-label" for="terms">I agree to the <a href="#" target="_blank">terms and *@
+    @*       conditions</a>.</label> *@
+    @* </div> *@
+    @* </form> *@
 
     <!-- Footer Links -->
     <div class="auth-footer mt-3">
