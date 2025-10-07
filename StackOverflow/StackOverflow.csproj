@@ -159,6 +159,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DateTimeHelper.cs" />
+    <Compile Include="Helpers\SimpleHmacSha512.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\BCP.cs" />
     <Compile Include="Models\Database.cs" />
@@ -262,6 +263,7 @@
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Shared\Partials\_Footer.cshtml" />
     <Content Include="Views\Shared\Partials\_Header.cshtml" />
+    <Content Include="Views\Shared\Partials\_Notification.cshtml" />
     <Content Include="Views\Shared\Partials\_Question.cshtml" />
     <Content Include="Views\Shared\Partials\_SectionRight.cshtml" />
     <Content Include="Views\Shared\Partials\_SidebarLeft.cshtml" />

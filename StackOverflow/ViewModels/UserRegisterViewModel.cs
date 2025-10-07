@@ -7,7 +7,7 @@ namespace StackOverflow.ViewModels
     {
         [Display(Name = "Tên đăng nhập")]
         [Required(ErrorMessage = "Vui lòng nhập tên đăng nhập.")]
-        public string Username{get; set;}
+        public string UserName{get; set;}
         
         [Display(Name = "Mật khẩu")]
         [Required(ErrorMessage = "Vui lòng nhập mật khẩu.")]

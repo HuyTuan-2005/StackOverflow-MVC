@@ -48,5 +48,46 @@ namespace StackOverflow.Repositories
                 }
             }
         }
+
+        public int CheckValidUser(UserRegisterViewModel user)
+        {
+            using (var conn = new SqlConnection(_connString))
+            {
+                conn.Open();
+                
+                using (var command = new SqlCommand("select dbo.f_CheckValidUser(@username, @email)", conn))
+                {
+                    command.Parameters.AddWithValue("@username", user.UserName);
+                    command.Parameters.AddWithValue("@email", user.Email);
+                    
+                    return (int)command.ExecuteScalar();
+                }
+            }
+        }
+
+        public int Register(UserRegisterViewModel user)
+        {
+            using (var conn = new SqlConnection(_connString))
+            {
+                conn.Open();
+                
+                using (var command = new SqlCommand("sp_RegisterUser", conn))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    
+                    command.Parameters.AddWithValue("@username", user.UserName);
+                    command.Parameters.AddWithValue("@email", user.Email);
+                    command.Parameters.AddWithValue("@password", user.Password);
+                    
+                    var result = new SqlParameter("@OutUserId", SqlDbType.Int);
+                    result.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(result);
+                    
+                    command.ExecuteNonQuery();
+                    
+                    return (int)result.Value;
+                }
+            }
+        }
     }
 }
