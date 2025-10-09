@@ -5,7 +5,7 @@ namespace StackOverflow.Repositories
 {
     public interface IUserRepository
     {
-        int VerifyUser(UserLoginViewModel user);
+        User VerifyUser(string username, string password);
 
         int CheckValidUser(UserRegisterViewModel user);
 

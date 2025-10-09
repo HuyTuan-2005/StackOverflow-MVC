@@ -15,10 +15,10 @@ namespace StackOverflow.Services
             _userRepository = userRepository;
         }
 
-        public int VerifyUser(UserLoginViewModel user)
+        public User VerifyUser(string username, string password)
         {
-            user.Password = SimpleHmacSha512.ComputeRawKey(user.Password, user.UserName.ToLower());
-            return _userRepository.VerifyUser(user);
+            password = SimpleHmacSha512.ComputeRawKey(password, username.ToLower());
+            return _userRepository.VerifyUser(username, password);
         }
 
         public bool CheckValidUser(UserRegisterViewModel user)

@@ -64,7 +64,7 @@ namespace StackOverflow.Controllers
             return View("Index", lstQuestion);
         }
 
-        public ActionResult Ask()
+        public ActionResult AskQuestion()
         {
             if (Session["UserName"] != null)
                 return View();    

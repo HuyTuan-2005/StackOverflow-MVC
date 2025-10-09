@@ -34,13 +34,14 @@ namespace StackOverflow.Controllers
                 return View(model);
             }
 
-            var result = _userService.VerifyUser(model);
-            if (result == 1)
+            var user = _userService.VerifyUser(model.UserName, model.Password);
+            if (user != null)
             {
-                Session["UserName"] = model.UserName;
-        
                 if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                 {
+                    // Lưu UserID và UserName vào Session
+                    Session["UserID"] = user.UserId;
+                    Session["UserName"] = user.UserName;
                     return Redirect(returnUrl);
                 }
         

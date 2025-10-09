@@ -5,7 +5,7 @@ namespace StackOverflow.Services
 {
     public interface IUserService
     {
-        int VerifyUser(UserLoginViewModel user);
+        User VerifyUser(string username, string password);
         
         bool CheckValidUser(UserRegisterViewModel user);
 
