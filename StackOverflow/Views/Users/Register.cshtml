@@ -115,7 +115,7 @@
     </div>
 
     <!-- Sign Up Form -->
-    @using (Html.BeginForm("Index", "Register", FormMethod.Post))
+    @using (Html.BeginForm("Register", "Users", FormMethod.Post))
     {
       <div class="mb-3">
         @Html.LabelFor(m => m.UserName)

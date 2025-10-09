@@ -102,7 +102,7 @@
       <span>or</span>
     </div>
 
-    @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+    @using (Html.BeginForm("Login", "Users", FormMethod.Post))
     {
       @Html.TextBox("returnURL", (string)ViewBag.returnURL, new { @type = "hidden" })
       <div class="mb-3">

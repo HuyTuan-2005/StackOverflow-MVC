@@ -70,7 +70,7 @@ namespace StackOverflow.Controllers
                 return View();    
             
             string returnUrl = Request.Url.PathAndQuery;
-            return RedirectToAction("Index", "Login", new { returnUrl = returnUrl });
+            return RedirectToAction("Login", "Users", new { returnUrl = returnUrl });
         }
     }
 }
