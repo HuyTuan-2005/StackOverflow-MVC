@@ -41,11 +41,11 @@ namespace StackOverflow.Controllers
             var user = _userService.VerifyUser(model.UserName, model.Password);
             if (user != null)
             {
+                // Lưu UserID và UserName vào Session
+                Session["UserID"] = user.UserId;
+                Session["UserName"] = user.UserName;
                 if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                 {
-                    // Lưu UserID và UserName vào Session
-                    Session["UserID"] = user.UserId;
-                    Session["UserName"] = user.UserName;
                     return Redirect(returnUrl);
                 }
         
