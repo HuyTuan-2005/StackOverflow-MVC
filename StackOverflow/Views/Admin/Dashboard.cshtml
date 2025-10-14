@@ -4,103 +4,223 @@
 }
 @using StackOverflow.Models
 @model List<StackOverflow.Models.Profile>
+<div class="main-content" id="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1><i class="bi bi-people me-3"></i>Quản Lý Người Dùng</h1>
+            <p>Hệ thống quản lý thông tin người dùng hiện đại và tiện lợi</p>
+        </div>
 
-<style>
+        <!-- Statistics Cards -->
+        <div class="row mb-4">
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="stats-card">
+                    <div class="card-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+                    <h3>1,234</h3>
+                    <p>Tổng số người dùng</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="stats-card">
+                    <div class="card-icon">
+                        <i class="bi bi-person-check"></i>
+                    </div>
+                    <h3>987</h3>
+                    <p>Người dùng hoạt động</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="stats-card">
+                    <div class="card-icon">
+                        <i class="bi bi-person-plus"></i>
+                    </div>
+                    <h3>56</h3>
+                    <p>Người dùng mới hôm nay</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="stats-card">
+                    <div class="card-icon">
+                        <i class="bi bi-clock-history"></i>
+                    </div>
+                    <h3>89%</h3>
+                    <p>Tỷ lệ hoạt động</p>
+                </div>
+            </div>
+        </div>
 
-    .card-users {
-        background: #0077cc15;
-    }
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="btn btn-custom btn-primary-custom">
+                <i class="bi bi-person-plus"></i>
+                Thêm người dùng mới
+            </button>
+            <button class="btn btn-custom btn-outline-custom">
+                <i class="bi bi-download"></i>
+                Xuất dữ liệu
+            </button>
+            <button class="btn btn-custom btn-outline-custom">
+                <i class="bi bi-funnel"></i>
+                Bộ lọc nâng cao
+            </button>
+            <button class="btn btn-custom btn-outline-custom">
+                <i class="bi bi-arrow-clockwise"></i>
+                Làm mới dữ liệu
+            </button>
+        </div>
 
-    .card-questions {
-        background: #f4802415;
-    }
+        <!-- Users Table -->
+        <div class="table-container">
+            <div class="table-header">
+                <h4><i class="bi bi-table me-2"></i>Danh sách người dùng</h4>
+            </div>
 
-    .card-answers {
-        background: #2ecc7115;
-    }
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Tên Hiển Thị</th>
+                            <th>Ngày Sinh</th>
+                            <th>Giới Tính</th>
+                            <th>Trạng Thái</th>
+                            <th>Hoạt Động Cuối</th>
+                            <th>Thao Tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1</strong></td>
+                            <td>HThuyfuan</td>
+                            <td>huyfuan@email.com</td>
+                            <td>Huy Tuấn</td>
+                            <td>22/05/2005</td>
+                            <td>NAM</td>
+                            <td><span class="status-badge status-active">Hoạt động</span></td>
+                            <td>15/09/2025 12:37</td>
+                            <td>
+                                <button class="action-btn btn-view" title="Xem chi tiết">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="action-btn btn-edit" title="Chỉnh sửa">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="action-btn btn-delete" title="Xóa">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>2</strong></td>
+                            <td>MTtriprozx</td>
+                            <td>ngocanh@email.com</td>
+                            <td>Minh Trí</td>
+                            <td>10/03/1995</td>
+                            <td>NỮ</td>
+                            <td><span class="status-badge status-active">Hoạt động</span></td>
+                            <td>15/09/2025 12:37</td>
+                            <td>
+                                <button class="action-btn btn-view" title="Xem chi tiết">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="action-btn btn-edit" title="Chỉnh sửa">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="action-btn btn-delete" title="Xóa">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>3</strong></td>
+                            <td>TTtinh</td>
+                            <td>vantrungtinh7@email.com</td>
+                            <td>Trung Tính</td>
+                            <td>15/08/1992</td>
+                            <td>NAM</td>
+                            <td><span class="status-badge status-inactive">Không hoạt động</span></td>
+                            <td>15/09/2025 12:37</td>
+                            <td>
+                                <button class="action-btn btn-view" title="Xem chi tiết">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="action-btn btn-edit" title="Chỉnh sửa">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="action-btn btn-delete" title="Xóa">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>4</strong></td>
+                            <td>LNlinhnguyen</td>
+                            <td>linhnguyen@email.com</td>
+                            <td>Linh Nguyễn</td>
+                            <td>11/07/1998</td>
+                            <td>NỮ</td>
+                            <td><span class="status-badge status-active">Hoạt động</span></td>
+                            <td>15/09/2025 12:37</td>
+                            <td>
+                                <button class="action-btn btn-view" title="Xem chi tiết">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="action-btn btn-edit" title="Chỉnh sửa">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="action-btn btn-delete" title="Xóa">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>5</strong></td>
+                            <td>KLkhoa123</td>
+                            <td>khoa123@email.com</td>
+                            <td>Khoa Lê</td>
+                            <td>25/01/1999</td>
+                            <td>NAM</td>
+                            <td><span class="status-badge status-active">Hoạt động</span></td>
+                            <td>15/09/2025 12:37</td>
+                            <td>
+                                <button class="action-btn btn-view" title="Xem chi tiết">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="action-btn btn-edit" title="Chỉnh sửa">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="action-btn btn-delete" title="Xóa">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-    .card-tags {
-        background: #9b59b615;
-    }
-</style>
-<!-- Content -->
-<div class="col-md-10 p-4">
-    <div class="d-flex justify-content-between">
-        <h4 class="mb-4">👋 Xin chào, Admin!</h4>
-        <div class="d-flex">
-            <form method="post" action="/Admin/Export" class="mx-2">
-                <button type="submit" class="btn btn-primary">Export CSV</button>
-            </form>
-            @using (Html.BeginForm("Import", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                <input type="file" name="file" accept=".csv,.xlsx,.xls" />
-                <button type="submit" class="btn btn-primary">Import CSV</button>
-            }
+        <!-- Pagination -->
+        
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <div class="text-muted">
+                Hiển thị 1-5 của 1,234 người dùng
+            </div>
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
-
-  
-  <!-- Cards -->
-  <div class="row g-4 mb-4">
-    <div class="col-md-3">
-      <div class="card text-center p-3 border-0 shadow-sm card-users">
-        <div class="icon text-primary"><i class="bi bi-people"></i></div>
-        <h6 class="text-muted">Users</h6>
-        <h3 class="text-primary">@ViewBag.CountUsers</h3>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card text-center p-3 border-0 shadow-sm card-questions">
-        <div class="icon" style="color:#f48024"><i class="bi bi-question-circle"></i></div>
-        <h6 class="text-muted">Questions</h6>
-        <h3 style="color:#f48024">@ViewBag.CountQuestions</h3>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card text-center p-3 border-0 shadow-sm card-answers">
-        <div class="icon text-success"><i class="bi bi-chat-dots"></i></div>
-        <h6 class="text-muted">Answers</h6>
-        <h3 class="text-success">@ViewBag.CountAnswers</h3>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card text-center p-3 border-0 shadow-sm card-tags">
-        <div class="icon" style="color:#9b59b6"><i class="bi bi-tags"></i></div>
-        <h6 class="text-muted">Tags</h6>
-        <h3 style="color:#9b59b6">@ViewBag.CountTags</h3>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- Bảng -->
-  <div class="card">
-    <div class="card-header bg-white fw-bold"><i class="bi bi-people"></i> Users mới</div>
-    <div class="card-body">
-      <table class="table align-middle">
-        <thead class="table-light">
-        <tr>
-          <th>Tên</th>
-          <th>Ngày sinh</th>
-          <th>Giới tinh</th>
-          <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var i in @Model)
-        {
-          <tr>
-            <td>@i.DisplayName</td>
-            <td>@i.Birthday.ToString("dd/MM/yyyy")</td>
-            <td>@i.Gender</td>
-            <td>
-              <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
-            </td>
-          </tr>
-        }
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-</div>

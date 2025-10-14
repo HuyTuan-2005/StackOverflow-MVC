@@ -187,6 +187,7 @@
     <Compile Include="ViewModels\UserRegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\AdminDashboard.css" />
     <Content Include="Content\css\QuestionDetails.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\user.css" />
@@ -257,10 +258,10 @@
     <Content Include="Views\Admin\_AdminLayout.cshtml" />
     <Content Include="Views\Questions\AskQuestion.cshtml" />
     <Content Include="Views\Questions\Details.cshtml" />
+    <Content Include="Views\Questions\_Question.cshtml" />
     <Content Include="Views\Shared\Partials\_Footer.cshtml" />
     <Content Include="Views\Shared\Partials\_Header.cshtml" />
     <Content Include="Views\Shared\Partials\_Notification.cshtml" />
-    <Content Include="Views\Shared\Partials\_Question.cshtml" />
     <Content Include="Views\Shared\Partials\_SectionRight.cshtml" />
     <Content Include="Views\Shared\Partials\_SidebarLeft.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />

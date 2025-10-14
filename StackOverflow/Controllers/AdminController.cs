@@ -15,8 +15,8 @@ namespace StackOverflow.Controllers
     {
         private List<Profile> GetAllProfile()
         {
-            var db = new Database();
-            SqlConnection conn = db.Connection();
+            // var db = new Database();
+            SqlConnection conn = Database._conn;
             
             var command = new SqlCommand();
             command.CommandType = CommandType.Text;
@@ -52,15 +52,15 @@ namespace StackOverflow.Controllers
         [HttpGet]
         public ActionResult DashBoard()
         {
-            var profiles = GetAllProfile();
+            // var profiles = GetAllProfile();
+            //
+            // var parameters = ThongKeDashboard();
+            // ViewBag.CountUsers = (int)parameters[0].Value;
+            // ViewBag.CountQuestions = (int)parameters[1].Value;
+            // ViewBag.CountAnswers = (int)parameters[2].Value;
+            // ViewBag.CountTags = (int)parameters[3].Value;
 
-            var parameters = ThongKeDashboard();
-            ViewBag.CountUsers = (int)parameters[0].Value;
-            ViewBag.CountQuestions = (int)parameters[1].Value;
-            ViewBag.CountAnswers = (int)parameters[2].Value;
-            ViewBag.CountTags = (int)parameters[3].Value;
-
-            return View("Dashboard", profiles);
+            return View("Dashboard");
         }
 
 
@@ -79,17 +79,19 @@ namespace StackOverflow.Controllers
                 return View("Login/Index", user);
             }
             var db = new Database();
-            
-            var conn = db.Connection(user.UserName, user.Password);
-            if (conn == null)
+
+            using (var conn = db.Connection(user.UserName, user.Password))
             {
-                ModelState.AddModelError(string.Empty, "Sai tên đăng nhập hoặc mật khẩu");
-                return View("Login/Index", user);
-            }
-            else
-            {
-                Session["admin"] = user.UserName;
-                return RedirectToAction("dashboard");
+                if (conn == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Sai tên đăng nhập hoặc mật khẩu");
+                    return View("Login/Index", user);
+                }
+                else
+                {
+                    Session["admin"] = user.UserName;
+                    return RedirectToAction("dashboard");
+                }
             }
         }
 

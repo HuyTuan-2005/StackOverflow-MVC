@@ -1,113 +1,198 @@
-﻿@{
-    ViewBag.Title = "Admin";
-    Layout = "";
-}
+﻿@using System.Web.UI.WebControls
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin Dashboard</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  <style>
-    :root {
-      --color-primary: #F48023;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
 
-    body {
-      background-color: #fafafa;
-      font-family: "Segoe UI", sans-serif;
-      color: #3b4045;
-    }
-    /* Navbar */
-    .navbar {
-      background: #fff;
-      border-bottom: 1px solid #e5e5e5;
-    }
-    .navbar .navbar-brand {
-      color: #f48024;
-      font-weight: bold;
-    }
+    <!-- Bootstrap 5 CSS -->
 
-    .btn-logout {
-      font-family: 'Roboto', sans-serif;
-      font-size: 15px;
-      font-weight: bold;
-      background-color: var(--color-primary);
-      color: white;
-      border-radius: 5px;
-      border: none;
-      text-decoration: none;
-      padding: 8px 20px;
-    }
-    /* Sidebar */
-    .sidebar {
-      min-height: 100vh;
-      background: #fff;
-      border-right: 1px solid #e5e5e5;
-    }
-    .sidebar h6 {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      margin: 20px 0 10px 20px;
-      color: #888;
-    }
-    .sidebar a {
-      color: #3b4045;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 20px;
-      transition: 0.2s;
-      border-radius: 8px;
-      margin: 2px 10px;
-    }
-    .sidebar a.active, .sidebar a:hover {
-      background: #fff4ec;
-      color: #f48024;
-    }
-    /* Cards */
-    .card {
-      border: 1px solid #e5e5e5;
-      border-radius: 10px;
-      background: #fff;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-    .card .icon {
-      font-size: 2rem;
-      color: #f48024;
-    }
-  </style>
-</head>
+    <!-- Bootstrap Icons -->
+    @Styles.Render("~/bundles/css")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/Content/css/AdminDashboard.css"/>
+
+    </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-light px-3">
-    <a class="navbar-brand" href=@Url.Action("Index")><i class="bi bi-stack"></i> Admin</a>
-    <div class="d-flex gap-2">
-      <a href=@Url.Action("Logout") class="btn-logout">Logout</a>
-      @* <button class="btn btn-login">Login</button> *@
-    </div>
-  </nav>
+    <!-- Main Header -->
+    <div class="main-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <button class="sidebar-toggle" onclick="toggleSidebar()">
+                    <i class="bi bi-list"></i>
+                </button>
+                <a href="#" class="logo">
+                    <i class="bi bi-shield-check"></i>
+                    AdminPanel
+                </a>
+            </div>
 
-  <div class="container-fluid">
-    <div class="row">
-      <!-- Sidebar -->
-      <div class="col-md-2 sidebar p-0">
-        <h6>Menu</h6>
-        <a href=@Url.Action("dashboard") class="active"><i class="bi bi-graph-up"></i> Dashboard</a>
-        <a href="#"><i class="bi bi-people"></i> Users</a>
-        <a href="#"><i class="bi bi-question-circle"></i> Questions</a>
-        <a href="#"><i class="bi bi-chat-dots"></i> Answers</a>
-        <a href="#"><i class="bi bi-tags"></i> Tags</a>
-        <a href="#"><i class="bi bi-flag"></i> Reports</a>
-      </div>
-      
-      @RenderBody()
-    </div>
-  </div>
+            <div class="header-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Tìm kiếm người dùng...">
+                    <i class="bi bi-search"></i>
+                </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+                <div class="user-menu" onclick="toggleUserMenu()">
+                    <div class="user-avatar">
+                        <i class="bi bi-person"></i>
+                    </div>
+                    <span>Admin</span>
+                    <i class="bi bi-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h5><i class="bi bi-speedometer2 me-2"></i>Dashboard</h5>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-category">Quản lý chính</li>
+            <li class="menu-item">
+                <a href="#" class="menu-link active">
+                    <i class="bi bi-people"></i>
+                    Quản lý người dùng
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="bi bi-person-badge"></i>
+                    Hồ sơ cá nhân
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="bi bi-shield-lock"></i>
+                    Phân quyền
+                </a>
+            </li>
+
+            <li class="menu-category">Báo cáo & Thống kê</li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="bi bi-bar-chart"></i>
+                    Thống kê truy cập
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="bi bi-file-earmark-text"></i>
+                    Báo cáo hoạt động
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="bi bi-graph-up"></i>
+                    Phân tích dữ liệu
+                </a>
+            </li>
+
+            <li class="menu-category">Hệ thống</li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="bi bi-gear"></i>
+                    Cài đặt hệ thống
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="bi bi-database"></i>
+                    Quản lý cơ sở dữ liệu
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="bi bi-journal-text"></i>
+                    Nhật ký hệ thống
+                </a>
+            </li>
+
+            <li class="menu-category">Tài khoản</li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="bi bi-person-circle"></i>
+                    Thông tin cá nhân
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Đăng xuất
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    @RenderBody()
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Toggle sidebar for mobile
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('show');
+        }
+
+        // Toggle user menu
+        function toggleUserMenu() {
+            // Implement user menu dropdown functionality
+            console.log('User menu clicked');
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const sidebarToggle = document.querySelector('.sidebar-toggle');
+
+            if (window.innerWidth <= 768) {
+                if (!sidebar.contains(event.target) && !sidebarToggle.contains(event.target)) {
+                    sidebar.classList.remove('show');
+                }
+            }
+        });
+
+        // Search functionality
+        document.querySelector('.search-box input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const searchTerm = this.value;
+                console.log('Searching for:', searchTerm);
+                // Implement search functionality
+            }
+        });
+
+        // Add smooth scrolling
+        document.querySelectorAll('.menu-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Remove active class from all links
+                document.querySelectorAll('.menu-link').forEach(l => l.classList.remove('active'));
+                // Add active class to clicked link
+                this.classList.add('active');
+            });
+        });
+        let sidebarVisible = true;
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            if (sidebarVisible) {
+                sidebar.style.transform = 'translateX(-100%)';
+                sidebarVisible = false;
+                mainContent.classList.add('ms-0');
+            } else {
+                sidebar.style.transform = 'translateX(0)';
+                sidebarVisible = true;
+                mainContent.classList.remove('ms-0');
+            }
+        }
+    </script>
 </body>
 </html>

@@ -25,7 +25,7 @@ namespace StackOverflow.Controllers
         [HttpGet]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl; 
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
@@ -76,7 +76,7 @@ namespace StackOverflow.Controllers
                 {
                     // Lưu thông báo thành công vào TempData
                     TempData["SuccessMessage"] = "Đăng ký tài khoản thành công!";
-                    return RedirectToAction("Index", "Login");
+                    return RedirectToAction("Login", "Users");
                 }
                 ModelState.AddModelError(string.Empty, "Tên đăng nhập hoặc email đã tồn tại.");
                 return View(model);
