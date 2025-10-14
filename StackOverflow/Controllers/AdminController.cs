@@ -15,12 +15,11 @@ namespace StackOverflow.Controllers
     {
         private List<Profile> GetAllProfile()
         {
-            // var db = new Database();
-            SqlConnection conn = Database._conn;
-            
+            SqlConnection conn = new SqlConnection(Database.ConnString);
+            conn.Open();
             var command = new SqlCommand();
             command.CommandType = CommandType.Text;
-            command.CommandText = "SELECT * FROM V_USERNEW";
+            command.CommandText = "SELECT * FROM profiles join users on profiles.user_id = users.user_id";
             command.Connection = conn;
             
             List<Profile> lstProfile = new List<Profile>();
@@ -32,8 +31,8 @@ namespace StackOverflow.Controllers
                     var profile = new Profile()
                     {
                         DisplayName = reader["display_name"].ToString(),
-                        Birthday = DateTime.Parse(reader[1].ToString()),
-                        Gender = reader[2].ToString(),
+                        Birthday = Convert.ToDateTime(reader["Birthday"] == DBNull.Value ? DateTime.Now : reader["Birthday"]),
+                        Gender = reader["Gender"] == DBNull.Value ? "Chưa xác định": reader["Gender"].ToString(),
                     };
                     lstProfile.Add(profile);
                 }
@@ -52,15 +51,12 @@ namespace StackOverflow.Controllers
         [HttpGet]
         public ActionResult DashBoard()
         {
-            // var profiles = GetAllProfile();
-            //
-            // var parameters = ThongKeDashboard();
-            // ViewBag.CountUsers = (int)parameters[0].Value;
-            // ViewBag.CountQuestions = (int)parameters[1].Value;
-            // ViewBag.CountAnswers = (int)parameters[2].Value;
-            // ViewBag.CountTags = (int)parameters[3].Value;
 
-            return View("Dashboard");
+            var profiles = GetAllProfile();
+
+            // var parameters = ThongKeDashboard();
+
+            return View("Dashboard", profiles);
         }
 
 

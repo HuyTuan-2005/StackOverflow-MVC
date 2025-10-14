@@ -7,8 +7,7 @@ namespace StackOverflow.Models
     public class Database
     {
         public static string ConnString = ConfigurationManager.ConnectionStrings["ForumDB"].ConnectionString;
-        public static SqlConnection _conn = null;
-        
+
         // Admin login
         public SqlConnection Connection(string username, string password)
         {
@@ -18,12 +17,10 @@ namespace StackOverflow.Models
                 builder.UserID = username;
                 builder.Password = password;
                 ConnString = builder.ConnectionString;
-                
-                using (var conn = new SqlConnection(ConnString))
-                {
-                    conn.Open();
-                    return conn;
-                }
+
+                var conn = new SqlConnection(ConnString);
+                conn.Open();
+                return conn;
             }
             catch (SqlException ex)
             {
@@ -31,18 +28,16 @@ namespace StackOverflow.Models
                 return null;
             }
         }
-        
+
         // User login
         public SqlConnection Connection()
         {
             try
             {
-                if (_conn == null)
-                {
-                    _conn = new SqlConnection(ConnString);
-                    _conn.Open();
-                }
-                return _conn;
+                var conn = new SqlConnection(ConnString);
+                conn.Open();
+
+                return conn;
             }
             catch (SqlException ex)
             {
