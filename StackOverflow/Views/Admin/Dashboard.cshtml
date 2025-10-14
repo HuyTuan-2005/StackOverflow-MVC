@@ -2,7 +2,7 @@
   ViewData["Title"] = "Admin";
   Layout = "_AdminLayout.cshtml";
 }
-@using StackOverflow.Models
+@using StackOverflow.Helpers
 @model List<StackOverflow.Models.Profile>
 <div class="main-content" id="main-content">
         <!-- Page Header -->
@@ -93,15 +93,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach (var i in Model)
+                    {
+                        
                         <tr>
                             <td><strong>1</strong></td>
-                            <td>HThuyfuan</td>
-                            <td>huyfuan@email.com</td>
-                            <td>Huy Tuấn</td>
-                            <td>22/05/2005</td>
-                            <td>NAM</td>
+                            <td>@i.DisplayName</td>
+                            <td>@i.DisplayName</td>
+                            <td>@i.DisplayName</td>
+                            <td>@i.Birthday.ToShortDateString()</td>
+                            <td>@i.Gender</td>
                             <td><span class="status-badge status-active">Hoạt động</span></td>
-                            <td>15/09/2025 12:37</td>
+                            <td>@DateTimeHelper.ConvertDateToString(i.Birthday)</td>
                             <td>
                                 <button class="action-btn btn-view" title="Xem chi tiết">
                                     <i class="bi bi-eye"></i>
@@ -114,90 +117,29 @@
                                 </button>
                             </td>
                         </tr>
-                        <tr>
-                            <td><strong>2</strong></td>
-                            <td>MTtriprozx</td>
-                            <td>ngocanh@email.com</td>
-                            <td>Minh Trí</td>
-                            <td>10/03/1995</td>
-                            <td>NỮ</td>
-                            <td><span class="status-badge status-active">Hoạt động</span></td>
-                            <td>15/09/2025 12:37</td>
-                            <td>
-                                <button class="action-btn btn-view" title="Xem chi tiết">
-                                    <i class="bi bi-eye"></i>
-                                </button>
-                                <button class="action-btn btn-edit" title="Chỉnh sửa">
-                                    <i class="bi bi-pencil"></i>
-                                </button>
-                                <button class="action-btn btn-delete" title="Xóa">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><strong>3</strong></td>
-                            <td>TTtinh</td>
-                            <td>vantrungtinh7@email.com</td>
-                            <td>Trung Tính</td>
-                            <td>15/08/1992</td>
-                            <td>NAM</td>
-                            <td><span class="status-badge status-inactive">Không hoạt động</span></td>
-                            <td>15/09/2025 12:37</td>
-                            <td>
-                                <button class="action-btn btn-view" title="Xem chi tiết">
-                                    <i class="bi bi-eye"></i>
-                                </button>
-                                <button class="action-btn btn-edit" title="Chỉnh sửa">
-                                    <i class="bi bi-pencil"></i>
-                                </button>
-                                <button class="action-btn btn-delete" title="Xóa">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><strong>4</strong></td>
-                            <td>LNlinhnguyen</td>
-                            <td>linhnguyen@email.com</td>
-                            <td>Linh Nguyễn</td>
-                            <td>11/07/1998</td>
-                            <td>NỮ</td>
-                            <td><span class="status-badge status-active">Hoạt động</span></td>
-                            <td>15/09/2025 12:37</td>
-                            <td>
-                                <button class="action-btn btn-view" title="Xem chi tiết">
-                                    <i class="bi bi-eye"></i>
-                                </button>
-                                <button class="action-btn btn-edit" title="Chỉnh sửa">
-                                    <i class="bi bi-pencil"></i>
-                                </button>
-                                <button class="action-btn btn-delete" title="Xóa">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><strong>5</strong></td>
-                            <td>KLkhoa123</td>
-                            <td>khoa123@email.com</td>
-                            <td>Khoa Lê</td>
-                            <td>25/01/1999</td>
-                            <td>NAM</td>
-                            <td><span class="status-badge status-active">Hoạt động</span></td>
-                            <td>15/09/2025 12:37</td>
-                            <td>
-                                <button class="action-btn btn-view" title="Xem chi tiết">
-                                    <i class="bi bi-eye"></i>
-                                </button>
-                                <button class="action-btn btn-edit" title="Chỉnh sửa">
-                                    <i class="bi bi-pencil"></i>
-                                </button>
-                                <button class="action-btn btn-delete" title="Xóa">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
+                    }
+                    @* <tr> *@
+                    @*     <td><strong>3</strong></td> *@
+                    @*     <td>TTtinh</td> *@
+                    @*     <td>vantrungtinh7@email.com</td> *@
+                    @*     <td>Trung Tính</td> *@
+                    @*     <td>15/08/1992</td> *@
+                    @*     <td>NAM</td> *@
+                    @*     <td><span class="status-badge status-inactive">Không hoạt động</span></td> *@
+                    @*     <td>15/09/2025 12:37</td> *@
+                    @*     <td> *@
+                    @*         <button class="action-btn btn-view" title="Xem chi tiết"> *@
+                    @*             <i class="bi bi-eye"></i> *@
+                    @*         </button> *@
+                    @*         <button class="action-btn btn-edit" title="Chỉnh sửa"> *@
+                    @*             <i class="bi bi-pencil"></i> *@
+                    @*         </button> *@
+                    @*         <button class="action-btn btn-delete" title="Xóa"> *@
+                    @*             <i class="bi bi-trash"></i> *@
+                    @*         </button> *@
+                    @*     </td> *@
+                    @* </tr> *@
+
                     </tbody>
                 </table>
             </div>
