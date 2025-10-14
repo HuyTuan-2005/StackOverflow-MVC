@@ -7,7 +7,7 @@ namespace StackOverflow.Models
     public class Database
     {
         public static string ConnString = ConfigurationManager.ConnectionStrings["ForumDB"].ConnectionString;
-        private static SqlConnection _conn = null;
+        public static SqlConnection _conn = null;
         
         // Admin login
         public SqlConnection Connection(string username, string password)

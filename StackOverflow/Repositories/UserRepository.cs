@@ -34,19 +34,20 @@ namespace StackOverflow.Repositories
                     command.Parameters.AddWithValue("@password", password);
 
 
-                    var reader = command.ExecuteReader();
-
-                    if (reader.Read())
-                    {
-                        return new User()
+                    using (var reader = command.ExecuteReader())
+                    { 
+                        if (reader.Read())
                         {
-                            UserId = Convert.ToInt32(reader["user_id"]),
-                            Email = Convert.ToString(reader["email"]),
-                            UserName = Convert.ToString(reader["username"]),
-                            Password = null,
-                            CreatedAt = Convert.ToDateTime(reader["created_at"]),
-                            LastActivity = Convert.ToDateTime(reader["last_activity"])
-                        };
+                            return new User()
+                            {
+                                UserId = reader["USER_ID"] != DBNull.Value ? Convert.ToInt32(reader["USER_ID"]) : 0,
+                                Email = Convert.ToString(reader["email"]),
+                                UserName = Convert.ToString(reader["username"]),
+                                Password = null,
+                                CreatedAt = Convert.ToDateTime(reader["created_at"]),
+                                LastActivity = Convert.ToDateTime(reader["last_activity"])
+                            };
+                        }
                     }
                     return null;
                 }
