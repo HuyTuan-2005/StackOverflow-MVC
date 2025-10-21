@@ -1,0 +1,45 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stats-card">
+            <div class="card-icon">
+                <i class="bi bi-people"></i>
+            </div>
+            <h3>@ViewBag.TotalUser</h3>
+            <p>Tổng số người dùng</p>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stats-card">
+            <div class="card-icon">
+                <i class="bi bi-person-check"></i>
+            </div>
+            @*<h3>@ViewBag.ActiveUser</h3>*@
+            <p>Người dùng hoạt động</p>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stats-card">
+            <div class="card-icon">
+                <i class="bi bi-person-plus"></i>
+            </div>
+            @*<h3>@ViewBag.NewUserToday</h3>*@
+            <p>Người dùng mới hôm nay</p>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stats-card">
+            <div class="card-icon">
+                <i class="bi bi-clock-history"></i>
+            </div>
+            @*<h3>@ViewBag.ActiveRate%</h3>*@
+            <p>Tỷ lệ hoạt động</p>
+        </div>
+    </div>
+</div>
