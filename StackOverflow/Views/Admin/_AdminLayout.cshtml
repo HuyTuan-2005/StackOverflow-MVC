@@ -56,7 +56,7 @@
         <ul class="sidebar-menu">
             <li class="menu-category">Quản lý chính</li>
             <li class="menu-item">
-                <a href="@Url.Action("Index")" class="menu-link active">
+                <a href="@Url.Action("Index")" class="menu-link @(Request.Url.Segments.Any(t => t.ToLowerInvariant().Contains("dashboard"))? "active": "")">
                     <i class="bi bi-people"></i>
                     Quản lý người dùng
                 </a>
@@ -68,7 +68,7 @@
                 </a>
             </li>
             <li class="menu-item">
-                <a href="@Url.Action("privilege", "Admin")" class="menu-link">
+                <a href="@Url.Action("privilege", "Admin")" class="menu-link @(Request.Url.Segments.Any(t => t.ToLowerInvariant().Contains("privilege"))? "active": "")">
                     <i class="bi bi-shield-lock"></i>
                     Phân quyền
                 </a>
