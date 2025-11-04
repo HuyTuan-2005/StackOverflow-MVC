@@ -3,7 +3,7 @@ using StackOverflow.Models;
 
 namespace StackOverflow.ViewModels
 {
-    public class UserLoginViewModel
+    public class UserRegisterAdminViewModel
     {
         [Display(Name = "Tên đăng nhập")]
         [Required(ErrorMessage = "Vui lòng nhập tên đăng nhập")]
@@ -13,5 +13,8 @@ namespace StackOverflow.ViewModels
         [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
         public string Password {get; set;}
 
+        [Display(Name = "Key")]
+        [Required(ErrorMessage = "Vui lòng nhập key")]
+        public string Key { get; set; }
     }
 }
