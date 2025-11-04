@@ -10,15 +10,17 @@
             <h1><i class="bi bi-people me-3"></i>Quản Lý Người Dùng</h1>
             <p>Hệ thống quản lý thông tin người dùng hiện đại và tiện lợi</p>
         </div>
-
+        @Html.Action("ThongKeUser", "Admin")
         <!-- Statistics Cards -->
-        <div class="row mb-4">
+        @*<div class="row mb-4">
             <div class="col-lg-3 col-md-6 mb-3">
                 <div class="stats-card">
                     <div class="card-icon">
                         <i class="bi bi-people"></i>
                     </div>
-                    <h3>1,234</h3>
+                    <h3>
+                        
+                    </h3>
                     <p>Tổng số người dùng</p>
                 </div>
             </div>
@@ -49,27 +51,33 @@
                     <p>Tỷ lệ hoạt động</p>
                 </div>
             </div>
-        </div>
+        </div>*@
 
         <!-- Action Buttons -->
-        <div class="action-buttons">
-            <button class="btn btn-custom btn-primary-custom">
-                <i class="bi bi-person-plus"></i>
-                Thêm người dùng mới
-            </button>
-            <button class="btn btn-custom btn-outline-custom">
-                <i class="bi bi-download"></i>
-                Xuất dữ liệu
-            </button>
-            <button class="btn btn-custom btn-outline-custom">
-                <i class="bi bi-funnel"></i>
-                Bộ lọc nâng cao
-            </button>
-            <button class="btn btn-custom btn-outline-custom">
-                <i class="bi bi-arrow-clockwise"></i>
-                Làm mới dữ liệu
-            </button>
-        </div>
+<div class="action-buttons">
+    <button class="btn btn-custom btn-primary-custom">
+        <i class="bi bi-person-plus"></i>
+        Thêm người dùng mới
+    </button>
+    <a class="btn btn-custom btn-outline-custom " href="/Admin/Export">
+        <i class="bi bi-download"></i>
+        Xuất dữ liệu
+    </a>
+    <form id="importForm" action="/Admin/Import" method="post" enctype="multipart/form-data" style="display:inline;">
+        <label class="btn btn-custom btn-outline-custom mb-0">
+            <i class="bi bi-upload"></i> Thêm dữ liệu
+            <input type="file" name="file" accept=".csv" onchange="document.getElementById('importForm').submit();" style="display:none;" />
+        </label>
+    </form>
+    <button class="btn btn-custom btn-outline-custom">
+        <i class="bi bi-funnel"></i>
+        Bộ lọc nâng cao
+    </button>
+    <button class="btn btn-custom btn-outline-custom">
+        <i class="bi bi-arrow-clockwise"></i>
+        Làm mới dữ liệu
+    </button>
+</div>
 
         <!-- Users Table -->
         <div class="table-container">
