@@ -105,9 +105,21 @@ namespace StackOverflow.Controllers
             return View("Login/Register");
         }
         [HttpPost]
-        public ActionResult Register(string UserName, string Password, string Key)
+        public ActionResult Register(UserRegisterAdminViewModel model)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["ForumDB"].ConnectionString;
+
+            if (!ModelState.IsValid)
+            {
+                // Dữ liệu nhập không hợp lệ => quay lại form
+                return View("Login/Register", model);
+            }
+
+            if (model.Key != "123456")
+            {
+                ModelState.AddModelError("", "Khóa xác thực không hợp lệ!");
+                return View("Login/Register", model);
+            }
 
             try
             {
@@ -118,28 +130,27 @@ namespace StackOverflow.Controllers
                     using (SqlCommand cmd = new SqlCommand("SP_REGISTER", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@USERNAME", UserName);
-                        cmd.Parameters.AddWithValue("@PASSWORD", Password);
-                        cmd.Parameters.AddWithValue("@KEY", Key);
+                        cmd.Parameters.AddWithValue("@USERNAME", model.UserName);
+                        cmd.Parameters.AddWithValue("@PASSWORD", model.Password);
+                        cmd.Parameters.AddWithValue("@KEY", model.Key);
 
                         cmd.ExecuteNonQuery();
                     }
                 }
 
                 TempData["SuccessMessage"] = "Đăng ký tài khoản thành công!";
-                // ✅ Đưa người dùng đến trang đăng nhập (đường dẫn hợp lệ)
                 return RedirectToAction("Login", "Admin");
             }
             catch (SqlException ex)
             {
-                // Nếu trùng username hoặc lỗi SQL
                 ModelState.AddModelError("", "Tên đăng nhập đã tồn tại hoặc lỗi SQL: " + ex.Message);
+                return View("Login/Register", model);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", "Lỗi không xác định: " + ex.Message);
+                return View("Login/Register", model);
             }
-            return View();
         }
         public ActionResult Export()
         {
