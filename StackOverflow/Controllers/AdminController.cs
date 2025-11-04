@@ -180,5 +180,10 @@ namespace StackOverflow.Controllers
                 }
             }
         }
+        
+        public ActionResult Privilege()
+        {
+            return View();
+        }
     }
 }

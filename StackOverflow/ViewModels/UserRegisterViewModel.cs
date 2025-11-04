@@ -24,5 +24,7 @@ namespace StackOverflow.ViewModels
         [Required(ErrorMessage = "Vui lòng nhập email.")]
         [EmailAddress(ErrorMessage = "Vui lòng nhập định dạng email.")]
         public string Email{get; set;}
+        
+        
     }
 }

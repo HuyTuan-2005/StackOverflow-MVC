@@ -49,5 +49,11 @@ namespace StackOverflow.Repositories
                 }
             }
         }
+
+
+        public bool PostAnswer(AnswerViewModel model)
+        {
+            return true;
+        }
     }
 }

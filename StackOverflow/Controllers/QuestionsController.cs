@@ -28,7 +28,7 @@ namespace StackOverflow.Controllers
             {
                 ViewBag.Id = id;
                 
-                // tra ve chi tiet cau hoi va danh sach cac cau tra loi cua cau hoi đó
+                // Tra ve chi tiet cau hoi va danh sach cac cau tra loi cua cau hoi đó
                 return View("Details", new DetailsQuestionViewModel()
                 {
                     Question = _questionService.GetQuestionsById(id.Value),
@@ -64,7 +64,7 @@ namespace StackOverflow.Controllers
             return View("Index", lstQuestion);
         }
 
-        public ActionResult AskQuestion()
+        public ActionResult Ask()
         {
             if (Session["UserName"] != null)
                 return View();    
@@ -72,5 +72,19 @@ namespace StackOverflow.Controllers
             string returnUrl = Request.Url.PathAndQuery;
             return RedirectToAction("Login", "Users", new { returnUrl = returnUrl });
         }
+
+        // public ActionResult PostAnswer(AnswerViewModel model)
+        // {
+        //     if (model == null)
+        //     {
+        //         return RedirectToAction("Index");
+        //     }
+        //
+        //     if (Session["UserName"] == null)
+        //     {
+        //         string returnUrl = Request.Url.PathAndQuery;
+        //         return RedirectToAction("Login", "Users", new { returnUrl = returnUrl });
+        //     }
+        // }
     }
 }
