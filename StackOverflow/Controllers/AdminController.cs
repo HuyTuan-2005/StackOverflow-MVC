@@ -299,10 +299,6 @@ namespace StackOverflow.Controllers
             }
         }
         
-        public ActionResult Privilege()
-        {
-            return View();
-        }
         public ActionResult ThongKeUser()
         {
             using (SqlConnection conn = new SqlConnection(Database.ConnString))
@@ -325,5 +321,12 @@ namespace StackOverflow.Controllers
 
             return PartialView("ThongKeUser");
         }
+        
+        
+        public ActionResult Privilege()
+        {
+            return View();
+        }
+
     }
 }

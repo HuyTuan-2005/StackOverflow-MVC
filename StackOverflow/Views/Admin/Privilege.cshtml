@@ -7,10 +7,14 @@
     <link href="~/Content/css/AdminPrivilege.css" rel="stylesheet"/>
 }
 <div class="main-content" id="main-content">
-    <div class="content-header">
-        <h2><i class="bi bi-shield-lock me-2"></i>Quản Lý Phân Quyền</h2>
-        <p class="text-muted">Quản lý quyền truy cập và thao tác của người dùng trên cơ sở dữ liệu</p>
+    <div class="page-header">
+        <h1><i class="bi bi-shield-lock me-2"></i>Quản Lý Phân Quyền</h1>
+        <p>Quản lý quyền truy cập và thao tác của người dùng trên cơ sở dữ liệu</p>
     </div>
+    @* <div class="content-header"> *@
+    @*     <h2><i class="bi bi-shield-lock me-2"></i>Quản Lý Phân Quyền</h2> *@
+    @*     <p class="text-muted">Quản lý quyền truy cập và thao tác của người dùng trên cơ sở dữ liệu</p> *@
+    @* </div> *@
 
     <!-- Statistics Cards -->
     <div class="row mb-4">
@@ -63,19 +67,19 @@
     <!-- Tabs Navigation -->
     <ul class="nav nav-tabs permission-tabs mb-4" id="permissionTabs" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="user-permission-tab" data-bs-toggle="tab" 
+            <button class="nav-link active" id="user-permission-tab" data-bs-toggle="tab"
                     data-bs-target="#user-permission" type="button" role="tab">
                 <i class="bi bi-person-check me-2"></i>Phân quyền người dùng
             </button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="group-management-tab" data-bs-toggle="tab" 
+            <button class="nav-link" id="group-management-tab" data-bs-toggle="tab"
                     data-bs-target="#group-management" type="button" role="tab">
                 <i class="bi bi-people-fill me-2"></i>Quản lý nhóm quyền
             </button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="user-group-tab" data-bs-toggle="tab" 
+            <button class="nav-link" id="user-group-tab" data-bs-toggle="tab"
                     data-bs-target="#user-group" type="button" role="tab">
                 <i class="bi bi-diagram-3 me-2"></i>Gán người dùng vào nhóm
             </button>
@@ -84,7 +88,7 @@
 
     <!-- Tab Contents -->
     <div class="tab-content" id="permissionTabContent">
-        
+
         <!-- Tab 1: Phân quyền người dùng đơn lẻ -->
         <div class="tab-pane fade show active" id="user-permission" role="tabpanel">
             <div class="card permission-card">
@@ -178,40 +182,40 @@
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
-                                    <tr>
-                                        <th>Bảng</th>
-                                        <th>SELECT</th>
-                                        <th>INSERT</th>
-                                        <th>UPDATE</th>
-                                        <th>DELETE</th>
-                                        <th>Thao tác</th>
-                                    </tr>
+                                <tr>
+                                    <th>Bảng</th>
+                                    <th>SELECT</th>
+                                    <th>INSERT</th>
+                                    <th>UPDATE</th>
+                                    <th>DELETE</th>
+                                    <th>Thao tác</th>
+                                </tr>
                                 </thead>
                                 <tbody id="userPermissionTable">
-                                    <tr>
-                                        <td>Users</td>
-                                        <td><span class="badge bg-success">Có</span></td>
-                                        <td><span class="badge bg-success">Có</span></td>
-                                        <td><span class="badge bg-secondary">Không</span></td>
-                                        <td><span class="badge bg-secondary">Không</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-danger">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Products</td>
-                                        <td><span class="badge bg-success">Có</span></td>
-                                        <td><span class="badge bg-secondary">Không</span></td>
-                                        <td><span class="badge bg-secondary">Không</span></td>
-                                        <td><span class="badge bg-secondary">Không</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-danger">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>Users</td>
+                                    <td><span class="badge bg-success">Có</span></td>
+                                    <td><span class="badge bg-success">Có</span></td>
+                                    <td><span class="badge bg-secondary">Không</span></td>
+                                    <td><span class="badge bg-secondary">Không</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Products</td>
+                                    <td><span class="badge bg-success">Có</span></td>
+                                    <td><span class="badge bg-secondary">Không</span></td>
+                                    <td><span class="badge bg-secondary">Không</span></td>
+                                    <td><span class="badge bg-secondary">Không</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -276,71 +280,71 @@
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Tên nhóm</th>
-                                            <th>Số thành viên</th>
-                                            <th>Ngày tạo</th>
-                                            <th>Thao tác</th>
-                                        </tr>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tên nhóm</th>
+                                        <th>Số thành viên</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Thao tác</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><span class="badge bg-primary">Admin</span></td>
-                                            <td>5</td>
-                                            <td>01/11/2025</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-info" onclick="viewGroupPermissions(1)">
-                                                    <i class="bi bi-eye"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-warning" onclick="editGroup(1)">
-                                                    <i class="bi bi-pencil"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td><span class="badge bg-success">Manager</span></td>
-                                            <td>12</td>
-                                            <td>01/11/2025</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-info" onclick="viewGroupPermissions(2)">
-                                                    <i class="bi bi-eye"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-warning" onclick="editGroup(2)">
-                                                    <i class="bi bi-pencil"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td><span class="badge bg-info">Staff</span></td>
-                                            <td>45</td>
-                                            <td>02/11/2025</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-info" onclick="viewGroupPermissions(3)">
-                                                    <i class="bi bi-eye"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-warning" onclick="editGroup(3)">
-                                                    <i class="bi bi-pencil"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td><span class="badge bg-secondary">Guest</span></td>
-                                            <td>88</td>
-                                            <td>02/11/2025</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-info" onclick="viewGroupPermissions(4)">
-                                                    <i class="bi bi-eye"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-warning" onclick="editGroup(4)">
-                                                    <i class="bi bi-pencil"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td><span class="badge bg-primary">Admin</span></td>
+                                        <td>5</td>
+                                        <td>01/11/2025</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" onclick="viewGroupPermissions(1)">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-warning" onclick="editGroup(1)">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td><span class="badge bg-success">Manager</span></td>
+                                        <td>12</td>
+                                        <td>01/11/2025</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" onclick="viewGroupPermissions(2)">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-warning" onclick="editGroup(2)">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td><span class="badge bg-info">Staff</span></td>
+                                        <td>45</td>
+                                        <td>02/11/2025</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" onclick="viewGroupPermissions(3)">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-warning" onclick="editGroup(3)">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td><span class="badge bg-secondary">Guest</span></td>
+                                        <td>88</td>
+                                        <td>02/11/2025</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" onclick="viewGroupPermissions(4)">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-warning" onclick="editGroup(4)">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -436,48 +440,48 @@
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
-                                        <tr>
-                                            <th>Người dùng</th>
-                                            <th>Email</th>
-                                            <th>Nhóm quyền</th>
-                                            <th>Ngày tham gia</th>
-                                            <th>Thao tác</th>
-                                        </tr>
+                                    <tr>
+                                        <th>Người dùng</th>
+                                        <th>Email</th>
+                                        <th>Nhóm quyền</th>
+                                        <th>Ngày tham gia</th>
+                                        <th>Thao tác</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Nguyễn Văn A</td>
-                                            <td>nguyenvana@example.com</td>
-                                            <td><span class="badge bg-primary">Admin</span></td>
-                                            <td>01/11/2025</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-danger">
-                                                    <i class="bi bi-person-x"></i> Xóa
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trần Thị B</td>
-                                            <td>tranthib@example.com</td>
-                                            <td><span class="badge bg-success">Manager</span></td>
-                                            <td>02/11/2025</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-danger">
-                                                    <i class="bi bi-person-x"></i> Xóa
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lê Văn C</td>
-                                            <td>levanc@example.com</td>
-                                            <td><span class="badge bg-info">Staff</span></td>
-                                            <td>03/11/2025</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-danger">
-                                                    <i class="bi bi-person-x"></i> Xóa
-                                                </button>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td>Nguyễn Văn A</td>
+                                        <td>nguyenvana@example.com</td>
+                                        <td><span class="badge bg-primary">Admin</span></td>
+                                        <td>01/11/2025</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="bi bi-person-x"></i> Xóa
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Trần Thị B</td>
+                                        <td>tranthib@example.com</td>
+                                        <td><span class="badge bg-success">Manager</span></td>
+                                        <td>02/11/2025</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="bi bi-person-x"></i> Xóa
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lê Văn C</td>
+                                        <td>levanc@example.com</td>
+                                        <td><span class="badge bg-info">Staff</span></td>
+                                        <td>03/11/2025</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="bi bi-person-x"></i> Xóa
+                                            </button>
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>

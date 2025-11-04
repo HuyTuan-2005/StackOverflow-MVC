@@ -214,13 +214,14 @@ body {
 }
 
 .page-header h1 {
+    font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
 
 .page-header p {
     opacity: 0.95;
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin: 0;
 }
 
