@@ -1,5 +1,0 @@
-﻿các package cần thiết để triển khai ASP.NET Identity và Entity Framework
-
-Install-Package Microsoft.AspNet.Identity.EntityFramework
-Install-Package Microsoft.AspNet.Identity.Owin
-Install-Package Microsoft.Owin.Host.SystemWeb

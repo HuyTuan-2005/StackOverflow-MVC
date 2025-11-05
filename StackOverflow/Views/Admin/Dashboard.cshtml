@@ -1,7 +1,9 @@
 ﻿@{
   ViewData["Title"] = "Admin";
   Layout = "_AdminLayout.cshtml";
+  int index = 0;
 }
+
 @using StackOverflow.Helpers
 @model List<StackOverflow.Models.Profile>
 <div class="main-content" id="main-content">
@@ -89,9 +91,9 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>STT</th>
                             <th>Username</th>
-                            <th>Email</th>
+                            @* <th>Email</th> *@
                             <th>Tên Hiển Thị</th>
                             <th>Ngày Sinh</th>
                             <th>Giới Tính</th>
@@ -103,16 +105,17 @@
                     <tbody>
                     @foreach (var i in Model)
                     {
-                        
+                        ++index;
                         <tr>
-                            <td><strong>1</strong></td>
+                            <td><strong>@index</strong></td>
                             <td>@i.DisplayName</td>
-                            <td>@i.DisplayName</td>
+                            @* <td>@i.DisplayName@@gmail.com</td> *@
                             <td>@i.DisplayName</td>
                             <td>@i.Birthday.ToShortDateString()</td>
                             <td>@i.Gender</td>
                             <td><span class="status-badge status-active">Hoạt động</span></td>
-                            <td>@DateTimeHelper.ConvertDateToString(i.Birthday)</td>
+                            @*     <td><span class="status-badge status-inactive">Không hoạt động</span></td> *@
+                            <td>@i.Birthday.ToShortDateString()</td>
                             <td>
                                 <button class="action-btn btn-view" title="Xem chi tiết">
                                     <i class="bi bi-eye"></i>

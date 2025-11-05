@@ -191,11 +191,9 @@
     </Compile>
     <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Helpers\SimpleHmacSha512.cs" />
-    <Compile Include="Identity\ApplicationUser.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\BCP.cs" />
     <Compile Include="Models\Database.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\QuestionTag.cs" />
@@ -277,7 +275,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Identity\doc.txt" />
     <Content Include="Repositories\docs.txt" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -293,6 +290,7 @@
     <Content Include="ViewModels\docs.txt" />
     <Content Include="Views\Admin\Dashboard.cshtml" />
     <Content Include="Views\Admin\Login\Index.cshtml" />
+    <Content Include="Views\Admin\Login\Register.cshtml" />
     <Content Include="Views\Admin\Privilege.cshtml" />
     <Content Include="Views\Admin\_AdminLayout.cshtml" />
     <Content Include="Views\Questions\Ask.cshtml" />

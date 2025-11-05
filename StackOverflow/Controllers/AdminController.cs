@@ -94,6 +94,70 @@ namespace StackOverflow.Controllers
                 }
             }
         }
+        
+        [HttpGet]
+        public ActionResult Register()
+        {
+            return View("Login/Register");
+        }
+        
+        [HttpPost]
+        public ActionResult Register(UserLoginViewModel user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Login/Register", user);
+            }
+            var db = new Database();
+
+            using (var conn = db.Connection())
+            {
+                using (var cmd = new SqlCommand("sp_RegisterUserDatabase", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+            
+                    // Input parameters
+                    cmd.Parameters.AddWithValue("@Username", user.UserName);
+                    cmd.Parameters.AddWithValue("@Password", user.Password);
+                    cmd.Parameters.AddWithValue("@DefaultDatabase", "ForumDB");
+            
+                    // Output parameters
+                    var statusParam = new SqlParameter("@Status", SqlDbType.Int) 
+                    { 
+                        Direction = ParameterDirection.Output 
+                    };
+                    var messageParam = new SqlParameter("@Message", SqlDbType.NVarChar, 255) 
+                    { 
+                        Direction = ParameterDirection.Output 
+                    };
+            
+                    cmd.Parameters.Add(statusParam);
+                    cmd.Parameters.Add(messageParam);
+            
+                    try
+                    {
+                        //conn.Open();
+                        cmd.ExecuteNonQuery();
+                
+                        int status = (int)statusParam.Value;
+                        string message = messageParam.Value.ToString();
+                        
+                        if (status == 0)
+                            return RedirectToAction("Login");
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, message);
+                            return View("Login/Register", user);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError(string.Empty, messageParam.Value.ToString());
+                        return View("Login/Register", user);
+                    }
+                }
+            }
+        }
 
         public ActionResult Logout()
         {
@@ -299,12 +363,12 @@ namespace StackOverflow.Controllers
             }
         }
         
-        public ActionResult ThongKeUser()
+        public ActionResult CountUser()
         {
             using (SqlConnection conn = new SqlConnection(Database.ConnString))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("sp_ThongKeUser", conn);
+                SqlCommand cmd = new SqlCommand("sp_CountUser", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
