@@ -164,7 +164,58 @@ namespace StackOverflow.Controllers
             Session["admin"] = null;
             return RedirectToAction("Login", "Admin");
         }
+        public ActionResult Register()
+        {
+            return View("Login/Register");
+        }
+        [HttpPost]
+        public ActionResult Register(UserRegisterAdminViewModel model)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["ForumDB"].ConnectionString;
 
+            if (!ModelState.IsValid)
+            {
+                // Dữ liệu nhập không hợp lệ => quay lại form
+                return View("Login/Register", model);
+            }
+
+            if (model.Key != "123456")
+            {
+                ModelState.AddModelError("", "Khóa xác thực không hợp lệ!");
+                return View("Login/Register", model);
+            }
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand("SP_REGISTER", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@USERNAME", model.UserName);
+                        cmd.Parameters.AddWithValue("@PASSWORD", model.Password);
+                        cmd.Parameters.AddWithValue("@KEY", model.Key);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                TempData["SuccessMessage"] = "Đăng ký tài khoản thành công!";
+                return RedirectToAction("Login", "Admin");
+            }
+            catch (SqlException ex)
+            {
+                ModelState.AddModelError("", "Tên đăng nhập đã tồn tại hoặc lỗi SQL: " + ex.Message);
+                return View("Login/Register", model);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Lỗi không xác định: " + ex.Message);
+                return View("Login/Register", model);
+            }
+        }
         public ActionResult Export()
         {
             try
