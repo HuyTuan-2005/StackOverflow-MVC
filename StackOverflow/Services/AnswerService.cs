@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Web.UI.WebControls;
 using StackOverflow.Repositories;
@@ -18,6 +19,18 @@ namespace StackOverflow.Services
         public IReadOnlyList<AnswerViewModel> GetAnswerByQuestionId(int questionId)
         {
             return _answerRepository.GetAnswerByQuestionId(questionId);
+        }
+        
+        public void PostAnswer(int modelUserId, int modelQuestionId, string modelBody)
+        {
+            var model = new AnswerViewModel
+            {
+                UserId = modelUserId,
+                QuestionId = modelQuestionId,
+                Body = modelBody,
+                CreatedAt = DateTime.Now,
+            };
+            _answerRepository.PostAnswer(model);
         }
     }
 }

@@ -6,6 +6,6 @@ namespace StackOverflow.Repositories
     public interface IAnswerRepository
     {
         List<AnswerViewModel> GetAnswerByQuestionId(int questionId);
-        bool PostAnswer(AnswerViewModel model);
+        void PostAnswer(AnswerViewModel model);
     }
 }

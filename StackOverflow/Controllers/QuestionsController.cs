@@ -64,6 +64,7 @@ namespace StackOverflow.Controllers
             return View("Index", lstQuestion);
         }
 
+        [HttpGet]
         public ActionResult Ask()
         {
             if (Session["UserName"] != null)
@@ -73,18 +74,39 @@ namespace StackOverflow.Controllers
             return RedirectToAction("Login", "Users", new { returnUrl = returnUrl });
         }
 
-        // public ActionResult PostAnswer(AnswerViewModel model)
-        // {
-        //     if (model == null)
-        //     {
-        //         return RedirectToAction("Index");
-        //     }
-        //
-        //     if (Session["UserName"] == null)
-        //     {
-        //         string returnUrl = Request.Url.PathAndQuery;
-        //         return RedirectToAction("Login", "Users", new { returnUrl = returnUrl });
-        //     }
-        // }
+        [HttpPost]
+        public ActionResult Ask(int userId, string title, string body, string tags)
+        {
+            if (Session["UserName"] == null)
+            {
+                string returnUrl = Request.Url.PathAndQuery;
+                return RedirectToAction("Login", "Users", new { returnUrl = returnUrl });
+            }
+            _questionService.PostQuestion(userId, title, body, tags);
+            return RedirectToAction("Index");
+        }
+        
+        [HttpPost]
+        public ActionResult PostAnswer(AnswerViewModel model)
+        {
+            if (model == null)
+            {
+                return RedirectToAction("Index");
+            }
+        
+            if (Session["UserName"] == null)
+            {
+                string returnUrl = "/questions/" + model.QuestionId;
+                return RedirectToAction("Login", "Users", new { returnUrl = returnUrl });
+            }
+            
+            if(model.QuestionId <= 0 || string.IsNullOrEmpty(model.Body) || model.UserId <= 0)
+            {
+                return RedirectToAction("Index");
+            }
+            
+            _answerService.PostAnswer(model.UserId, model.QuestionId, model.Body);
+            return RedirectToAction("Index", new { id = model.QuestionId });
+        }
     }
 }

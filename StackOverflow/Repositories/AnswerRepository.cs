@@ -50,10 +50,22 @@ namespace StackOverflow.Repositories
             }
         }
 
-
-        public bool PostAnswer(AnswerViewModel model)
+        public void PostAnswer(AnswerViewModel model)
         {
-            return true;
+            using (var conn = new SqlConnection(_connString))
+            {
+                conn.Open();
+                using (var cmd = new SqlCommand("sp_PostAnswer", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@User_Id", model.UserId);
+                    cmd.Parameters.AddWithValue("@Question_Id", model.QuestionId);
+                    cmd.Parameters.AddWithValue("@Body", model.Body);
+                    cmd.Parameters.AddWithValue("@createdAt", model.CreatedAt);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

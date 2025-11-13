@@ -71,8 +71,8 @@
       <div class="card-body">
         <h2 class="h4 mb-3">Thêm câu trả lời của bạn</h2>
         <form action="/Questions/PostAnswer" method="post">
-          <input type="hidden" name="QuestionId" value=@Model.Question.QuestionId/>
-          <input type="hidden" name="UserId" value=@Model.Question.UserId/>
+          <input type="hidden" name="QuestionId" value=@Model.Question.QuestionId />
+          <input type="hidden" name="UserId" value=@Session["UserId"] />
           <div class="mb-3">
             <label for="answerBody" class="form-label fw-semibold">Nội dung trả lời</label>
             <textarea

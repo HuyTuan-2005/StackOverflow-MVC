@@ -10,5 +10,6 @@ namespace StackOverflow.Repositories
         List<HomePageViewModel> GetQuestionsByTagName(string tag);
         List<HomePageViewModel> GetQuestionsByTitle(string title);
         HomePageViewModel GetQuestionsById(int questionId);
+        void PostQuestion(int userId, string title, string body, string tags);
     }
 }
