@@ -109,16 +109,16 @@ namespace StackOverflow.Areas.Admin.Controllers
             }
         }
 
-
-        private string EscapeCsv(string input)
-        {
-            if (input.Contains(",") || input.Contains("\"") || input.Contains("\n") || input.Contains("\r"))
-            {
-                input = input.Replace("\"", "\"\"");
-                return $"\"{input}\"";
-            }
-            return input;
-        }
+        // private string EscapeCsv(string input)
+        // {
+        //     if (input.Contains(",") || input.Contains("\"") || input.Contains("\n") || input.Contains("\r"))
+        //     {
+        //         input = input.Replace("\"", "\"\"");
+        //         return $"\"{input}\"";
+        //     }
+        //     return input;
+        // }
+        
         [HttpPost]
         public ActionResult Import(HttpPostedFileBase file)
         {
