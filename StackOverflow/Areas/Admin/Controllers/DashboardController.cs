@@ -105,7 +105,7 @@ namespace StackOverflow.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = "Lỗi khi export: " + ex.Message;
-                return View("Dashboard");
+                return RedirectToAction("Index", "Dashboard");
             }
         }
 
@@ -127,7 +127,7 @@ namespace StackOverflow.Areas.Admin.Controllers
                 if (file == null || file.ContentLength == 0)
                 {
                     ViewBag.Error = "Vui lòng chọn file CSV hợp lệ.";
-                    return View("Dashboard");
+                    return RedirectToAction("Index", "Dashboard");
                 }
 
                 string tableName = "QUESTIONS";
@@ -172,12 +172,12 @@ namespace StackOverflow.Areas.Admin.Controllers
                     System.IO.File.Delete(tempFile);
 
                 ViewBag.Message = "✅ Import thành công và đã tạo hồ sơ tự động!";
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("Index", "Dashboard");
             }
             catch (Exception ex)
             {
                 ViewBag.Error = "❌ Lỗi khi import: " + ex.Message;
-                return View("Dashboard");
+                return RedirectToAction("Index", "Dashboard");
             }
         }
 

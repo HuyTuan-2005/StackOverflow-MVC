@@ -1,13 +1,8 @@
-﻿using StackOverflow.Helpers;
-using StackOverflow.ViewModels;
+﻿using StackOverflow.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.Entity;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace StackOverflow.Areas.Admin.Controllers
@@ -23,7 +18,7 @@ namespace StackOverflow.Areas.Admin.Controllers
         public ActionResult Logout()
         {
             Session["UserConnStr"] = null;
-            return RedirectToAction("Login", "Admin");
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpGet]
@@ -104,7 +99,7 @@ namespace StackOverflow.Areas.Admin.Controllers
                 }
 
                 TempData["SuccessMessage"] = "Đăng ký tài khoản thành công!";
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "Account");
             }
             catch (SqlException ex)
             {

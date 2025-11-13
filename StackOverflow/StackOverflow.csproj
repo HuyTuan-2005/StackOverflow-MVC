@@ -196,7 +196,6 @@
     <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Helpers\SimpleHmacSha512.cs" />
     <Compile Include="Models\Answer.cs" />
-    <Compile Include="Models\BCP.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\QuestionTag.cs" />

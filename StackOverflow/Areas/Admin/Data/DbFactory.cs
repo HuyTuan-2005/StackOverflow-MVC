@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
 namespace StackOverflow.Areas.Admin.Data
 {
@@ -28,7 +24,7 @@ namespace StackOverflow.Areas.Admin.Data
         }
 
         // Trả về DataTable cho truy vấn SELECT
-        public DataTable ExecuteQuery(string query)
+        public DataTable ExecuteQuery(string query, params SqlParameter[] parameters)
         {
             DataTable result = new DataTable();
 
@@ -36,6 +32,10 @@ namespace StackOverflow.Areas.Admin.Data
             {
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    if (parameters != null)
+                    {
+                        cmd.Parameters.AddRange(parameters);
+                    }
                     using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                     {
                         adapter.Fill(result);
@@ -45,6 +45,33 @@ namespace StackOverflow.Areas.Admin.Data
 
             return result;
         }
+        
+        // Thực thi thủ tục lưu trữ và trả về DataTable
+        public DataTable ExecuteStoredProcedure(string storedProcName, params SqlParameter[] parameters)
+        {
+            DataTable result = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(storedProcName, conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    if (parameters != null)
+                    {
+                        cmd.Parameters.AddRange(parameters);
+                    }
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(result);
+                    }
+                }
+            }
+
+            return result;
+        }
+        
 
         // Thực thi câu lệnh không trả về (INSERT, UPDATE, DELETE)
         public int ExecuteNonQuery(string query)
@@ -54,6 +81,25 @@ namespace StackOverflow.Areas.Admin.Data
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    return cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        
+        public int ExecuteStoredProcedureNonQuery(string storedProcName, params SqlParameter[] parameters)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(storedProcName, conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    if (parameters != null)
+                    {
+                        cmd.Parameters.AddRange(parameters);
+                    }
+
                     return cmd.ExecuteNonQuery();
                 }
             }
