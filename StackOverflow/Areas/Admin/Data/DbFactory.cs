@@ -9,7 +9,6 @@ namespace StackOverflow.Areas.Admin.Data
         public string ConnectionString // Public property
         {
             get { return _connectionString; }
-            set { ConnectionString = value; }
         }
 
         public DbFactory()
