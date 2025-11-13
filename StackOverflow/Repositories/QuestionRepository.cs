@@ -99,5 +99,30 @@ namespace StackOverflow.Repositories
             // parameter.Add("@Tags", tag);
             return ExecStoredProcedureAndMap("select * from f_GetQuestionsById(@question_id)", CommandType.Text, parameter).First();;
         }
+        
+        public void PostQuestion(int userId, string title, string body, string tags)
+        {
+            try
+            {
+                using (var conn = new SqlConnection(_connString))
+                {
+                    conn.Open();
+                    using (var command = new SqlCommand("sp_PostQuestion", conn))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("@user_id", SqlDbType.Int).Value = userId;
+                        command.Parameters.Add("@title", SqlDbType.NVarChar, 200).Value = title;
+                        command.Parameters.Add("@body", SqlDbType.NVarChar, -1).Value = body;
+                        command.Parameters.Add("@tags", SqlDbType.NVarChar, 400).Value = tags;
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                // Handle exception (log it, rethrow it, etc.)
+            }
+        }
     }
 }

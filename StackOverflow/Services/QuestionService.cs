@@ -34,5 +34,10 @@ namespace StackOverflow.Services
         {
             return _questionRepository.GetQuestionsById(questionId);
         }
+        
+        public void PostQuestion(int userId, string title, string body, string tags)
+        {
+            _questionRepository.PostQuestion(userId, title, body, tags);
+        }
     }
 }

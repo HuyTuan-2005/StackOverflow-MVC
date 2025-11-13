@@ -28,7 +28,8 @@
     <section class="card m-3 ">
         <div class="card-body p-0 p-md-2">
             <h2 class="h4 mb-3 ms-2">Thêm câu hỏi của bạn</h2>
-            <form action="/Questions" method="post">
+            @using (Html.BeginForm("Ask", "Questions", FormMethod.Post))
+            {
                 <input type="hidden" name="UserId" value="@Session["UserId"]"/>
                 <div class="mb-3">
                     <div class="mb-3">
@@ -61,7 +62,7 @@
                     <div class="mb-3">
                         <label for="tagsQuestion" class="form-label fw-semibold p-0 ms-2 mb-0">Tags</label>
                         <div class="custom-input-group">
-                            <input class="form-control" id="tagsQuestion" type="text" name="tags" placeholder="Tags"
+                            <input class="form-control" id="tagsQuestion" type="text" name="tags" placeholder="Nhập các tags cách nhau bằng dấu chấm phẩy"
                                    value=""/>
                         </div>
                     </div>
@@ -75,7 +76,7 @@
                         <span>Gửi</span>
                     </button>
                 </div>
-            </form>
+            }
         </div>
     </section>
 </div>

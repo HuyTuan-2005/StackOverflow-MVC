@@ -9,5 +9,6 @@ namespace StackOverflow.Services
         IReadOnlyList<HomePageViewModel> GetQuestionsByTagName(string tag);
         IReadOnlyList<HomePageViewModel> GetQuestionsByTitle(string title);
         HomePageViewModel GetQuestionsById(int questionId);
+        void PostQuestion(int userId, string title, string body, string tags);
     }
 }
