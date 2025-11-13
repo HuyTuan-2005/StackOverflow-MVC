@@ -1,25 +1,30 @@
-﻿using System.IO;
+﻿using StackOverflow.Areas.Admin.Data;
+using StackOverflow.Helpers;
+using StackOverflow.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
-using System.Web.Mvc;
-using StackOverflow.Models;
-using System.Web;
+using System.Data.Entity;
 using System.Data.SqlClient;
-using StackOverflow.ViewModels;
-using System.Numerics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Configuration;
+using System.Web;
+using System.Web.Mvc;
 
-namespace StackOverflow.Controllers
+
+namespace StackOverflow.Areas.Admin.Controllers
 {
-    public class AdminController : Controller
+    [AdminAuthorize]
+    public class DashboardController : Controller
     {
-        private List<Profile> GetAllProfile()
+        // GET: Admin/Dashboard
+        public ActionResult Index()
         {
-            using (SqlConnection conn = new SqlConnection(Database.ConnString))
+            // var parameters = ThongKeDashboard();
+            using (SqlConnection conn = DbFactory.GetConnection())
             {
                 conn.Open();
                 var command = new SqlCommand("sp_getAllProfile", conn);
@@ -40,182 +45,11 @@ namespace StackOverflow.Controllers
                         lstProfile.Add(profile);
                     }
                 }
-                return lstProfile;
+                return View(lstProfile);
             }
         }
 
 
-        // GET
-        public ActionResult Index()
-        {
-            return RedirectToAction("dashboard");
-        }
-        
-        // GET: DashBoard
-        [HttpGet]
-        public ActionResult DashBoard()
-        {
-
-            var profiles = GetAllProfile();
-
-            // var parameters = ThongKeDashboard();
-
-            return View("Dashboard", profiles);
-        }
-
-
-        // GET: Login
-        [HttpGet]
-        public ActionResult Login()
-        {
-            return View("Login/Index", new UserLoginViewModel());
-        }
-        
-        [HttpPost]
-        public ActionResult Login(UserLoginViewModel user)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("Login/Index", user);
-            }
-            var db = new Database();
-
-            using (var conn = db.Connection(user.UserName, user.Password))
-            {
-                if (conn == null)
-                {
-                    ModelState.AddModelError(string.Empty, "Sai tên đăng nhập hoặc mật khẩu");
-                    return View("Login/Index", user);
-                }
-                else
-                {
-                    Session["admin"] = user.UserName;
-                    return RedirectToAction("dashboard");
-                }
-            }
-        }
-        
-        [HttpGet]
-        public ActionResult Register()
-        {
-            return View("Login/Register");
-        }
-        
-        [HttpPost]
-        public ActionResult Register(UserLoginViewModel user)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("Login/Register", user);
-            }
-            var db = new Database();
-
-            using (var conn = db.Connection())
-            {
-                using (var cmd = new SqlCommand("sp_RegisterUserDatabase", conn))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-            
-                    // Input parameters
-                    cmd.Parameters.AddWithValue("@Username", user.UserName);
-                    cmd.Parameters.AddWithValue("@Password", user.Password);
-                    cmd.Parameters.AddWithValue("@DefaultDatabase", "ForumDB");
-            
-                    // Output parameters
-                    var statusParam = new SqlParameter("@Status", SqlDbType.Int) 
-                    { 
-                        Direction = ParameterDirection.Output 
-                    };
-                    var messageParam = new SqlParameter("@Message", SqlDbType.NVarChar, 255) 
-                    { 
-                        Direction = ParameterDirection.Output 
-                    };
-            
-                    cmd.Parameters.Add(statusParam);
-                    cmd.Parameters.Add(messageParam);
-            
-                    try
-                    {
-                        //conn.Open();
-                        cmd.ExecuteNonQuery();
-                
-                        int status = (int)statusParam.Value;
-                        string message = messageParam.Value.ToString();
-                        
-                        if (status == 0)
-                            return RedirectToAction("Login");
-                        else
-                        {
-                            ModelState.AddModelError(string.Empty, message);
-                            return View("Login/Register", user);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        ModelState.AddModelError(string.Empty, messageParam.Value.ToString());
-                        return View("Login/Register", user);
-                    }
-                }
-            }
-        }
-
-        public ActionResult Logout()
-        {
-            Session["admin"] = null;
-            return RedirectToAction("Login", "Admin");
-        }
-        public ActionResult Register()
-        {
-            return View("Login/Register");
-        }
-        [HttpPost]
-        public ActionResult Register(UserRegisterAdminViewModel model)
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["ForumDB"].ConnectionString;
-
-            if (!ModelState.IsValid)
-            {
-                // Dữ liệu nhập không hợp lệ => quay lại form
-                return View("Login/Register", model);
-            }
-
-            if (model.Key != "123456")
-            {
-                ModelState.AddModelError("", "Khóa xác thực không hợp lệ!");
-                return View("Login/Register", model);
-            }
-
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-
-                    using (SqlCommand cmd = new SqlCommand("SP_REGISTER", conn))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@USERNAME", model.UserName);
-                        cmd.Parameters.AddWithValue("@PASSWORD", model.Password);
-                        cmd.Parameters.AddWithValue("@KEY", model.Key);
-
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-                TempData["SuccessMessage"] = "Đăng ký tài khoản thành công!";
-                return RedirectToAction("Login", "Admin");
-            }
-            catch (SqlException ex)
-            {
-                ModelState.AddModelError("", "Tên đăng nhập đã tồn tại hoặc lỗi SQL: " + ex.Message);
-                return View("Login/Register", model);
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("", "Lỗi không xác định: " + ex.Message);
-                return View("Login/Register", model);
-            }
-        }
         public ActionResult Export()
         {
             try
@@ -223,7 +57,7 @@ namespace StackOverflow.Controllers
                 string tableName = "QUESTIONS";
                 string tempFile = Path.Combine(Path.GetTempPath(), $"{tableName}_export.csv");
 
-                using (SqlConnection conn = new SqlConnection(Database.ConnString))
+                using (SqlConnection conn = DbFactory.GetConnection())
                 {
                     conn.Open();
 
@@ -347,7 +181,6 @@ namespace StackOverflow.Controllers
             }
         }
 
-
         private DataTable ReadCsvToDataTable(string filePath)
         {
             DataTable dt = new DataTable();
@@ -382,11 +215,9 @@ namespace StackOverflow.Controllers
             return dt;
         }
 
-
-
-        public SqlParameter[] ThongKeDashboard()
+        public SqlParameter[] ThongKeUser()
         {
-            using (var conn = new SqlConnection(Database.ConnString))
+            using (var conn = DbFactory.GetConnection())
             {
                 conn.Open();
 
@@ -399,9 +230,9 @@ namespace StackOverflow.Controllers
                     // khai báo giá trị output trong sql server
                     SqlParameter[] parameters = new SqlParameter[4];
                     parameters[0] = new SqlParameter("@COUNT_USERS", SqlDbType.Int) { Direction = ParameterDirection.Output };
-                    parameters[1] = new SqlParameter("@COUNT_QUESTIONS", SqlDbType.Int) { Direction = ParameterDirection.Output }; 
-                    parameters[2] = new SqlParameter("@COUNT_ANSWERS", SqlDbType.Int) { Direction = ParameterDirection.Output }; 
-                    parameters[3] = new SqlParameter("@COUNT_TAGS", SqlDbType.Int) { Direction = ParameterDirection.Output }; 
+                    parameters[1] = new SqlParameter("@COUNT_QUESTIONS", SqlDbType.Int) { Direction = ParameterDirection.Output };
+                    parameters[2] = new SqlParameter("@COUNT_ANSWERS", SqlDbType.Int) { Direction = ParameterDirection.Output };
+                    parameters[3] = new SqlParameter("@COUNT_TAGS", SqlDbType.Int) { Direction = ParameterDirection.Output };
                     // Direction = Output
                     foreach (var p in parameters)
                     {
@@ -413,10 +244,10 @@ namespace StackOverflow.Controllers
                 }
             }
         }
-        
+
         public ActionResult CountUser()
         {
-            using (SqlConnection conn = new SqlConnection(Database.ConnString))
+            using (SqlConnection conn = DbFactory.GetConnection())
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("sp_CountUser", conn);
@@ -435,12 +266,6 @@ namespace StackOverflow.Controllers
             }
 
             return PartialView("ThongKeUser");
-        }
-        
-        
-        public ActionResult Privilege()
-        {
-            return View();
         }
 
     }

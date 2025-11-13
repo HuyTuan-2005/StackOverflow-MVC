@@ -1,0 +1,616 @@
+﻿@{
+    ViewData["Title"] = "Phân Quyền Người Dùng";
+}
+@section css
+{
+    <link href="~/Content/css/Admin/AdminPrivilege.css" rel="stylesheet"/>
+}
+<div class="main-content" id="main-content">
+    <div class="page-header">
+        <h1><i class="bi bi-shield-lock me-2"></i>Quản Lý Phân Quyền</h1>
+        <p>Quản lý quyền truy cập và thao tác của người dùng trên cơ sở dữ liệu</p>
+    </div>
+    @* <div class="content-header"> *@
+    @*     <h2><i class="bi bi-shield-lock me-2"></i>Quản Lý Phân Quyền</h2> *@
+    @*     <p class="text-muted">Quản lý quyền truy cập và thao tác của người dùng trên cơ sở dữ liệu</p> *@
+    @* </div> *@
+
+    <!-- Statistics Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="stats-card">
+                <div class="stats-icon bg-primary">
+                    <i class="bi bi-people"></i>
+                </div>
+                <div class="stats-info">
+                    <h3>150</h3>
+                    <p>Người dùng</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card">
+                <div class="stats-icon bg-success">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+                <div class="stats-info">
+                    <h3>8</h3>
+                    <p>Nhóm quyền</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card">
+                <div class="stats-icon bg-warning">
+                    <i class="bi bi-database"></i>
+                </div>
+                <div class="stats-info">
+                    <h3>25</h3>
+                    <p>Bảng dữ liệu</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card">
+                <div class="stats-icon bg-danger">
+                    <i class="bi bi-key"></i>
+                </div>
+                <div class="stats-info">
+                    <h3>320</h3>
+                    <p>Quyền đã cấp</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabs Navigation -->
+    <ul class="nav nav-tabs permission-tabs mb-4" id="permissionTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="user-permission-tab" data-bs-toggle="tab"
+                    data-bs-target="#user-permission" type="button" role="tab">
+                <i class="bi bi-person-check me-2"></i>Phân quyền người dùng
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="group-management-tab" data-bs-toggle="tab"
+                    data-bs-target="#group-management" type="button" role="tab">
+                <i class="bi bi-people-fill me-2"></i>Quản lý nhóm quyền
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="user-group-tab" data-bs-toggle="tab"
+                    data-bs-target="#user-group" type="button" role="tab">
+                <i class="bi bi-diagram-3 me-2"></i>Gán người dùng vào nhóm
+            </button>
+        </li>
+    </ul>
+
+    <!-- Tab Contents -->
+    <div class="tab-content" id="permissionTabContent">
+
+        <!-- Tab 1: Phân quyền người dùng đơn lẻ -->
+        <div class="tab-pane fade show active" id="user-permission" role="tabpanel">
+            <div class="card permission-card">
+                <div class="card-header">
+                    <h5><i class="bi bi-person-gear me-2"></i>Phân quyền đơn lẻ cho người dùng</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <!-- Chọn người dùng -->
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="bi bi-person me-1"></i>Chọn người dùng
+                            </label>
+                            <select class="form-select" id="userSelect">
+                                <option value="">-- Chọn người dùng --</option>
+                                <option value="1">Nguyễn Văn A (admin01)</option>
+                                <option value="2">Trần Thị B (user02)</option>
+                                <option value="3">Lê Văn C (manager03)</option>
+                                <option value="4">Phạm Thị D (staff04)</option>
+                            </select>
+                        </div>
+
+                        <!-- Chọn bảng -->
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="bi bi-table me-1"></i>Chọn bảng dữ liệu
+                            </label>
+                            <select class="form-select" id="tableSelect">
+                                <option value="">-- Chọn bảng --</option>
+                                <option value="Users">Users</option>
+                                <option value="Products">Products</option>
+                                <option value="Orders">Orders</option>
+                                <option value="Categories">Categories</option>
+                                <option value="Customers">Customers</option>
+                                <option value="Reports">Reports</option>
+                            </select>
+                        </div>
+
+                        <!-- Checkbox quyền -->
+                        <div class="col-12">
+                            <label class="form-label mb-3">
+                                <i class="bi bi-check2-square me-1"></i>Chọn các quyền thao tác
+                            </label>
+                            <div class="permission-checkboxes">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="selectPermission" value="SELECT">
+                                    <label class="form-check-label" for="selectPermission">
+                                        <i class="bi bi-eye text-primary"></i> SELECT (Xem)
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="insertPermission" value="INSERT">
+                                    <label class="form-check-label" for="insertPermission">
+                                        <i class="bi bi-plus-circle text-success"></i> INSERT (Thêm)
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="updatePermission" value="UPDATE">
+                                    <label class="form-check-label" for="updatePermission">
+                                        <i class="bi bi-pencil-square text-warning"></i> UPDATE (Sửa)
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="deletePermission" value="DELETE">
+                                    <label class="form-check-label" for="deletePermission">
+                                        <i class="bi bi-trash text-danger"></i> DELETE (Xóa)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Nút thao tác -->
+                        <div class="col-12">
+                            <div class="btn-group-custom">
+                                <button type="button" class="btn btn-primary" onclick="grantUserPermission()">
+                                    <i class="bi bi-check-circle me-2"></i>Phân quyền
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="revokeUserPermission()">
+                                    <i class="bi bi-x-circle me-2"></i>Thu hồi quyền
+                                </button>
+                                <button type="button" class="btn btn-secondary" onclick="resetUserForm()">
+                                    <i class="bi bi-arrow-counterclockwise me-2"></i>Làm mới
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bảng hiển thị quyền hiện tại -->
+                    <div class="mt-4">
+                        <h6 class="mb-3"><i class="bi bi-list-check me-2"></i>Quyền hiện tại của người dùng</h6>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Bảng</th>
+                                    <th>SELECT</th>
+                                    <th>INSERT</th>
+                                    <th>UPDATE</th>
+                                    <th>DELETE</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                                </thead>
+                                <tbody id="userPermissionTable">
+                                <tr>
+                                    <td>Users</td>
+                                    <td><span class="badge bg-success">Có</span></td>
+                                    <td><span class="badge bg-success">Có</span></td>
+                                    <td><span class="badge bg-secondary">Không</span></td>
+                                    <td><span class="badge bg-secondary">Không</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Products</td>
+                                    <td><span class="badge bg-success">Có</span></td>
+                                    <td><span class="badge bg-secondary">Không</span></td>
+                                    <td><span class="badge bg-secondary">Không</span></td>
+                                    <td><span class="badge bg-secondary">Không</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Quản lý nhóm quyền -->
+        <div class="tab-pane fade" id="group-management" role="tabpanel">
+            <div class="row">
+                <!-- Form tạo/xóa nhóm quyền -->
+                <div class="col-lg-5">
+                    <div class="card permission-card mb-4">
+                        <div class="card-header">
+                            <h5><i class="bi bi-plus-square me-2"></i>Tạo nhóm quyền mới</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label">Tên nhóm quyền</label>
+                                <input type="text" class="form-control" id="groupName" placeholder="Ví dụ: Admin, Manager, Staff...">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Mô tả</label>
+                                <textarea class="form-control" id="groupDescription" rows="3" placeholder="Mô tả về nhóm quyền..."></textarea>
+                            </div>
+                            <button type="button" class="btn btn-success w-100" onclick="createPermissionGroup()">
+                                <i class="bi bi-plus-circle me-2"></i>Tạo nhóm quyền
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card permission-card">
+                        <div class="card-header">
+                            <h5><i class="bi bi-trash me-2"></i>Xóa nhóm quyền</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label">Chọn nhóm quyền cần xóa</label>
+                                <select class="form-select" id="groupToDelete">
+                                    <option value="">-- Chọn nhóm --</option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Manager</option>
+                                    <option value="3">Staff</option>
+                                    <option value="4">Guest</option>
+                                </select>
+                            </div>
+                            <button type="button" class="btn btn-danger w-100" onclick="deletePermissionGroup()">
+                                <i class="bi bi-trash me-2"></i>Xóa nhóm quyền
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Danh sách nhóm quyền -->
+                <div class="col-lg-7">
+                    <div class="card permission-card">
+                        <div class="card-header">
+                            <h5><i class="bi bi-list-ul me-2"></i>Danh sách nhóm quyền</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tên nhóm</th>
+                                        <th>Số thành viên</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td><span class="badge bg-primary">Admin</span></td>
+                                        <td>5</td>
+                                        <td>01/11/2025</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" onclick="viewGroupPermissions(1)">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-warning" onclick="editGroup(1)">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td><span class="badge bg-success">Manager</span></td>
+                                        <td>12</td>
+                                        <td>01/11/2025</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" onclick="viewGroupPermissions(2)">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-warning" onclick="editGroup(2)">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td><span class="badge bg-info">Staff</span></td>
+                                        <td>45</td>
+                                        <td>02/11/2025</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" onclick="viewGroupPermissions(3)">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-warning" onclick="editGroup(3)">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td><span class="badge bg-secondary">Guest</span></td>
+                                        <td>88</td>
+                                        <td>02/11/2025</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" onclick="viewGroupPermissions(4)">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-warning" onclick="editGroup(4)">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Gán người dùng vào nhóm -->
+        <div class="tab-pane fade" id="user-group" role="tabpanel">
+            <div class="row">
+                <!-- Thêm người dùng vào nhóm -->
+                <div class="col-lg-6">
+                    <div class="card permission-card">
+                        <div class="card-header">
+                            <h5><i class="bi bi-person-plus me-2"></i>Thêm người dùng vào nhóm</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label">Chọn người dùng</label>
+                                <select class="form-select" id="userToAdd">
+                                    <option value="">-- Chọn người dùng --</option>
+                                    <option value="1">Nguyễn Văn A</option>
+                                    <option value="2">Trần Thị B</option>
+                                    <option value="3">Lê Văn C</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Chọn nhóm quyền</label>
+                                <select class="form-select" id="groupToAddUser">
+                                    <option value="">-- Chọn nhóm --</option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Manager</option>
+                                    <option value="3">Staff</option>
+                                    <option value="4">Guest</option>
+                                </select>
+                            </div>
+                            <button type="button" class="btn btn-primary w-100" onclick="addUserToGroup()">
+                                <i class="bi bi-check-circle me-2"></i>Thêm vào nhóm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Xóa người dùng khỏi nhóm -->
+                <div class="col-lg-6">
+                    <div class="card permission-card">
+                        <div class="card-header">
+                            <h5><i class="bi bi-person-dash me-2"></i>Xóa người dùng khỏi nhóm</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label">Chọn người dùng</label>
+                                <select class="form-select" id="userToRemove">
+                                    <option value="">-- Chọn người dùng --</option>
+                                    <option value="1">Nguyễn Văn A</option>
+                                    <option value="2">Trần Thị B</option>
+                                    <option value="3">Lê Văn C</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Chọn nhóm quyền</label>
+                                <select class="form-select" id="groupToRemoveUser">
+                                    <option value="">-- Chọn nhóm --</option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Manager</option>
+                                    <option value="3">Staff</option>
+                                    <option value="4">Guest</option>
+                                </select>
+                            </div>
+                            <button type="button" class="btn btn-danger w-100" onclick="removeUserFromGroup()">
+                                <i class="bi bi-x-circle me-2"></i>Xóa khỏi nhóm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Danh sách người dùng trong nhóm -->
+                <div class="col-12 mt-4">
+                    <div class="card permission-card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0"><i class="bi bi-people me-2"></i>Danh sách người dùng theo nhóm</h5>
+                            <select class="form-select w-auto" id="filterByGroup" onchange="filterUsersByGroup()">
+                                <option value="">-- Tất cả nhóm --</option>
+                                <option value="1">Admin</option>
+                                <option value="2">Manager</option>
+                                <option value="3">Staff</option>
+                                <option value="4">Guest</option>
+                            </select>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Người dùng</th>
+                                        <th>Email</th>
+                                        <th>Nhóm quyền</th>
+                                        <th>Ngày tham gia</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Nguyễn Văn A</td>
+                                        <td>nguyenvana@example.com</td>
+                                        <td><span class="badge bg-primary">Admin</span></td>
+                                        <td>01/11/2025</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="bi bi-person-x"></i> Xóa
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Trần Thị B</td>
+                                        <td>tranthib@example.com</td>
+                                        <td><span class="badge bg-success">Manager</span></td>
+                                        <td>02/11/2025</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="bi bi-person-x"></i> Xóa
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lê Văn C</td>
+                                        <td>levanc@example.com</td>
+                                        <td><span class="badge bg-info">Staff</span></td>
+                                        <td>03/11/2025</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="bi bi-person-x"></i> Xóa
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Phân quyền người dùng đơn lẻ
+    function grantUserPermission() {
+        const user = document.getElementById('userSelect').value;
+        const table = document.getElementById('tableSelect').value;
+        const permissions = getSelectedPermissions();
+
+        if (!user || !table || permissions.length === 0) {
+            alert('Vui lòng chọn đầy đủ thông tin!');
+            return;
+        }
+
+        // Gọi API để phân quyền
+        console.log('Phân quyền:', { user, table, permissions });
+        alert('Đã phân quyền thành công!');
+    }
+
+    function revokeUserPermission() {
+        const user = document.getElementById('userSelect').value;
+        const table = document.getElementById('tableSelect').value;
+
+        if (!user || !table) {
+            alert('Vui lòng chọn người dùng và bảng!');
+            return;
+        }
+
+        if (confirm('Bạn có chắc muốn thu hồi quyền?')) {
+            console.log('Thu hồi quyền:', { user, table });
+            alert('Đã thu hồi quyền thành công!');
+        }
+    }
+
+    function getSelectedPermissions() {
+        const permissions = [];
+        if (document.getElementById('selectPermission').checked) permissions.push('SELECT');
+        if (document.getElementById('insertPermission').checked) permissions.push('INSERT');
+        if (document.getElementById('updatePermission').checked) permissions.push('UPDATE');
+        if (document.getElementById('deletePermission').checked) permissions.push('DELETE');
+        return permissions;
+    }
+
+    function resetUserForm() {
+        document.getElementById('userSelect').value = '';
+        document.getElementById('tableSelect').value = '';
+        document.querySelectorAll('.permission-checkboxes input[type="checkbox"]').forEach(cb => cb.checked = false);
+    }
+
+    // Quản lý nhóm quyền
+    function createPermissionGroup() {
+        const name = document.getElementById('groupName').value;
+        const description = document.getElementById('groupDescription').value;
+
+        if (!name) {
+            alert('Vui lòng nhập tên nhóm quyền!');
+            return;
+        }
+
+        console.log('Tạo nhóm:', { name, description });
+        alert('Đã tạo nhóm quyền thành công!');
+        document.getElementById('groupName').value = '';
+        document.getElementById('groupDescription').value = '';
+    }
+
+    function deletePermissionGroup() {
+        const groupId = document.getElementById('groupToDelete').value;
+
+        if (!groupId) {
+            alert('Vui lòng chọn nhóm cần xóa!');
+            return;
+        }
+
+        if (confirm('Bạn có chắc muốn xóa nhóm này?')) {
+            console.log('Xóa nhóm:', groupId);
+            alert('Đã xóa nhóm quyền thành công!');
+        }
+    }
+
+    function viewGroupPermissions(groupId) {
+        console.log('Xem quyền của nhóm:', groupId);
+        // Hiển thị modal hoặc chuyển trang
+    }
+
+    function editGroup(groupId) {
+        console.log('Chỉnh sửa nhóm:', groupId);
+        // Hiển thị form chỉnh sửa
+    }
+
+    // Gán người dùng vào nhóm
+    function addUserToGroup() {
+        const userId = document.getElementById('userToAdd').value;
+        const groupId = document.getElementById('groupToAddUser').value;
+
+        if (!userId || !groupId) {
+            alert('Vui lòng chọn đầy đủ thông tin!');
+            return;
+        }
+
+        console.log('Thêm người dùng vào nhóm:', { userId, groupId });
+        alert('Đã thêm người dùng vào nhóm thành công!');
+    }
+
+    function removeUserFromGroup() {
+        const userId = document.getElementById('userToRemove').value;
+        const groupId = document.getElementById('groupToRemoveUser').value;
+
+        if (!userId || !groupId) {
+            alert('Vui lòng chọn đầy đủ thông tin!');
+            return;
+        }
+
+        if (confirm('Bạn có chắc muốn xóa người dùng khỏi nhóm?')) {
+            console.log('Xóa người dùng khỏi nhóm:', { userId, groupId });
+            alert('Đã xóa người dùng khỏi nhóm thành công!');
+        }
+    }
+
+    function filterUsersByGroup() {
+        const groupId = document.getElementById('filterByGroup').value;
+        console.log('Lọc theo nhóm:', groupId);
+        // Gọi API để lọc dữ liệu
+    }
+</script>

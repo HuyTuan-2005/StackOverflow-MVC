@@ -182,7 +182,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PrivilegeController.cs" />
+    <Compile Include="Areas\Admin\Data\DbFactory.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -193,7 +197,6 @@
     <Compile Include="Helpers\SimpleHmacSha512.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\BCP.cs" />
-    <Compile Include="Models\Database.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\QuestionTag.cs" />
@@ -222,8 +225,8 @@
     <Compile Include="ViewModels\UserRegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\AdminDashboard.css" />
-    <Content Include="Content\css\AdminPrivilege.css" />
+    <Content Include="Content\css\Admin\AdminDashboard.css" />
+    <Content Include="Content\css\Admin\AdminPrivilege.css" />
     <Content Include="Content\css\QuestionDetails.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\user.css" />
@@ -273,8 +276,17 @@
     <Content Include="Content\lib\js\bootstrap.js.map" />
     <Content Include="Content\lib\js\bootstrap.min.js" />
     <Content Include="Content\lib\js\bootstrap.min.js.map" />
+    <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Register.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Privilege\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\ThongKeUser.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Repositories\docs.txt" />
     <Content Include="Scripts\jquery-3.3.1.js" />
