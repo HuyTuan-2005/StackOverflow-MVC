@@ -73,13 +73,17 @@ namespace StackOverflow.Areas.Admin.Data
         
 
         // Thực thi câu lệnh không trả về (INSERT, UPDATE, DELETE)
-        public int ExecuteNonQuery(string query)
+        public int ExecuteNonQuery(string query, params SqlParameter[] parameters)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    if (parameters != null)
+                    {
+                        cmd.Parameters.AddRange(parameters);
+                    }
                     return cmd.ExecuteNonQuery();
                 }
             }
