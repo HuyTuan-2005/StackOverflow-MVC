@@ -50,9 +50,6 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="mscorlib" />
-    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
-      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -272,11 +269,6 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Services\docs.txt" />
     <Content Include="ViewModels\docs.txt" />
-    <Content Include="Views\Admin\Dashboard.cshtml" />
-    <Content Include="Views\Admin\Login\Index.cshtml" />
-    <Content Include="Views\Admin\Login\Register.cshtml" />
-    <Content Include="Views\Admin\Privilege.cshtml" />
-    <Content Include="Views\Admin\_AdminLayout.cshtml" />
     <Content Include="Views\Questions\Ask.cshtml" />
     <Content Include="Views\Questions\Details.cshtml" />
     <Content Include="Views\Questions\_Question.cshtml" />
@@ -300,8 +292,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Questions\Index.cshtml" />
-    <Content Include="Views\Admin\ThongKeUser.cshtml" />
-    <Content Include="Views\Admin\Login\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
