@@ -67,7 +67,6 @@ namespace StackOverflow.Areas.Admin.Data
                     }
                 }
             }
-
             return result;
         }
         
